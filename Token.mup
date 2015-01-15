@@ -3,33 +3,90 @@
   "id": 1,
   "formatVersion": 2,
   "ideas": {
-    "1": {
-      "title": "card",
-      "id": 2
-    },
     "2": {
       "title": "character sheet",
-      "id": 4
+      "id": 4,
+      "ideas": {},
+      "attr": {
+        "position": [
+          174,
+          -127,
+          9
+        ],
+        "style": {}
+      }
     },
-    "3": {
+    "14": {
+      "title": "card",
+      "id": 2,
+      "attr": {
+        "style": {},
+        "position": [
+          202,
+          45,
+          10
+        ]
+      }
+    },
+    "24": {
       "title": "marker",
-      "id": 6
-    },
-    "4": {
-      "title": "info card",
-      "id": 8
+      "id": 6,
+      "attr": {
+        "position": [
+          74,
+          199,
+          11
+        ],
+        "style": {}
+      }
     },
     "-1": {
       "title": "pawn",
-      "id": 3
-    },
-    "-2": {
-      "title": "board",
-      "id": 5
+      "id": 3,
+      "attr": {
+        "position": [
+          229,
+          -4,
+          6
+        ],
+        "style": {}
+      }
     },
     "-3": {
       "title": "dice",
-      "id": 7
+      "id": 7,
+      "attr": {
+        "position": [
+          200,
+          133,
+          12
+        ],
+        "style": {}
+      }
+    },
+    "-0.5": {
+      "title": "info card",
+      "id": 8,
+      "attr": {
+        "position": [
+          186,
+          -151,
+          7
+        ],
+        "style": {}
+      }
+    },
+    "-0.25": {
+      "title": "board",
+      "id": 5,
+      "attr": {
+        "position": [
+          59,
+          -257,
+          8
+        ],
+        "style": {}
+      }
     }
   }
 }
