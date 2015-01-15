@@ -22,3 +22,7 @@ Music and sound effect triggers
 Simple automation
 
 Batch interface/API
+
+
+mindmap link at:
+https://www.mindmup.com
