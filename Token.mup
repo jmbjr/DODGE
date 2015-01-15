@@ -1,5 +1,35 @@
 {
   "title": "Token",
   "id": 1,
-  "formatVersion": 2
+  "formatVersion": 2,
+  "ideas": {
+    "1": {
+      "title": "card",
+      "id": 2
+    },
+    "2": {
+      "title": "character sheet",
+      "id": 4
+    },
+    "3": {
+      "title": "marker",
+      "id": 6
+    },
+    "4": {
+      "title": "info card",
+      "id": 8
+    },
+    "-1": {
+      "title": "pawn",
+      "id": 3
+    },
+    "-2": {
+      "title": "board",
+      "id": 5
+    },
+    "-3": {
+      "title": "dice",
+      "id": 7
+    }
+  }
 }
