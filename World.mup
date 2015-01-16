@@ -1,65 +1,1043 @@
 {
-  "title": "World",
+  "title": "root",
   "id": 1,
   "formatVersion": 2,
   "ideas": {
-    "1": {
-      "title": "Game",
-      "id": 2,
+    "5": {
+      "title": "Objects",
+      "id": 28,
+      "attr": {
+        "position": [
+          1023.5,
+          28,
+          2
+        ],
+        "style": {}
+      },
+      "ideas": {
+        "12": {
+          "title": "Stack",
+          "id": 5,
+          "ideas": {},
+          "attr": {
+            "style": {
+              "background": "#ffff00"
+            }
+          }
+        },
+        "22": {
+          "title": "PlayArea",
+          "id": 29,
+          "attr": {
+            "position": [
+              65,
+              421,
+              3
+            ],
+            "style": {
+              "background": "#008080"
+            }
+          },
+          "ideas": {}
+        },
+        "23": {
+          "title": "Layer/Mask",
+          "id": 30,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "24": {
+          "title": "Game",
+          "id": 31,
+          "attr": {
+            "position": [
+              69,
+              540,
+              4
+            ],
+            "style": {
+              "background": "#ff6600"
+            }
+          }
+        },
+        "0.5": {
+          "title": "Token",
+          "id": 6,
+          "ideas": {
+            "2": {
+              "title": "info",
+              "id": 9,
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              }
+            },
+            "3": {
+              "title": "pawn",
+              "id": 10,
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              }
+            },
+            "4": {
+              "title": "card",
+              "id": 11,
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              }
+            },
+            "5": {
+              "title": "marker",
+              "id": 12,
+              "ideas": {},
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              }
+            },
+            "6": {
+              "title": "die",
+              "id": 13,
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              }
+            },
+            "7": {
+              "title": "board",
+              "id": 8,
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              },
+              "ideas": {}
+            },
+            "8": {
+              "title": "mask",
+              "id": 32,
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#ff0000"
+            },
+            "position": [
+              72,
+              97,
+              2
+            ]
+          }
+        }
+      }
+    },
+    "10": {
+      "title": "Example Tree",
+      "id": 27,
+      "attr": {
+        "position": [
+          31.5,
+          94,
+          1
+        ],
+        "style": {}
+      },
       "ideas": {
         "1": {
-          "title": "PlayArea",
-          "id": 3,
+          "title": "Arkham Horror",
+          "id": 2,
           "ideas": {
             "1": {
-              "title": "Layer",
-              "id": 4,
+              "title": "Main Board",
+              "id": 3,
               "ideas": {
-                "1": {
-                  "title": "Stack",
-                  "id": 5,
+                "11": {
+                  "title": "streets&locations",
+                  "id": 39,
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
                   "ideas": {
                     "1": {
-                      "title": "Token",
-                      "id": 6,
-                      "ideas": {
-                        "2": {
-                          "title": "info",
-                          "id": 9
+                      "title": "player_jennybarnes",
+                      "id": 42,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      }
+                    },
+                    "2": {
+                      "title": "player_monteryjack",
+                      "id": 43,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      }
+                    },
+                    "3": {
+                      "title": "gate_dreamleands",
+                      "id": 47,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      }
+                    },
+                    "4": {
+                      "title": "gate_plateau_leng",
+                      "id": 48,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      }
+                    },
+                    "5": {
+                      "title": "mon_cultist",
+                      "id": 52,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      }
+                    },
+                    "6": {
+                      "title": "mon_darkyoung",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 55
+                    }
+                  }
+                },
+                "15": {
+                  "title": "gate_track",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "id": 40,
+                  "ideas": {
+                    "1": {
+                      "title": "player_joediamond",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 44
+                    },
+                    "2": {
+                      "title": "player_harveywalters",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 45
+                    }
+                  }
+                },
+                "17": {
+                  "title": "Rumors",
+                  "id": 56,
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  }
+                },
+                "19": {
+                  "title": "terror_track",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "id": 41,
+                  "ideas": {
+                    "1": {
+                      "title": "token_terrorface",
+                      "id": 46,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
                         },
-                        "3": {
-                          "title": "pawn",
-                          "id": 10
+                        "position": [
+                          97,
+                          65,
+                          1
+                        ]
+                      }
+                    }
+                  }
+                },
+                "29": {
+                  "title": "board image",
+                  "id": 36,
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "board_arkham",
+                      "id": 37,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
                         },
-                        "4": {
-                          "title": "card",
-                          "id": 11
-                        },
-                        "5": {
-                          "title": "marker",
-                          "id": 12,
-                          "ideas": {}
-                        },
-                        "6": {
-                          "title": "die",
-                          "id": 13
-                        },
-                        "7": {
-                          "title": "board",
-                          "id": 8,
-                          "attr": {
-                            "style": {}
-                          }
+                        "position": [
+                          43.5,
+                          93,
+                          1
+                        ]
+                      },
+                      "ideas": {}
+                    }
+                  }
+                },
+                "16.5": {
+                  "title": "Outskirts",
+                  "id": 49,
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "mon_MiGo",
+                      "id": 50,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      }
+                    },
+                    "2": {
+                      "title": "mon_witch",
+                      "id": 51,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
                         }
                       }
                     }
                   }
+                },
+                "16.75": {
+                  "title": "Environment",
+                  "id": 57,
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "card_env_terrorstrikesarkham",
+                      "id": 58,
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          93.5,
+                          54,
+                          1
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "attr": {
+                "position": [
+                  -1,
+                  76,
+                  1
+                ],
+                "style": {
+                  "background": "#008080"
+                }
+              }
+            },
+            "2": {
+              "title": "char_joediamond",
+              "id": 25,
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                },
+                "position": [
+                  92.5,
+                  521,
+                  2
+                ]
+              },
+              "ideas": {
+                "1": {
+                  "title": "sanity",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    },
+                    "position": [
+                      76.5,
+                      96,
+                      1
+                    ]
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_brain",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 60
+                    },
+                    "2": {
+                      "title": "token_brain",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 61
+                    },
+                    "3": {
+                      "title": "token_brain",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 62
+                    },
+                    "4": {
+                      "title": "token_brain",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 63
+                    }
+                  },
+                  "id": 59
+                },
+                "2": {
+                  "title": "stamina",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_heart",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 65
+                    },
+                    "2": {
+                      "title": "token_heart",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 69
+                    },
+                    "3": {
+                      "title": "token_heart",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 70
+                    }
+                  },
+                  "id": 64
+                },
+                "3": {
+                  "title": "money",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_onedollar",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 72
+                    },
+                    "3": {
+                      "title": "token_fivedollar",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 74
+                    }
+                  },
+                  "id": 71
+                },
+                "4": {
+                  "title": "speed_sneak",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_stat",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 76
+                    }
+                  },
+                  "id": 75
+                },
+                "5": {
+                  "title": "fight_will",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_stat",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 79
+                    }
+                  },
+                  "id": 78
+                },
+                "6": {
+                  "title": "lore_luck",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_stat",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 81
+                    }
+                  },
+                  "id": 80
+                },
+                "2.5": {
+                  "title": "cluetokens",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_clue",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 90
+                    },
+                    "2": {
+                      "title": "token_clue",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 91
+                    }
+                  },
+                  "id": 89
+                }
+              }
+            },
+            "3": {
+              "title": "char_harveywalters",
+              "id": 82,
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              }
+            },
+            "4": {
+              "title": "char_jennybarnes",
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              },
+              "id": 83
+            },
+            "5": {
+              "title": "char_monterayjack",
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              },
+              "id": 84
+            },
+            "6": {
+              "title": "hand_joediamond",
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              },
+              "id": 85,
+              "ideas": {
+                "12": {
+                  "title": "card_citem_45automatic",
+                  "attr": {
+                    "style": {
+                      "background": "#ff0000"
+                    }
+                  },
+                  "id": 92
+                },
+                "22": {
+                  "title": "card_citem_flask",
+                  "attr": {
+                    "style": {
+                      "background": "#ff0000"
+                    }
+                  },
+                  "id": 93
+                },
+                "23": {
+                  "title": "card_uitem_eldersign",
+                  "attr": {
+                    "style": {
+                      "background": "#ff0000"
+                    }
+                  },
+                  "id": 94
+                },
+                "24": {
+                  "title": "card_skill_plus1fight",
+                  "attr": {
+                    "style": {
+                      "background": "#ff0000"
+                    }
+                  },
+                  "id": 95
+                }
+              }
+            },
+            "7": {
+              "title": "hand_harveywalters",
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              },
+              "id": 86
+            },
+            "8": {
+              "title": "hand_jennybarnes",
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              },
+              "id": 87
+            },
+            "9": {
+              "title": "hand_monterayjack",
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              },
+              "id": 88
+            },
+            "10": {
+              "title": "bank",
+              "id": 96,
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              },
+              "ideas": {
+                "1": {
+                  "title": "arkham_decks",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    },
+                    "position": [
+                      15.5,
+                      85,
+                      1
+                    ]
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "deck_downtown",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "id": 98,
+                      "ideas": {
+                        "1": {
+                          "title": "card_enc_downtown01",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            },
+                            "position": [
+                              126.5,
+                              61,
+                              1
+                            ]
+                          },
+                          "id": 107
+                        },
+                        "2": {
+                          "title": "card_enc_downtown02",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 108
+                        },
+                        "3": {
+                          "title": "card_enc_downtown03",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 109
+                        },
+                        "4": {
+                          "title": "card_enc_downtown04",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 110
+                        },
+                        "5": {
+                          "title": "card_enc_downtown05",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 111
+                        },
+                        "6": {
+                          "title": "card_enc_downtown06",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 112
+                        },
+                        "7": {
+                          "title": "card_enc_downtown07",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 113
+                        }
+                      }
+                    },
+                    "2": {
+                      "title": "deck_easttown",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 99
+                    },
+                    "3": {
+                      "title": "deck_frenchhill",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 100
+                    },
+                    "4": {
+                      "title": "deck_merchantdistrict",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 101
+                    },
+                    "5": {
+                      "title": "deck_miskatonicuniversity",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 102
+                    },
+                    "6": {
+                      "title": "deck_northside",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 103
+                    },
+                    "7": {
+                      "title": "deck_rivertown",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 104
+                    },
+                    "8": {
+                      "title": "deck_southside",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 105
+                    },
+                    "9": {
+                      "title": "deck_uptown",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 106
+                    }
+                  },
+                  "id": 97
+                },
+                "2": {
+                  "title": "otherworld",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    },
+                    "position": [
+                      62.5,
+                      1013,
+                      2
+                    ]
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "deck_otherworld",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          58.5,
+                          60,
+                          1
+                        ]
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "card_otherworld01",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            },
+                            "position": [
+                              130.5,
+                              59,
+                              1
+                            ]
+                          },
+                          "id": 116
+                        },
+                        "2": {
+                          "title": "card_otherworld02",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 131
+                        },
+                        "3": {
+                          "title": "card_otherworld03",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 132
+                        },
+                        "4": {
+                          "title": "card_otherworld04",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 133
+                        },
+                        "5": {
+                          "title": "card_otherworld05",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 134
+                        }
+                      },
+                      "id": 115
+                    }
+                  },
+                  "id": 114
                 }
               }
             }
+          },
+          "attr": {
+            "style": {
+              "background": "#ff6600"
+            },
+            "position": [
+              97.5,
+              78,
+              1
+            ]
           }
         }
       }
     }
-  }
+  },
+  "attr": {
+    "storyboards": [
+      "Storyboard 1"
+    ],
+    "storyboard-scenes": [
+      {
+        "storyboards": {
+          "Storyboard 1": 1
+        }
+      }
+    ],
+    "style": {}
+  },
+  "links": []
 }
