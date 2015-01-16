@@ -1,0 +1,35 @@
+{
+  "title": "World",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "1": {
+      "title": "Game",
+      "id": 2,
+      "ideas": {
+        "1": {
+          "title": "PlayArea",
+          "id": 3,
+          "ideas": {
+            "1": {
+              "title": "Layer",
+              "id": 4,
+              "ideas": {
+                "1": {
+                  "title": "Stack",
+                  "id": 5,
+                  "ideas": {
+                    "1": {
+                      "title": "Token",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
