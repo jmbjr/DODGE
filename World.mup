@@ -18,7 +18,33 @@
         "12": {
           "title": "Stack",
           "id": 5,
-          "ideas": {},
+          "ideas": {
+            "1": {
+              "title": "deck",
+              "id": 153
+            },
+            "2": {
+              "title": "pile",
+              "id": 154,
+              "attr": {
+                "style": {}
+              }
+            },
+            "3": {
+              "title": "fan",
+              "id": 155,
+              "attr": {
+                "style": {}
+              }
+            },
+            "4": {
+              "title": "stacked",
+              "id": 156,
+              "attr": {
+                "style": {}
+              }
+            }
+          },
           "attr": {
             "style": {
               "background": "#ffff00"
@@ -294,6 +320,31 @@
                     }
                   }
                 },
+                "24": {
+                  "title": "ancient_old_one",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "bigbad_cthulu",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          127.41758388671883,
+                          69.68748389892562,
+                          1
+                        ]
+                      },
+                      "id": 171
+                    }
+                  },
+                  "id": 170
+                },
                 "29": {
                   "title": "board image",
                   "id": 36,
@@ -373,6 +424,54 @@
                       }
                     }
                   }
+                },
+                "26.5": {
+                  "title": "doom_track",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 174,
+                      "ideas": {}
+                    },
+                    "2": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 175
+                    },
+                    "3": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 176
+                    },
+                    "4": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 177
+                    }
+                  },
+                  "id": 173
                 }
               },
               "attr": {
@@ -609,6 +708,32 @@
                   },
                   "id": 80
                 },
+                "7": {
+                  "title": "character_profile",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "charactersheet_joediamond",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          43.5,
+                          93,
+                          1
+                        ]
+                      },
+                      "ideas": {},
+                      "id": 187
+                    }
+                  },
+                  "id": 186
+                },
                 "2.5": {
                   "title": "cluetokens",
                   "attr": {
@@ -762,9 +887,9 @@
                       "background": "#808080"
                     },
                     "position": [
-                      15.5,
-                      85,
-                      1
+                      65.9601762695313,
+                      128.9118076171876,
+                      3
                     ]
                   },
                   "ideas": {
@@ -1008,6 +1133,553 @@
                     }
                   },
                   "id": 114
+                },
+                "3": {
+                  "title": "investigator_decks",
+                  "id": 135,
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "deck_citems",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          107.32955253906243,
+                          59.51136016845703,
+                          1
+                        ]
+                      },
+                      "id": 136
+                    },
+                    "2": {
+                      "title": "deck_uitems",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 137
+                    },
+                    "3": {
+                      "title": "deck_skills",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 138
+                    },
+                    "4": {
+                      "title": "deck_spells",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 139
+                    },
+                    "5": {
+                      "title": "deck_allies",
+                      "id": 140,
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      }
+                    }
+                  }
+                },
+                "4": {
+                  "title": "special_decks",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "deck_membership",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          107.32955253906243,
+                          59.51136016845703,
+                          1
+                        ]
+                      },
+                      "id": 142
+                    },
+                    "2": {
+                      "title": "deck_retainer",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 143
+                    },
+                    "3": {
+                      "title": "deck_bankloan",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 144
+                    },
+                    "4": {
+                      "title": "deck_deputy",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 145
+                    },
+                    "5": {
+                      "title": "deck_blessingcurse",
+                      "id": 146,
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      }
+                    }
+                  },
+                  "id": 141
+                },
+                "5": {
+                  "title": "tokens",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "pile_brains",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 148
+                    },
+                    "3": {
+                      "title": "pile_cluetokens",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 150
+                    },
+                    "4": {
+                      "title": "pile_onedollars",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 151
+                    },
+                    "5": {
+                      "title": "pile_fivedollars",
+                      "id": 152,
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      }
+                    },
+                    "6": {
+                      "title": "pile_tendollars",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 157
+                    },
+                    "7": {
+                      "title": "pile_doomtokens",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 158
+                    },
+                    "8": {
+                      "title": "pile_closedmarkers",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 167
+                    },
+                    "9": {
+                      "title": "pile_exploredmarkers",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 168
+                    },
+                    "10": {
+                      "title": "pile_activitymarkers",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 169
+                    },
+                    "3.5": {
+                      "title": "pile_hearts",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "id": 149
+                    }
+                  },
+                  "id": 147
+                },
+                "6": {
+                  "title": "player_tokens",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "stack_characters",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          107.32955253906243,
+                          59.51136016845703,
+                          1
+                        ]
+                      },
+                      "id": 179,
+                      "ideas": {
+                        "1": {
+                          "title": "player_ashcanpete",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 192
+                        },
+                        "2": {
+                          "title": "player_dexterdrake",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 193,
+                          "ideas": {}
+                        },
+                        "3": {
+                          "title": "player_amandasharpe",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 195
+                        },
+                        "4": {
+                          "title": "player_gloriagoldberg",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 196
+                        }
+                      }
+                    }
+                  },
+                  "id": 178
+                },
+                "7": {
+                  "title": "character_sheets",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "stack_charactersheets",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          126.9601762695313,
+                          57.43191018066409,
+                          1
+                        ]
+                      },
+                      "id": 185,
+                      "ideas": {
+                        "1": {
+                          "title": "charactersheet_ashcanpete",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 188
+                        },
+                        "2": {
+                          "title": "charactersheet_dexterdrake",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 189
+                        },
+                        "3": {
+                          "title": "charactersheet_amandasharpe",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 190
+                        },
+                        "4": {
+                          "title": "charactersheet_gloriagoldberg",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 191
+                        }
+                      }
+                    }
+                  },
+                  "id": 184
+                },
+                "8": {
+                  "title": "monster_cup",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "pile_monsters",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          107.32955253906243,
+                          59.51136016845703,
+                          1
+                        ]
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "mon_migo",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 199
+                        },
+                        "2": {
+                          "title": "mon_zombie",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 200
+                        },
+                        "3": {
+                          "title": "mon_elderthing",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 201
+                        },
+                        "4": {
+                          "title": "player_maniac",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 202
+                        }
+                      },
+                      "id": 198
+                    }
+                  },
+                  "id": 197
+                },
+                "9": {
+                  "title": "ancientone_sheets",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "stack_ancientonesheets",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          126.9601762695313,
+                          57.43191018066409,
+                          1
+                        ]
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "ancientonesheet_azathtoth",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 205
+                        },
+                        "5": {
+                          "title": "ancientonesheet_hastur",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 209
+                        },
+                        "6": {
+                          "title": "ancientonesheet_yig",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "ideas": {},
+                          "id": 210
+                        }
+                      },
+                      "id": 204
+                    }
+                  },
+                  "id": 203
+                },
+                "1.5": {
+                  "title": "mythos",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "deck_mythos",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          64.31819999999993,
+                          59.41458389892614,
+                          1
+                        ]
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "card_mythos01\n",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 161
+                        },
+                        "2": {
+                          "title": "card_mythos02",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 162
+                        },
+                        "3": {
+                          "title": "card_mythos03",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 163
+                        },
+                        "4": {
+                          "title": "card_mythos04",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 164
+                        },
+                        "5": {
+                          "title": "card_mythos05",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 165
+                        }
+                      },
+                      "id": 160
+                    }
+                  },
+                  "id": 159
                 }
               }
             }
