@@ -21,7 +21,37 @@
                   "ideas": {
                     "1": {
                       "title": "Token",
-                      "id": 6
+                      "id": 6,
+                      "ideas": {
+                        "2": {
+                          "title": "info",
+                          "id": 9
+                        },
+                        "3": {
+                          "title": "pawn",
+                          "id": 10
+                        },
+                        "4": {
+                          "title": "card",
+                          "id": 11
+                        },
+                        "5": {
+                          "title": "marker",
+                          "id": 12,
+                          "ideas": {}
+                        },
+                        "6": {
+                          "title": "die",
+                          "id": 13
+                        },
+                        "7": {
+                          "title": "board",
+                          "id": 8,
+                          "attr": {
+                            "style": {}
+                          }
+                        }
+                      }
                     }
                   }
                 }
