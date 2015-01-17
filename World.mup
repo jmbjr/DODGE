@@ -157,6 +157,26 @@
                   "background": "transparent"
                 }
               }
+            },
+            "9": {
+              "title": "defaults",
+              "id": 272,
+              "attr": {
+                "style": {
+                  "background": "#000000"
+                }
+              },
+              "ideas": {
+                "1": {
+                  "title": "anchorpoint=center, anchor_xoff=0, anchor_yoff=0",
+                  "attr": {
+                    "style": {
+                      "background": "#000000"
+                    }
+                  },
+                  "id": 273
+                }
+              }
             }
           },
           "attr": {
@@ -208,6 +228,35 @@
                         "style": {
                           "background": "#ff0000"
                         }
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "state_img[0]=player_jennybarnes.png",
+                          "id": 251,
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          }
+                        },
+                        "3": {
+                          "title": "x=10, y=100",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 271
+                        },
+                        "1.5": {
+                          "title": "state_img[1]=player_jennybarnes_delayed.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 262
+                        }
                       }
                     },
                     "2": {
@@ -216,6 +265,35 @@
                       "attr": {
                         "style": {
                           "background": "#ff0000"
+                        }
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "state_img[0]=player_monteryjack.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 252
+                        },
+                        "2": {
+                          "title": "state_img[1]=player_monterayjack_delayed.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 263
+                        },
+                        "3": {
+                          "title": "x=40, y=80",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 264
                         }
                       }
                     },
@@ -226,6 +304,35 @@
                         "style": {
                           "background": "#ff0000"
                         }
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "state_img[0]=gate_backimage.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 253
+                        },
+                        "2": {
+                          "title": "state_img[1]=gate_dreamlands.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 254
+                        },
+                        "3": {
+                          "title": "x=125, y=385",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 277
+                        }
                       }
                     },
                     "4": {
@@ -234,6 +341,35 @@
                       "attr": {
                         "style": {
                           "background": "#ff0000"
+                        }
+                      },
+                      "ideas": {
+                        "2": {
+                          "title": "state_img[0]=gate_backimage.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 256
+                        },
+                        "12": {
+                          "title": "state_img[1]=gate_plateau.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 255
+                        },
+                        "13": {
+                          "title": "x=118, y=285",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 276
                         }
                       }
                     },
@@ -244,6 +380,35 @@
                         "style": {
                           "background": "#ff0000"
                         }
+                      },
+                      "ideas": {
+                        "2": {
+                          "title": "state_img[0]=mon_cultist_back.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 258
+                        },
+                        "12": {
+                          "title": "state_img[1]=mon_cultist_front.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 257
+                        },
+                        "13": {
+                          "title": "x=25, y=185",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 275
+                        }
                       }
                     },
                     "6": {
@@ -253,7 +418,36 @@
                           "background": "#ff0000"
                         }
                       },
-                      "id": 55
+                      "id": 55,
+                      "ideas": {
+                        "2": {
+                          "title": "state_img[0]=mon_darkyoung_back.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 260
+                        },
+                        "12": {
+                          "title": "state_img[1]=mon_darkyoung_front.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 259
+                        },
+                        "13": {
+                          "title": "x=18, y=121",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 274
+                        }
+                      }
                     }
                   }
                 },
@@ -273,7 +467,41 @@
                           "background": "#ff0000"
                         }
                       },
-                      "id": 44
+                      "id": 44,
+                      "ideas": {
+                        "1": {
+                          "title": "state_img[0]=player_joediamond.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 267
+                        },
+                        "2": {
+                          "title": "state_img[1]=player_joediamond_delayed.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 266
+                        },
+                        "13": {
+                          "title": "x=62, y=54",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            },
+                            "position": [
+                              141.55401440429682,
+                              51.28686778564452,
+                              1
+                            ]
+                          },
+                          "id": 265
+                        }
+                      }
                     },
                     "2": {
                       "title": "player_harveywalters",
@@ -282,7 +510,36 @@
                           "background": "#ff0000"
                         }
                       },
-                      "id": 45
+                      "id": 45,
+                      "ideas": {
+                        "1": {
+                          "title": "state_img[0]=player_harveywalters.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 268
+                        },
+                        "2": {
+                          "title": "state_img[1]=player_harveywalters_delayed.png",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 269
+                        },
+                        "3": {
+                          "title": "x=98, y=145",
+                          "attr": {
+                            "style": {
+                              "background": "#000000"
+                            }
+                          },
+                          "id": 270
+                        }
+                      }
                     }
                   }
                 },
