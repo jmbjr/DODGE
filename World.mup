@@ -371,6 +371,71 @@
                     }
                   }
                 },
+                "30": {
+                  "title": "Dice",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "die_normal",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 244
+                    },
+                    "2": {
+                      "title": "die_normal",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 245
+                    },
+                    "3": {
+                      "title": "die_normal",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 246
+                    },
+                    "4": {
+                      "title": "die_normal",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 247
+                    },
+                    "5": {
+                      "title": "die_normal",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 248
+                    },
+                    "6": {
+                      "title": "die_normal",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 249
+                    }
+                  },
+                  "id": 211
+                },
                 "16.5": {
                   "title": "Outskirts",
                   "id": 49,
@@ -1680,6 +1745,147 @@
                     }
                   },
                   "id": 159
+                },
+                "0.5": {
+                  "title": "Dice",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    },
+                    "position": [
+                      114.36640761718763,
+                      45.900158892820855,
+                      4
+                    ]
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "pile_dice_normal",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        },
+                        "position": [
+                          33.281183886718736,
+                          64.86360000000013,
+                          1
+                        ]
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "die_normal",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            },
+                            "position": [
+                              126.5,
+                              61,
+                              1
+                            ]
+                          },
+                          "id": 229
+                        },
+                        "2": {
+                          "title": "die_normal",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 230
+                        },
+                        "3": {
+                          "title": "die_normal",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 231
+                        },
+                        "4": {
+                          "title": "die_normal",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 232
+                        },
+                        "5": {
+                          "title": "die_normal",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 233
+                        },
+                        "6": {
+                          "title": "die_normal",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 234
+                        }
+                      },
+                      "id": 228
+                    },
+                    "2": {
+                      "title": "pile_dice_blessed",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "die_blessed",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            },
+                            "position": [
+                              126.5,
+                              61,
+                              1
+                            ]
+                          },
+                          "id": 236
+                        }
+                      },
+                      "id": 235
+                    },
+                    "3": {
+                      "title": "pile_dice_cursed",
+                      "attr": {
+                        "style": {
+                          "background": "#ffff00"
+                        }
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "die_cursed",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            },
+                            "position": [
+                              126.5,
+                              61,
+                              1
+                            ]
+                          },
+                          "id": 243
+                        }
+                      },
+                      "id": 242
+                    }
+                  },
+                  "id": 227
                 }
               }
             }
