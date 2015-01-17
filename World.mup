@@ -321,29 +321,93 @@
                   }
                 },
                 "24": {
-                  "title": "ancient_old_one",
-                  "attr": {
-                    "style": {
-                      "background": "#808080"
-                    }
-                  },
+                  "title": "ancientone&doomtrack",
+                  "id": 250,
                   "ideas": {
                     "1": {
-                      "title": "bigbad_cthulu",
+                      "title": "ancient_old_one",
                       "attr": {
                         "style": {
-                          "background": "#ff0000"
+                          "background": "#808080"
                         },
                         "position": [
-                          127.41758388671883,
-                          69.68748389892562,
+                          74.27550761718749,
+                          66.38063643798841,
                           1
                         ]
                       },
-                      "id": 171
+                      "ideas": {
+                        "1": {
+                          "title": "ancientone_cthulu",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            },
+                            "position": [
+                              127.41758388671883,
+                              69.68748389892562,
+                              1
+                            ]
+                          },
+                          "id": 171
+                        }
+                      },
+                      "id": 170
+                    },
+                    "2": {
+                      "title": "doom_track",
+                      "attr": {
+                        "style": {
+                          "background": "#808080"
+                        }
+                      },
+                      "ideas": {
+                        "1": {
+                          "title": "token_doom",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 174,
+                          "ideas": {}
+                        },
+                        "2": {
+                          "title": "token_doom",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 175
+                        },
+                        "3": {
+                          "title": "token_doom",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 176
+                        },
+                        "4": {
+                          "title": "token_doom",
+                          "attr": {
+                            "style": {
+                              "background": "#ff0000"
+                            }
+                          },
+                          "id": 177
+                        }
+                      },
+                      "id": 173
                     }
                   },
-                  "id": 170
+                  "attr": {
+                    "style": {
+                      "background": "#008080"
+                    }
+                  }
                 },
                 "29": {
                   "title": "board image",
@@ -446,7 +510,7 @@
                   },
                   "ideas": {
                     "1": {
-                      "title": "mon_MiGo",
+                      "title": "mon_migo",
                       "id": 50,
                       "attr": {
                         "style": {
@@ -475,7 +539,7 @@
                   },
                   "ideas": {
                     "1": {
-                      "title": "card_env_terrorstrikesarkham",
+                      "title": "card_mythos_environment04",
                       "id": 58,
                       "attr": {
                         "style": {
@@ -489,54 +553,6 @@
                       }
                     }
                   }
-                },
-                "26.5": {
-                  "title": "doom_track",
-                  "attr": {
-                    "style": {
-                      "background": "#808080"
-                    }
-                  },
-                  "ideas": {
-                    "1": {
-                      "title": "token_doom",
-                      "attr": {
-                        "style": {
-                          "background": "#ff0000"
-                        }
-                      },
-                      "id": 174,
-                      "ideas": {}
-                    },
-                    "2": {
-                      "title": "token_doom",
-                      "attr": {
-                        "style": {
-                          "background": "#ff0000"
-                        }
-                      },
-                      "id": 175
-                    },
-                    "3": {
-                      "title": "token_doom",
-                      "attr": {
-                        "style": {
-                          "background": "#ff0000"
-                        }
-                      },
-                      "id": 176
-                    },
-                    "4": {
-                      "title": "token_doom",
-                      "attr": {
-                        "style": {
-                          "background": "#ff0000"
-                        }
-                      },
-                      "id": 177
-                    }
-                  },
-                  "id": 173
                 }
               },
               "attr": {
