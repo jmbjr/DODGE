@@ -2559,6 +2559,74 @@
           }
         }
       }
+    },
+    "-1": {
+      "title": "Interface",
+      "id": 353
+    },
+    "-2": {
+      "title": "Compilation/Run",
+      "id": 354,
+      "ideas": {
+        "1": {
+          "title": "make",
+          "id": 355,
+          "ideas": {
+            "1": {
+              "title": "include *.con content files",
+              "id": 356,
+              "attr": {
+                "position": [
+                  80,
+                  71,
+                  1
+                ],
+                "style": {}
+              },
+              "ideas": {
+                "1": {
+                  "title": "for each *.con file",
+                  "id": 360,
+                  "ideas": {
+                    "1": {
+                      "title": "load each object into GAME",
+                      "id": 362,
+                      "attr": {
+                        "position": [
+                          141,
+                          58,
+                          1
+                        ],
+                        "style": {}
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {},
+                    "position": [
+                      144,
+                      122,
+                      1
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "attr": {
+            "position": [
+              117,
+              75,
+              1
+            ],
+            "style": {}
+          }
+        },
+        "2": {
+          "title": "start GAME",
+          "id": 368
+        }
+      }
     }
   },
   "attr": {
