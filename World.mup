@@ -2665,7 +2665,14 @@
                     "1": {
                       "title": "contains presets to use for content definitions",
                       "id": 395,
-                      "attr": {}
+                      "attr": {
+                        "position": [
+                          131,
+                          57.875,
+                          1
+                        ],
+                        "style": {}
+                      }
                     }
                   }
                 }
@@ -2684,6 +2691,76 @@
         "2": {
           "title": "start GAME",
           "id": 368
+        }
+      }
+    },
+    "2.5": {
+      "title": "Development Flow\n",
+      "id": 397,
+      "attr": {
+        "position": [
+          59.87852268454503,
+          -79.44091257636887,
+          3
+        ],
+        "style": {}
+      },
+      "ideas": {
+        "3": {
+          "title": "need scripts to keep the filenames syncd",
+          "id": 401,
+          "ideas": {
+            "1": {
+              "title": "Script to create *.con files",
+              "id": 400,
+              "attr": {
+                "style": {},
+                "position": [
+                  155.0069670147368,
+                  -76.0069580078125,
+                  1
+                ]
+              }
+            },
+            "2": {
+              "title": "Script to run DODGE in batch to test game",
+              "id": 403
+            },
+            "0.5": {
+              "title": "Scripts to create NanDeck files",
+              "id": 398,
+              "ideas": {
+                "1": {
+                  "title": "create cards, boards, tokens, etc files",
+                  "id": 399,
+                  "attr": {
+                    "position": [
+                      109,
+                      60.9896240234375,
+                      1
+                    ],
+                    "style": {}
+                  }
+                }
+              },
+              "attr": {
+                "style": {},
+                "position": [
+                  120.00693649715868,
+                  51.00689697265625,
+                  2
+                ]
+              }
+            }
+          },
+          "attr": {
+            "position": [
+              92.01386398739305,
+              54.11459305845665,
+              1
+            ],
+            "style": {}
+          }
         }
       }
     }
