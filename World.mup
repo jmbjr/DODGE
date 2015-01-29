@@ -903,95 +903,6 @@
                     }
                   }
                 },
-                "24": {
-                  "title": "ancientone&doomtrack",
-                  "id": 250,
-                  "ideas": {
-                    "1": {
-                      "title": "ancient_old_one",
-                      "attr": {
-                        "style": {
-                          "background": "#808080"
-                        },
-                        "position": [
-                          74.27550761718749,
-                          66.38063643798841,
-                          1
-                        ]
-                      },
-                      "ideas": {
-                        "1": {
-                          "title": "ancientone_cthulu",
-                          "attr": {
-                            "style": {
-                              "background": "#ff0000"
-                            },
-                            "position": [
-                              127.41758388671883,
-                              69.68748389892562,
-                              1
-                            ]
-                          },
-                          "id": 171
-                        }
-                      },
-                      "id": 170
-                    },
-                    "2": {
-                      "title": "doom_track",
-                      "attr": {
-                        "style": {
-                          "background": "#808080"
-                        }
-                      },
-                      "ideas": {
-                        "1": {
-                          "title": "token_doom",
-                          "attr": {
-                            "style": {
-                              "background": "#ff0000"
-                            }
-                          },
-                          "id": 174,
-                          "ideas": {}
-                        },
-                        "2": {
-                          "title": "token_doom",
-                          "attr": {
-                            "style": {
-                              "background": "#ff0000"
-                            }
-                          },
-                          "id": 175
-                        },
-                        "3": {
-                          "title": "token_doom",
-                          "attr": {
-                            "style": {
-                              "background": "#ff0000"
-                            }
-                          },
-                          "id": 176
-                        },
-                        "4": {
-                          "title": "token_doom",
-                          "attr": {
-                            "style": {
-                              "background": "#ff0000"
-                            }
-                          },
-                          "id": 177
-                        }
-                      },
-                      "id": 173
-                    }
-                  },
-                  "attr": {
-                    "style": {
-                      "background": "#008080"
-                    }
-                  }
-                },
                 "29": {
                   "title": "board image",
                   "id": 36,
@@ -2545,6 +2456,95 @@
                   "id": 227
                 }
               }
+            },
+            "1.5": {
+              "title": "ancientone&doomtrack",
+              "id": 250,
+              "ideas": {
+                "1": {
+                  "title": "ancient_old_one",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    },
+                    "position": [
+                      74.27550761718749,
+                      66.38063643798841,
+                      1
+                    ]
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "ancientone_cthulu",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        },
+                        "position": [
+                          127.41758388671883,
+                          69.68748389892562,
+                          1
+                        ]
+                      },
+                      "id": 171
+                    }
+                  },
+                  "id": 170
+                },
+                "2": {
+                  "title": "doom_track",
+                  "attr": {
+                    "style": {
+                      "background": "#808080"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 174,
+                      "ideas": {}
+                    },
+                    "2": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 175
+                    },
+                    "3": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 176
+                    },
+                    "4": {
+                      "title": "token_doom",
+                      "attr": {
+                        "style": {
+                          "background": "#ff0000"
+                        }
+                      },
+                      "id": 177
+                    }
+                  },
+                  "id": 173
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#008080"
+                }
+              }
             }
           },
           "attr": {
@@ -2565,15 +2565,15 @@
       "id": 353
     },
     "-2": {
-      "title": "Compilation/Run",
+      "title": "How to Run the Game",
       "id": 354,
       "ideas": {
         "1": {
-          "title": "make",
+          "title": "Create Game \"Makefile\"",
           "id": 355,
           "ideas": {
             "1": {
-              "title": "include *.con content files",
+              "title": "include *.con content files\ninclude order is important\n",
               "id": 356,
               "attr": {
                 "position": [
@@ -2585,29 +2585,88 @@
               },
               "ideas": {
                 "1": {
-                  "title": "for each *.con file",
-                  "id": 360,
+                  "title": "boards.con",
+                  "id": 370
+                },
+                "2": {
+                  "title": "character_tokens.con",
+                  "id": 371
+                },
+                "3": {
+                  "title": "monster_tokens.con",
+                  "id": 373
+                },
+                "4": {
+                  "title": "arkham_encounter_cards.con",
+                  "id": 374,
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "5": {
+                  "title": "otherworld_encounter_cards.con",
+                  "id": 375
+                },
+                "6": {
+                  "title": "character_sheets.con",
+                  "id": 376
+                },
+                "7": {
+                  "title": "great_old_one_sheets.con",
+                  "id": 377
+                },
+                "8": {
+                  "title": "tokens.con",
+                  "id": 379
+                },
+                "9": {
+                  "title": "common_item_cards.con",
+                  "id": 380,
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "10": {
+                  "title": "unique_item_cards.con",
+                  "id": 381
+                },
+                "11": {
+                  "title": "spell_cards.con",
+                  "id": 382
+                },
+                "12": {
+                  "title": "skill_cards.con",
+                  "id": 383
+                },
+                "13": {
+                  "title": "ally_cards.con",
+                  "id": 384
+                },
+                "14": {
+                  "title": "misc_cards.con",
+                  "id": 385
+                },
+                "15": {
+                  "title": "mythos_cards.con",
+                  "id": 386
+                },
+                "16": {
+                  "title": "decks.con",
+                  "id": 392
+                },
+                "17": {
+                  "title": "playareas.con",
+                  "id": 393
+                },
+                "0.5": {
+                  "title": "presets.con",
+                  "id": 394,
                   "ideas": {
                     "1": {
-                      "title": "load each object into GAME",
-                      "id": 362,
-                      "attr": {
-                        "position": [
-                          141,
-                          58,
-                          1
-                        ],
-                        "style": {}
-                      }
+                      "title": "contains presets to use for content definitions",
+                      "id": 395,
+                      "attr": {}
                     }
-                  },
-                  "attr": {
-                    "style": {},
-                    "position": [
-                      144,
-                      122,
-                      1
-                    ]
                   }
                 }
               }
