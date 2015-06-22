@@ -26,3 +26,11 @@ Batch interface/API
 
 mindmap link at:
 https://www.mindmup.com
+
+latest version at:
+https://atlas.mindmup.com/2015/02/b109b4f08da60132ea7e0e49b1a9e576/dodge/index.html
+
+
+link to setting up unity projects in github:
+http://stackoverflow.com/questions/21573405/how-to-prepare-a-unity-project-for-git
+
