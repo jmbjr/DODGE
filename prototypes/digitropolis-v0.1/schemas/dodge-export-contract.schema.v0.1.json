@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digitropolis.example.invalid/schemas/dodge-export-contract.schema.v0.1.json",
+  "title": "DODGE exporter contract v0.1",
+  "type": "object",
+  "required": ["contract_version", "contract_id", "target", "accepts", "maps", "adds", "outputs", "forbidden_in_dodge"],
+  "properties": {
+    "contract_version": {"const": "0.1.0"},
+    "contract_id": {"type": "string"},
+    "target": {"enum": ["print-and-play", "tabletop-simulator"]},
+    "accepts": {
+      "type": "object",
+      "required": ["dodge_versions", "object_kinds"],
+      "properties": {
+        "dodge_versions": {"type": "array", "items": {"type": "string"}},
+        "object_kinds": {"type": "array", "items": {"enum": ["token", "collection", "randomizer"]}},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "maps": {"type": "array", "items": {"type": "object", "required": ["from", "to"], "properties": {"from": {"type": "string"}, "to": {"type": "string"}}, "additionalProperties": false}},
+    "adds": {"type": "array", "items": {"type": "string"}},
+    "outputs": {"type": "array", "items": {"type": "string"}},
+    "forbidden_in_dodge": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

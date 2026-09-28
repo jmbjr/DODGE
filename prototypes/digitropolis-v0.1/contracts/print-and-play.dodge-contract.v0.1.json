@@ -1,0 +1,18 @@
+{
+  "contract_version": "0.1.0",
+  "contract_id": "digitropolis.pnp-from-dodge.v0.1",
+  "target": "print-and-play",
+  "accepts": {
+    "dodge_versions": ["0.1.0"],
+    "object_kinds": ["token", "collection"],
+    "limitations": ["Only card tokens with front/back face slots are printable in v0.1."]
+  },
+  "maps": [
+    {"from": "collection.members in order", "to": "selected printable card sequence"},
+    {"from": "member.entity_ref", "to": "canonical card lookup"},
+    {"from": "token faces", "to": "printable front/back content"}
+  ],
+  "adds": ["paper size", "card dimensions", "page coordinates", "cut guides", "corner guides", "typography", "build traceability"],
+  "outputs": ["PDF", "PnP build manifest"],
+  "forbidden_in_dodge": ["page coordinates", "crop marks", "printer margins", "font sizes", "PDF metadata"]
+}

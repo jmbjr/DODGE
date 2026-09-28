@@ -1,0 +1,19 @@
+{
+  "contract_version": "0.1.0",
+  "contract_id": "digitropolis.tts-from-dodge.v0.1",
+  "target": "tabletop-simulator",
+  "accepts": {
+    "dodge_versions": ["0.1.0"],
+    "object_kinds": ["token", "collection"],
+    "limitations": ["Only standard two-sided card tokens and one deck collection are supported in v0.1."]
+  },
+  "maps": [
+    {"from": "scene instance of collection", "to": "TTS DeckCustom object"},
+    {"from": "collection.members in order", "to": "DeckIDs, ContainedObjects, and atlas slots"},
+    {"from": "token faces", "to": "FaceURL and BackURL textures"},
+    {"from": "reference token", "to": "clickable TTS notecard"}
+  ],
+  "adds": ["GUIDs", "transforms", "atlas indices", "TTS object names", "hosted asset URLs", "table and sky", "build traceability"],
+  "outputs": ["RGB face atlas PNG", "RGB back PNG", "TTS save JSON", "TTS build manifest", "rules text"],
+  "forbidden_in_dodge": ["TTS GUIDs", "Transform", "DeckIDs", "CardID", "atlas coordinates", "Steam Cloud URLs", "table and sky identifiers"]
+}

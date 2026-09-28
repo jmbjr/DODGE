@@ -1,0 +1,2173 @@
+{
+  "dodge_version": "0.1.0",
+  "document_id": "digitropolis.full-set",
+  "game_id": "digitropolis",
+  "title": "Digitropolis full-set scene",
+  "description": "Target-neutral card collection and rules reference shared by every exporter.",
+  "sources": {
+    "cards": {
+      "kind": "entity_catalog",
+      "uri": "data/cards/base-set.v0.2.json",
+      "version": "0.2.0",
+      "sha256": "493a7f160a5dee73cefc38be29e3eca45a5ee49f5ce8f51432beeac02eaf8553"
+    },
+    "rules": {
+      "kind": "rules",
+      "uri": "docs/research/rules-and-dataset.v0.1.md",
+      "version": "research-v0.1",
+      "sha256": "fe157865d4dabb3c06c3bb5307ebc2ad497d03c634378bf90b3ea789253e93cc"
+    }
+  },
+  "archetypes": {
+    "standard-card": {
+      "kind": "token",
+      "face_slots": [
+        {
+          "id": "front",
+          "role": "front"
+        },
+        {
+          "id": "back",
+          "role": "back"
+        }
+      ],
+      "description": "A two-sided standard card token."
+    },
+    "deck": {
+      "kind": "collection",
+      "description": "An ordered collection that may be shuffled and drawn without replacement."
+    },
+    "reference-token": {
+      "kind": "token",
+      "face_slots": [
+        {
+          "id": "reference",
+          "role": "reference"
+        }
+      ],
+      "description": "A readable non-playing reference token."
+    }
+  },
+  "objects": {
+    "card-pool": {
+      "kind": "collection",
+      "archetype_ref": "deck",
+      "name": "full-set",
+      "source_ref": "cards",
+      "members": [
+        {
+          "entity_ref": "cards:base-001",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-002",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-003",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-004",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-005",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-006",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-007",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-008",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-009",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-010",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-011",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-012",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-013",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-014",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-015",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-016",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-017",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-018",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-019",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-020",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-021",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-022",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-023",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-024",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-025",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-026",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-027",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-028",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-029",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-030",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-031",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-032",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-033",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-034",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-035",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-036",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-037",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-038",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-039",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-040",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-041",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-042",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-043",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-044",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-045",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-046",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-047",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-048",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-049",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-050",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-051",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-052",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-053",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-054",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-055",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-056",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-057",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-058",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-059",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-060",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-061",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-062",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-063",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-064",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-065",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-066",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-067",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-068",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-069",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-070",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-071",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-072",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-073",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-074",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-075",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-076",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-077",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-078",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-079",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-080",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-081",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-082",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-083",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-084",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-085",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-086",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-087",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-088",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-089",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-090",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-091",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-092",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-093",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-094",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-095",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-096",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-097",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-098",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-099",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-100",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-101",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-102",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-103",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-104",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-105",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-106",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-107",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-108",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-109",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-110",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-111",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-112",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-113",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-114",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-115",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-116",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-117",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-118",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-119",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-120",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-121",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-122",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-123",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-124",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-125",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-126",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-127",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-128",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-129",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-130",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-131",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-132",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-133",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-134",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-135",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-136",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-137",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-138",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-139",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-140",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-141",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-142",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-143",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-144",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-145",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-146",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-147",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-148",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-149",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-150",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-151",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-152",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-153",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-154",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-155",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-156",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-157",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-158",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-159",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-160",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-161",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-162",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-163",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-164",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-165",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-166",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-167",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-168",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-169",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-170",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-171",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-172",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-173",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-174",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-175",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-176",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-177",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-178",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-179",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-180",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-181",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-182",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-183",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-184",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-185",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-186",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-187",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-188",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-189",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-190",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-191",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-192",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-193",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-194",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-195",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-196",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-197",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-198",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-199",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-200",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-201",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-202",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-203",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-204",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-205",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-206",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-207",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-208",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-209",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-210",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-211",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-212",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-213",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-214",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-215",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-216",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-217",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-218",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-219",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-220",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-221",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-222",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-223",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-224",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-225",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-226",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-227",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-228",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-229",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-230",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-231",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-232",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-233",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-234",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-235",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-236",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-237",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-238",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-239",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-240",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-241",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-242",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-243",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-244",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-245",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-246",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-247",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-248",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-249",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-250",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-251",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-252",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-253",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-254",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-255",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-256",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-257",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-258",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-259",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-260",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-261",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-262",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-263",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-264",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-265",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-266",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-267",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-268",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-269",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-270",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-271",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-272",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-273",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-274",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-275",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-276",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-277",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-278",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-279",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-280",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-281",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-282",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-283",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-284",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-285",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-286",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-287",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-288",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-289",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-290",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-291",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-292",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-293",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-294",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-295",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-296",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-297",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-298",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-299",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-300",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-301",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-302",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-303",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-304",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-305",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-306",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-307",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-308",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-309",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-310",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-311",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-312",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-313",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-314",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-315",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-316",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-317",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-318",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-319",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-320",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-321",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-322",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-323",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-324",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-325",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-326",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-327",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-328",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-329",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-330",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-331",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-332",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-333",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-334",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-335",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-336",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-337",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-338",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-339",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-340",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-341",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-342",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-343",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-344",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-345",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-346",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-347",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-348",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-349",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-350",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-351",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-352",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-353",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-354",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-355",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-356",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-357",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-358",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-359",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-360",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-361",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-362",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-363",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-364",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-365",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-366",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-367",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-368",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-369",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-370",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-371",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-372",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-373",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-374",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-375",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-376",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-377",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-378",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-379",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-380",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-381",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-382",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-383",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-384",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-385",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-386",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-387",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-388",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-389",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-390",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-391",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-392",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-393",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-394",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-395",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-396",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-397",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-398",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-399",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-400",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-401",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-402",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-403",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-404",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-405",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-406",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-407",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-408",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-409",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-410",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-411",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-412",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-413",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-414",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-415",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-416",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-417",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-418",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-419",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-420",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-421",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-422",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-423",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-424",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-425",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-426",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-427",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-428",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-429",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-430",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-431",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-432",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-433",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-434",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-435",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-436",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-437",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-438",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-439",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-440",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-441",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-442",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-443",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-444",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-445",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-446",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-447",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-448",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-449",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-450",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-451",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-452",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-453",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-454",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-455",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-456",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-457",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-458",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-459",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-460",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-461",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-462",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-463",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-464",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-465",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-466",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-467",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-468",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-469",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-470",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-471",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-472",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-473",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-474",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-475",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-476",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-477",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-478",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-479",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-480",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-481",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-482",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-483",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-484",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-485",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-486",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-487",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-488",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-489",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-490",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-491",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-492",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-493",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-494",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-495",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-496",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-497",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-498",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-499",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-500",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-501",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-502",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-503",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-504",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-505",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-506",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-507",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-508",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-509",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-510",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-511",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-512",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-513",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-514",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-515",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-516",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-517",
+          "archetype_ref": "standard-card"
+        }
+      ],
+      "behaviors": [
+        {
+          "type": "shuffle"
+        },
+        {
+          "type": "draw",
+          "replacement": false,
+          "destination": "player-hand"
+        }
+      ]
+    },
+    "rules-reference": {
+      "kind": "token",
+      "archetype_ref": "reference-token",
+      "name": "Digitropolis Rules",
+      "faces": [
+        {
+          "slot": "reference",
+          "content_ref": "rules"
+        }
+      ]
+    }
+  },
+  "scenes": {
+    "starter-table": {
+      "name": "Digitropolis starter table",
+      "instances": [
+        {
+          "id": "deck-1",
+          "object_ref": "card-pool"
+        },
+        {
+          "id": "rules-1",
+          "object_ref": "rules-reference"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "status": "draft",
+    "limitations": [
+      "No target layout",
+      "No normalized game rules",
+      "No general randomizer model"
+    ]
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "dodge_version": "0.1.0",
+  "document_id": "digitropolis.starter-original-01",
+  "game_id": "digitropolis",
+  "title": "Digitropolis starter-original-01 scene",
+  "description": "Target-neutral card collection and rules reference shared by every exporter.",
+  "sources": {
+    "cards": {
+      "kind": "entity_catalog",
+      "uri": "data/cards/base-set.v0.2.json",
+      "version": "0.2.0",
+      "sha256": "493a7f160a5dee73cefc38be29e3eca45a5ee49f5ce8f51432beeac02eaf8553"
+    },
+    "rules": {
+      "kind": "rules",
+      "uri": "docs/research/rules-and-dataset.v0.1.md",
+      "version": "research-v0.1",
+      "sha256": "fe157865d4dabb3c06c3bb5307ebc2ad497d03c634378bf90b3ea789253e93cc"
+    },
+    "selection": {
+      "kind": "selection_manifest",
+      "uri": "data/decks/starters/starter-original-01.json",
+      "version": "0.1.0",
+      "sha256": "89d461e52a3710bcbeb0c3401bde09d1061694de6322485e230aa3a48f1d246b"
+    }
+  },
+  "archetypes": {
+    "standard-card": {
+      "kind": "token",
+      "face_slots": [
+        {
+          "id": "front",
+          "role": "front"
+        },
+        {
+          "id": "back",
+          "role": "back"
+        }
+      ],
+      "description": "A two-sided standard card token."
+    },
+    "deck": {
+      "kind": "collection",
+      "description": "An ordered collection that may be shuffled and drawn without replacement."
+    },
+    "reference-token": {
+      "kind": "token",
+      "face_slots": [
+        {
+          "id": "reference",
+          "role": "reference"
+        }
+      ],
+      "description": "A readable non-playing reference token."
+    }
+  },
+  "objects": {
+    "card-pool": {
+      "kind": "collection",
+      "archetype_ref": "deck",
+      "name": "starter-original-01",
+      "source_ref": "selection",
+      "members": [
+        {
+          "entity_ref": "cards:base-205",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-319",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-160",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-270",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-386",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-212",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-358",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-165",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-049",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-372",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-008",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-474",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-057",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-213",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-415",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-102",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-150",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-380",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-050",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-297",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-251",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-344",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-314",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-006",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-041",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-413",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-396",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-363",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-207",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-087",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-137",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-202",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-381",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-489",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-223",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-007",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-133",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-407",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-132",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-304",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-109",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-173",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-091",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-131",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-335",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-399",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-145",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-495",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-446",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-143",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-055",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-451",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-267",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-377",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-337",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-271",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-231",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-163",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-379",
+          "archetype_ref": "standard-card"
+        },
+        {
+          "entity_ref": "cards:base-454",
+          "archetype_ref": "standard-card"
+        }
+      ],
+      "behaviors": [
+        {
+          "type": "shuffle"
+        },
+        {
+          "type": "draw",
+          "replacement": false,
+          "destination": "player-hand"
+        }
+      ]
+    },
+    "rules-reference": {
+      "kind": "token",
+      "archetype_ref": "reference-token",
+      "name": "Digitropolis Rules",
+      "faces": [
+        {
+          "slot": "reference",
+          "content_ref": "rules"
+        }
+      ]
+    }
+  },
+  "scenes": {
+    "starter-table": {
+      "name": "Digitropolis starter table",
+      "instances": [
+        {
+          "id": "deck-1",
+          "object_ref": "card-pool"
+        },
+        {
+          "id": "rules-1",
+          "object_ref": "rules-reference"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "status": "draft",
+    "limitations": [
+      "No target layout",
+      "No normalized game rules",
+      "No general randomizer model"
+    ]
+  }
+}
