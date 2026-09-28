@@ -1,0 +1,84 @@
+{
+  "dodge_version": "0.2.0",
+  "document_id": "wretched-demesne.scenario-01-example",
+  "game_id": "wretched-demesne-plateau-of-leng",
+  "title": "Wretched Demesne component-inventory example",
+  "sources": {
+    "gdd": {
+      "kind": "sidecar",
+      "uri": "game/wretched-demesne.gdd.sidecar.json",
+      "version": "prototype-v0.1",
+      "authority": "authoritative"
+    },
+    "cards": {
+      "kind": "entity_catalog",
+      "uri": "game/wretched-demesne.gdd.sidecar.json#/structured_extensions/deck_building",
+      "version": "prototype-v0.1",
+      "authority": "authoritative"
+    }
+  },
+  "sidecars": [
+    {
+      "source_ref": "gdd",
+      "purpose": "Losslessly preserve game semantics not normalized by DODGE 0.2.0.",
+      "lossless": true,
+      "promotion_status": "adjacent"
+    }
+  ],
+  "archetypes": {
+    "standard-card": {
+      "kind": "token",
+      "face_slots": [{"id": "front", "role": "front"}, {"id": "back", "role": "back"}],
+      "component": {"form": "card", "size_class": "standard-card", "shape": "rectangle", "two_sided": true}
+    },
+    "deck": {"kind": "collection"},
+    "board-token": {
+      "kind": "token",
+      "face_slots": [{"id": "front", "role": "front"}],
+      "component": {
+        "form": "token",
+        "size_class": "small-token",
+        "shape": "circle",
+        "dimensions": {"unit": "mm", "diameter": 25}
+      }
+    }
+  },
+  "objects": {
+    "security-starter-deck": {
+      "kind": "collection",
+      "archetype_ref": "deck",
+      "source_ref": "cards",
+      "members": [
+        {"entity_ref": "cards:sidearm", "archetype_ref": "standard-card", "quantity": 2},
+        {"entity_ref": "cards:move", "archetype_ref": "standard-card", "quantity": 2}
+      ],
+      "behaviors": [{"type": "shuffle"}, {"type": "draw", "replacement": false, "destination": "player-hand"}]
+    },
+    "spider-corpse": {
+      "kind": "token",
+      "archetype_ref": "board-token",
+      "name": "Spider Corpse",
+      "source_ref": "gdd",
+      "faces": [{"slot": "front", "text": "SPIDER CORPSE"}]
+    },
+    "chrysalis": {
+      "kind": "token",
+      "archetype_ref": "board-token",
+      "name": "Chrysalis",
+      "source_ref": "gdd",
+      "faces": [{"slot": "front", "text": "CHRYSALIS"}],
+      "relationships": [{"type": "transforms-from", "target_object_ref": "spider-corpse"}]
+    }
+  },
+  "scenes": {
+    "scenario-01-the-cave": {
+      "name": "Scenario 01: The Cave",
+      "instances": [
+        {"id": "security-deck-1", "object_ref": "security-starter-deck"},
+        {"id": "corpse-supply", "object_ref": "spider-corpse", "quantity": 8, "state": {"supply": true}},
+        {"id": "chrysalis-supply", "object_ref": "chrysalis", "quantity": 4, "state": {"supply": true}}
+      ]
+    }
+  },
+  "metadata": {"status": "draft", "implementation_authority": "provisional"}
+}
