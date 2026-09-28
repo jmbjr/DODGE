@@ -52,6 +52,7 @@
     },
     "spider-corpse": {"kind": "token", "archetype_ref": "board-token", "name": "Spider Corpse", "faces": [{"slot": "front", "text": "SPIDER CORPSE"}], "tags": ["corpse", "spider-food"]},
     "chrysalis": {"kind": "token", "archetype_ref": "board-token", "name": "Chrysalis", "faces": [{"slot": "front", "text": "CHRYSALIS"}], "relationships": [{"type": "transforms-from", "target_object_ref": "spider-corpse"}], "tags": ["chrysalis"]},
+    "security-crew": {"kind": "token", "archetype_ref": "board-token", "name": "Security Crew", "faces": [{"slot": "front", "text": "SECURITY"}], "tags": ["crew", "security"]},
     "cave-room": {"kind": "token", "archetype_ref": "room-tile", "name": "Cave Room", "faces": [{"slot": "front", "text": "CAVE"}], "tags": ["room", "cave"]}
   },
   "scenes": {
@@ -62,6 +63,7 @@
         {"id": "security-deck-1", "object_ref": "security-starter-deck"},
         {"id": "corpse-supply", "object_ref": "spider-corpse", "quantity": 8, "state": {"supply": true}},
         {"id": "chrysalis-supply", "object_ref": "chrysalis", "quantity": 4, "state": {"supply": true}},
+        {"id": "crew-security-1", "object_ref": "security-crew", "location_ref": "entrance"},
         {"id": "entrance-room", "object_ref": "cave-room", "location_ref": "entrance"},
         {"id": "nest-room", "object_ref": "cave-room", "location_ref": "nest"}
       ]
@@ -69,17 +71,18 @@
   },
   "rules": {
     "values": {
-      "health": {"name": "Health", "type": "integer", "scope": "actor", "minimum": 0, "authority": "authoritative", "source_ref": "gdd"}
+      "health": {"name": "Health", "type": "integer", "owner_scope": "actor", "persistence_scope": "campaign", "minimum": 0, "authority": "authoritative", "source_ref": "gdd"}
     },
     "resources": {
-      "actions": {"name": "Actions remaining", "kind": "capacity", "scope": "turn", "value_type": "integer", "default": 3, "minimum": 0, "maximum": 3, "authority": "authoritative", "source_ref": "gdd"},
-      "hand-size": {"name": "Hand size", "kind": "capacity", "scope": "player", "value_type": "integer", "default": 5, "minimum": 0, "authority": "authoritative", "source_ref": "gdd"},
-      "ammunition": {"name": "Ammunition", "kind": "currency", "scope": "actor", "value_type": "integer", "default": 0, "minimum": 0, "authority": "authoritative", "source_ref": "gdd"},
-      "scrap": {"name": "Scrap", "kind": "currency", "scope": "campaign", "value_type": "integer", "default": 0, "minimum": 0, "authority": "authoritative", "source_ref": "gdd"},
-      "noise": {"name": "Noise", "kind": "track", "scope": "location", "value_type": "integer", "default": 0, "minimum": 0, "authority": "provisional", "source_ref": "gdd", "assumptions": ["Location scope is inferred; the GDD does not settle exact noise scope."]},
-      "threat": {"name": "Threat", "kind": "track", "scope": "scenario", "value_type": "integer", "default": 0, "minimum": 0, "authority": "provisional", "source_ref": "gdd", "assumptions": ["Scenario scope is provisional; campaign interaction remains unresolved."]},
-      "fed": {"name": "Fed", "kind": "status", "scope": "actor", "value_type": "boolean", "default": false, "authority": "authoritative", "source_ref": "gdd"},
-      "incapacitated": {"name": "Incapacitated", "kind": "status", "scope": "actor", "value_type": "boolean", "default": false, "authority": "authoritative", "source_ref": "gdd"}
+      "actions": {"name": "Actions remaining", "kind": "capacity", "owner_scope": "actor", "persistence_scope": "turn", "reset_at": {"scope": "turn", "boundary": "start", "occurrence": "current", "subject": {"relative": "current-actor"}}, "value_type": "integer", "default": 3, "minimum": 0, "maximum": 3, "authority": "authoritative", "source_ref": "gdd"},
+      "hand-size": {"name": "Hand size", "kind": "capacity", "owner_scope": "player", "persistence_scope": "scenario", "value_type": "integer", "default": 5, "minimum": 0, "authority": "authoritative", "source_ref": "gdd"},
+      "ammunition": {"name": "Ammunition", "kind": "currency", "owner_scope": "expedition", "persistence_scope": "expedition", "value_type": "integer", "default": 0, "minimum": 0, "authority": "authoritative", "source_ref": "gdd"},
+      "scrap": {"name": "Scrap", "kind": "currency", "owner_scope": "campaign", "persistence_scope": "campaign", "value_type": "integer", "default": 0, "minimum": 0, "authority": "authoritative", "source_ref": "gdd"},
+      "noise": {"name": "Noise", "kind": "track", "owner_scope": "location", "persistence_scope": "scenario", "value_type": "integer", "default": 0, "minimum": 0, "authority": "provisional", "source_ref": "gdd", "assumptions": ["Location ownership is inferred; the GDD does not settle exact noise scope."]},
+      "threat": {"name": "Threat", "kind": "track", "owner_scope": "scenario", "persistence_scope": "scenario", "value_type": "integer", "default": 0, "minimum": 0, "authority": "provisional", "source_ref": "gdd", "assumptions": ["Scenario ownership is provisional; campaign interaction remains unresolved."]},
+      "fed": {"name": "Fed", "kind": "status", "owner_scope": "actor", "persistence_scope": "scenario", "value_type": "boolean", "default": false, "authority": "authoritative", "source_ref": "gdd"},
+      "incapacitated": {"name": "Incapacitated", "kind": "status", "owner_scope": "actor", "persistence_scope": "scenario", "value_type": "boolean", "default": false, "authority": "authoritative", "source_ref": "gdd"},
+      "cover": {"name": "Cover", "kind": "status", "owner_scope": "actor", "persistence_scope": "turn", "value_type": "boolean", "default": false, "authority": "provisional", "source_ref": "scenario-mvp"}
     },
     "conditions": {
       "target-at-zero-health": {"op": "lte", "left": {"ref": "health", "subject": {"relative": "target"}}, "right": 0, "source_ref": "gdd", "authority": "authoritative"},
@@ -94,7 +97,45 @@
       "become-fed": {"op": "add_status", "target_ref": "fed", "subject": {"relative": "current-actor"}},
       "become-incapacitated": {"op": "add_status", "target_ref": "incapacitated", "subject": {"relative": "target"}},
       "create-corpse": {"op": "create", "target_ref": "spider-corpse", "subject": {"relative": "location"}},
-      "pupate": {"op": "transform", "target_ref": "spider-corpse", "to_ref": "chrysalis", "subject": {"relative": "current-actor"}, "authority": "provisional", "source_ref": "gdd", "assumptions": ["The exact source object consumed/transformed remains to be corrected in WD review."]},
+      "take-cover-until-next-turn": {
+        "op": "add_status", "target_ref": "cover", "subject": {"relative": "current-actor"},
+        "timing": {"apply": "immediate", "expires_at": {"scope": "turn", "boundary": "start", "occurrence": "next", "subject": {"relative": "current-actor"}}},
+        "authority": "provisional", "source_ref": "scenario-mvp"
+      },
+      "security-training-next-attack": {
+        "prose": "Apply the Security Training modifier to this actor's next Attack this turn.",
+        "timing": {
+          "apply": "immediate",
+          "expires_at": {"scope": "turn", "boundary": "end", "occurrence": "current", "subject": {"relative": "current-actor"}},
+          "usage": {"count": 1, "mode": "next", "period": {"scope": "turn", "subject": {"relative": "current-actor"}}, "consume_on": "resolve", "match": {"action_ref": "attack"}}
+        },
+        "authority": "provisional", "source_ref": "scenario-mvp"
+      },
+      "pupate": {
+        "op": "transform", "subject": {"relative": "current-actor"},
+        "transformation": {
+          "subject": {"relative": "current-actor"},
+          "replacement_object_ref": "chrysalis",
+          "consume": [{"subject": {"relative": "location"}, "object_ref": "spider-corpse", "quantity": 1}],
+          "placement": {"mode": "same-location"},
+          "identity_policy": "new-instance-id",
+          "state_transfer": {"mode": "none"},
+          "relationship_transfer": "none",
+          "cause_ref": "spider-can-pupate",
+          "event": "spider-pupated"
+        },
+        "authority": "provisional", "source_ref": "gdd"
+      },
+      "hatch-next-end-phase": {
+        "op": "transform", "subject": {"relative": "current-actor"},
+        "timing": {"apply": "scheduled", "at": {"scope": "phase", "boundary": "end", "ref": "end-of-turn", "occurrence": "next"}},
+        "transformation": {
+          "subject": {"relative": "current-actor"}, "replacement_entity_ref": "gdd:next-spider-stage",
+          "placement": {"mode": "same-location"}, "identity_policy": "new-instance-id", "state_transfer": {"mode": "none"},
+          "relationship_transfer": "none", "event": "chrysalis-hatched"
+        },
+        "authority": "provisional", "source_ref": "gdd"
+      },
       "emit-retreat": {"op": "emit", "event": "crew-retreats"}
     },
     "actions": {
@@ -142,6 +183,15 @@
           {"kind": "prose", "prose": "Gain resources and information."}, {"kind": "choice", "options": [{"kind": "prose", "prose": "Return after completing the objective."}, {"kind": "prose", "prose": "Retreat."}]},
           {"kind": "prose", "prose": "Upgrade and reorganize at the ship."}, {"kind": "prose", "prose": "Unlock new regions and threats."}
         ]
+      },
+      "generate-cave-topology": {
+        "name": "Generate Scenario 01 cave topology", "scope": "scenario", "source_ref": "scenario-mvp", "authority": "provisional",
+        "steps": [
+          {"kind": "prose", "prose": "Place Cave Mouth as the first materialized node."},
+          {"kind": "prose", "prose": "Shuffle the remaining room components."},
+          {"kind": "prose", "prose": "Constrain Ancient Relay to the bottom three rooms."},
+          {"kind": "prose", "prose": "During exploration, reveal a room, assign its stable node ID, and materialize its connecting edge."}
+        ]
       }
     },
     "phases": {
@@ -177,9 +227,23 @@
     }
   },
   "topologies": {
-    "the-cave": {
-      "name": "The Cave logical topology", "source_ref": "scenario-mvp", "authority": "provisional",
-      "assumptions": ["This two-room topology illustrates the schema and is not asserted to be the final Scenario 01 map."],
+    "the-cave-unresolved": {
+      "name": "The Cave unresolved topology", "resolution": "unresolved", "generation_procedure_ref": "generate-cave-topology",
+      "component_pool": [{"object_ref": "cave-room", "quantity": 6, "tags": ["room"], "constraints": ["Cave Mouth is first.", "Ancient Relay is among the final three."]}],
+      "constraints": ["Rooms materialize only when placed or revealed."], "hidden_state_policy": "Unrevealed pool order is neutral runtime state.",
+      "id_policy": "stable-recorded", "source_ref": "scenario-mvp", "authority": "provisional"
+    },
+    "the-cave-materialized-example": {
+      "name": "The Cave materialized runtime snapshot", "resolution": "materialized", "source_ref": "scenario-mvp", "authority": "provisional",
+      "assumptions": ["This two-room snapshot demonstrates materialization and is not asserted to be the final Scenario 01 map."],
+      "materialization": {
+        "source_topology_ref": "the-cave-unresolved", "generation_id": "scenario-01-generation-001", "generation_procedure_ref": "generate-cave-topology",
+        "seed": "example-only", "generator_version": "draft-0.2.1", "id_policy": "stable-recorded", "state_revision": "2",
+        "decisions": [
+          {"sequence": 0, "event": "room-placed", "payload": {"node_id": "entrance", "room": "Cave Mouth"}},
+          {"sequence": 1, "event": "room-revealed", "payload": {"node_id": "nest", "connected_from": "entrance"}}
+        ]
+      },
       "nodes": [
         {"id": "entrance", "name": "Entrance", "object_ref": "cave-room", "tags": ["room", "extraction"]},
         {"id": "nest", "name": "Spider Nest", "object_ref": "cave-room", "tags": ["room", "nest"], "hidden": true}
@@ -189,10 +253,11 @@
   },
   "scenarios": {
     "scenario-01": {
-      "name": "Scenario 01: The Cave", "scene_ref": "scenario-01-the-cave", "topology_ref": "the-cave", "players": {"min": 1, "max": 4},
+      "name": "Scenario 01: The Cave", "scene_ref": "scenario-01-the-cave", "topology_ref": "the-cave-unresolved", "materialized_topology_ref": "the-cave-materialized-example", "players": {"min": 1, "max": 4},
       "action_refs": ["move", "attack", "search", "interact", "assist", "recover"], "turn_procedure_ref": "expedition-turn",
       "initial_state": [
         {"ref": "actions", "subject": {"relative": "current-actor"}, "value": 3, "authority": "authoritative"},
+        {"ref": "ammunition", "subject": {"relative": "expedition"}, "value": 6, "authority": "provisional"},
         {"ref": "threat", "subject": {"relative": "scenario"}, "value": 0, "authority": "provisional"}
       ],
       "objectives": [{"id": "complete-objective", "name": "Reach the objective and extract", "completion": "objective-complete"}],
@@ -215,6 +280,33 @@
       ],
       "source_ref": "gdd", "authority": "provisional",
       "assumptions": ["Only representative regions are included; exact unlock rules and campaign-loss conditions remain unresolved."]
+    }
+  },
+  "runtime_states": {
+    "scenario-01-example-save": {
+      "scene_ref": "scenario-01-the-cave", "scenario_ref": "scenario-01", "campaign_ref": "plateau-of-leng",
+      "clock": {"round": 2, "turn": 1, "phase_ref": "crew-action", "active_subject": {"instance_ref": "crew-security-1"}},
+      "bindings": [
+        {"ref": "ammunition", "subject": {"relative": "expedition"}, "value": 4, "authority": "provisional"},
+        {"ref": "threat", "subject": {"relative": "scenario"}, "value": 6, "authority": "provisional"}
+      ],
+      "active_effects": [
+        {
+          "id": "security-training-effect-1", "effect_ref": "security-training-next-attack", "subject": {"instance_ref": "crew-security-1"},
+          "source_subject": {"instance_ref": "crew-security-1"}, "remaining_uses": 1,
+          "expires_at": {"scope": "turn", "boundary": "end", "occurrence": "current", "subject": {"instance_ref": "crew-security-1"}}
+        }
+      ],
+      "scheduled_effects": [
+        {
+          "id": "chrysalis-hatch-1", "effect_ref": "hatch-next-end-phase", "subject": {"instance_ref": "chrysalis-runtime-1"},
+          "at": {"scope": "phase", "boundary": "end", "ref": "end-of-turn", "occurrence": "next"},
+          "cause_ref": "pupate", "captured_bindings": {"location_ref": "nest"}
+        }
+      ],
+      "materialized_topology_ref": "the-cave-materialized-example",
+      "events": [{"sequence": 0, "event": "topology-materialized", "payload": {"generation_id": "scenario-01-generation-001"}}],
+      "revision": "example-1"
     }
   },
   "metadata": {

@@ -35,6 +35,9 @@ DODGE is authoritative for neutral composition and for any normalized semantics 
 - `topologies`
 - `scenarios`
 - `campaigns`
+- `runtime_states`
+
+The revision responding to issue #21 also makes timing, ownership, transformation, and runtime topology materialization normative within those sections.
 
 A 0.2.0 document migrates by changing `dodge_version` to `0.2.1`. No other change is required.
 
@@ -123,9 +126,16 @@ A resource has a `kind`:
 - `capacity`: a bounded allowance such as actions remaining or hand size;
 - `inventory`: a counted carried or pooled item category.
 
-Resources declare scope, optional bounds/defaults, and optional threshold rules. A threshold rule contains a condition and ordered effect references or inline effects.
+Resources declare ownership, persistence, optional bounds/defaults, and optional threshold rules. A threshold rule contains a condition and ordered effect references or inline effects.
 
-Resource definitions do not imply ownership. Runtime state binds scoped resource IDs to concrete players, actors, scenes, objects, or campaigns.
+Every resource declares two separate concepts:
+
+- `owner_scope`: which kind of subject owns one binding (`actor`, `player`, `party`, `expedition`, `location`, `scenario`, `campaign`, `object`, or `game`);
+- `persistence_scope`: the boundary through which that binding survives (`turn`, `round`, `scenario`, `expedition`, `campaign`, or `game`).
+
+`scope` is retained temporarily as a deprecated draft alias and MUST NOT be used when `owner_scope` is present. A binding selects the concrete owner. Thus one Health binding can belong to one crew actor, one hand/deck to one player or crew context, Ammo to the current expedition, Threat to the scenario, and Scrap or Knowledge to the campaign.
+
+An optional `reset_at` timing anchor declares when a resource resets. Ownership never implies reset or persistence.
 
 ### 7.3 Conditions
 
@@ -157,6 +167,62 @@ An effect is either structured or prose-only. Structured effect operations inclu
 - `choose` among declared options.
 
 Effects MAY have conditions. Effects execute in declared order unless a rule explicitly marks them simultaneous.
+
+### 7.4.1 Timing anchors
+
+A timing anchor identifies a deterministic boundary:
+
+- `scope`: `phase`, `turn`, `round`, `scenario`, `expedition`, or `campaign`;
+- `boundary`: `start` or `end`;
+- optional `ref`: the named phase, procedure, scenario, or campaign;
+- optional `subject`: whose boundary is meant;
+- `occurrence`: `current`, `next`, or a positive ordinal;
+- optional `offset` in boundary occurrences.
+
+For example, “until your next turn” expires at the start of the next turn owned by the affected actor. “Hatch during the next End phase” schedules an effect at the specified boundary of the next referenced End phase.
+
+### 7.4.2 Effect timing and lifetime
+
+An effect MAY declare `timing`:
+
+- `apply`: `immediate` or `scheduled`;
+- `at`: required timing anchor for scheduled application;
+- `expires_at`: timing anchor that removes the effect;
+- `cancel_condition_refs`: conditions that cancel it before application or expiration;
+- `recheck_condition_refs`: conditions evaluated at scheduled execution time;
+- `duration`: an integer number of named boundary occurrences;
+- `usage`: a usage-limit definition.
+
+A scheduled effect is queued with stable identity, source/cause traceability, resolved subject bindings, and its resolved anchor. Crossing the anchor executes it once unless cancelled. Runtimes MUST serialize pending scheduled effects as neutral state so saves and targets agree.
+
+A temporary effect with neither `expires_at`, `duration`, nor consuming `usage` is invalid.
+
+### 7.4.3 First, next, and once-per-X limits
+
+A usage limit declares:
+
+- `count`: allowed or consumable uses;
+- `mode`: `first`, `next`, or `up-to`;
+- `period`: a timing scope and owner subject for reset;
+- `consume_on`: `attempt`, `resolve`, `success`, or a named event;
+- optional event/action/tag matching;
+- optional `expires_at` independent of consumption.
+
+“Your next attack this turn” is a `next` use matching Attack, consumed at the declared point, with end-of-current-turn expiration. “First firearm attack each turn” is `first`, count 1, matching the firearm tag, reset per actor turn. “Once per turn” is `up-to`, count 1, with the same period.
+
+### 7.4.4 Neutral runtime timing state
+
+A resumable implementation MUST serialize normalized timing state rather than reconstruct it from target code. A `runtime_states` snapshot contains:
+
+- the selected scene/scenario/campaign;
+- current round/turn counters, phase reference, and active subject;
+- concrete value/resource bindings and owners;
+- active effects with remaining uses and resolved expiration anchors;
+- scheduled effects with resolved application anchors, captured subjects, and causes;
+- the current materialized topology reference;
+- optional ordered semantic event records for traceability.
+
+Runtime-state IDs, active-effect IDs, and scheduled-effect IDs are stable within the snapshot. Target saves MAY wrap this state, but they MUST NOT replace its neutral meaning.
 
 ### 7.5 Actions
 
@@ -207,7 +273,21 @@ This supports WD's Detect → Move → Act procedure and differentiated Small/La
 
 ## 8. Topologies
 
-A topology defines concrete logical space independently of rendering. It contains nodes and edges.
+A topology defines logical space independently of rendering. It has a `resolution` of `unresolved`, `partially-materialized`, or `materialized`.
+
+An unresolved topology declares a `generation_procedure_ref`, optional component/object pools, constraints, hidden-state policy, and stable-ID policy. It does not pretend that unknown nodes or edges already exist.
+
+A materialized topology contains concrete nodes and edges plus a `materialization` record:
+
+- `source_topology_ref` pointing to the unresolved/template topology;
+- stable `generation_id`;
+- optional seed and generator version;
+- generation-procedure reference;
+- ordered decisions/events sufficient for replay when available;
+- stable node/edge ID policy;
+- source hash or state revision when persisted.
+
+Materialization creates or updates neutral DODGE runtime state, not a target-owned save format. Web, TTS, simulation, and other stateful targets consume the same materialized topology snapshot. PnP MAY export the generation procedure and unresolved component pool when topology is intentionally generated during physical play.
 
 A node MAY declare object/terrain tags, capacity, state, and discovery visibility. An edge declares endpoints, directionality, connection kind, costs, requirements, and state.
 
@@ -215,12 +295,15 @@ Connection kinds are semantic project IDs such as `passage`, `door`, `rail`, or 
 
 Procedural-generation candidates or recommendations are not concrete topology. They remain metadata/sidecar information until expressed as a formal generator in a future version.
 
+Hidden is orthogonal to unresolved: a materialized node may exist with a stable ID while remaining unrevealed to players. Revealing it changes visibility/state, not identity.
+
 ## 9. Scenarios
 
 A scenario binds game semantics into a playable scope. It MAY declare:
 
 - a setup `scene_ref`;
 - a `topology_ref`;
+- optional `materialized_topology_ref`, bound after runtime generation;
 - player constraints;
 - initial state/resource bindings;
 - available actions;
@@ -254,7 +337,29 @@ The WD loop—select destination, explore, gain resources/information, return or
 
 Rules operate on semantic subjects. A subject selector MAY reference a concrete instance, actor/object tag, current actor/player, target, source, location, scenario, or campaign.
 
+Selectors also include `party` and `expedition`. `party` means the participating group identity; `expedition` means the shared state container for the current outing. They are not synonyms: a campaign party may undertake multiple expeditions, and expedition-owned resources normally end or transfer explicitly when that expedition ends.
+
+Every state/resource lookup and mutation MUST resolve to exactly one binding unless the operation explicitly allows a set. Ambiguous selectors are validation/runtime errors.
+
 Events are named semantic occurrences with optional payload. Conditions can match events; effects can emit them. Event names are project IDs unless standardized by a later DODGE version.
+
+### 11.1 Deterministic transformation
+
+An effect with `op: transform` MUST include a `transformation` transaction containing:
+
+- `subject`: the object, entity, or instance being replaced;
+- `replacement_object_ref` or `replacement_entity_ref`;
+- `consume`: zero or more independently selected objects/entities consumed by the transformation;
+- `placement`: `same-location`, an explicit `location_ref`, or a subject selector;
+- `identity_policy`: `preserve-instance-id` or `new-instance-id`;
+- `state_transfer`: `none`, `all`, `only`, `except`, or an explicit field map;
+- optional relationship-transfer policy;
+- optional `cause_ref` and event payload;
+- optional effect timing, including scheduled transformation.
+
+The runtime resolves the subject and consumed items first, validates them, removes or consumes them atomically, creates the replacement at the resolved placement, transfers only the declared state and relationships, and emits a traceable transformation event. Partial transformation is invalid.
+
+For WD pupation, the spider is the transformation subject; corpse tokens are separate consumed inputs; the Chrysalis is the replacement; placement is the spider's location. The corpse is not itself transformed into the Chrysalis.
 
 ## 12. Authority and assumptions
 
@@ -344,3 +449,20 @@ The WD chat should validate at least these decisions:
 10. how deck-building acquisition and ship modification interact with campaign persistence.
 
 These are explicit draft uncertainties, not silent assumptions.
+
+## 18. Issue #21 adoption requirements
+
+This revision intends to satisfy issue #21 as follows:
+
+| Requirement | Normative mechanism |
+|---|---|
+| temporary deterministic expiration | effect `timing.expires_at` or duration |
+| delayed/scheduled effects | `timing.apply: scheduled`, an `at` anchor, and pending-effect state |
+| phase/turn/round anchors | timing-anchor scope, boundary, subject, and occurrence |
+| first/next/once-per-X | usage limits with mode, count, period, matching, and consumption point |
+| actor/player/shared ownership | `owner_scope`, `persistence_scope`, subject selectors, and concrete bindings |
+| deterministic replacement | atomic `transformation` transaction |
+| generated versus concrete topology | topology `resolution`, materialization record, and stable IDs |
+| deterministic save/resume | neutral `runtime_states` bindings, active effects, schedules, clock, and topology reference |
+
+These mechanisms are generic. WD-specific values and procedures belong in WD data, not this specification.

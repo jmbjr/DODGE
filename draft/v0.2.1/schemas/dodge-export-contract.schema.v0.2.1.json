@@ -15,7 +15,7 @@
         "dodge_versions": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
         "object_kinds": {"type": "array", "items": {"enum": ["token", "collection", "randomizer"]}, "uniqueItems": true},
         "component_forms": {"type": "array", "items": {"enum": ["card", "token", "tile", "board", "reference_sheet", "tracker", "die", "standee", "custom"]}, "uniqueItems": true},
-        "rule_features": {"type": "array", "items": {"enum": ["values", "resources", "conditions", "effects", "actions", "procedures", "phases", "ai_profiles", "topologies", "scenarios", "campaigns"]}, "uniqueItems": true},
+        "rule_features": {"type": "array", "items": {"enum": ["values", "resources", "ownership_bindings", "conditions", "effects", "timing", "usage_limits", "transformations", "actions", "procedures", "phases", "ai_profiles", "topologies", "topology_materialization", "scenarios", "campaigns"]}, "uniqueItems": true},
         "allows_prose_rules": {"type": "boolean", "default": false},
         "required_extensions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
         "limitations": {"type": "array", "items": {"type": "string"}}
