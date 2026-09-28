@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dodge-format.example.invalid/schemas/dodge.schema.v0.2.0.json",
+  "title": "DODGE document 0.2.0",
+  "type": "object",
+  "required": ["dodge_version", "document_id", "game_id", "sources", "archetypes", "objects", "scenes"],
+  "properties": {
+    "dodge_version": {"const": "0.2.0"},
+    "document_id": {"$ref": "#/$defs/id"},
+    "game_id": {"$ref": "#/$defs/id"},
+    "title": {"type": "string"},
+    "description": {"type": "string"},
+    "sources": {"type": "object", "additionalProperties": {"$ref": "#/$defs/source"}},
+    "sidecars": {"type": "array", "items": {"$ref": "#/$defs/sidecar"}},
+    "archetypes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/archetype"}},
+    "objects": {"type": "object", "additionalProperties": {"$ref": "#/$defs/object"}},
+    "scenes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/scene"}},
+    "metadata": {"type": "object"},
+    "extensions": {"$ref": "#/$defs/extensions"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+    "ref": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+    "extensions": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z0-9][a-z0-9._:-]*$"}
+    },
+    "source": {
+      "type": "object",
+      "required": ["kind", "uri", "version"],
+      "properties": {
+        "kind": {"enum": ["entity_catalog", "selection_manifest", "rules", "text", "asset_catalog", "scenario", "sidecar"]},
+        "uri": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "media_type": {"type": "string"},
+        "authority": {"enum": ["authoritative", "derived", "provisional", "reference"]},
+        "description": {"type": "string"},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "sidecar": {
+      "type": "object",
+      "required": ["source_ref", "purpose"],
+      "properties": {
+        "source_ref": {"$ref": "#/$defs/ref"},
+        "purpose": {"type": "string", "minLength": 1},
+        "lossless": {"type": "boolean", "default": false},
+        "promotion_status": {"enum": ["adjacent", "experimental", "partially-promoted"]}
+      },
+      "additionalProperties": false
+    },
+    "faceSlot": {
+      "type": "object",
+      "required": ["id", "role"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "role": {"enum": ["front", "back", "side", "outcome", "reference"]},
+        "description": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["unit"],
+      "properties": {
+        "unit": {"enum": ["mm", "cm", "in", "pt"]},
+        "width": {"type": "number", "exclusiveMinimum": 0},
+        "height": {"type": "number", "exclusiveMinimum": 0},
+        "diameter": {"type": "number", "exclusiveMinimum": 0},
+        "thickness": {"type": "number", "minimum": 0}
+      },
+      "anyOf": [
+        {"required": ["width", "height"]},
+        {"required": ["diameter"]}
+      ],
+      "additionalProperties": false
+    },
+    "component": {
+      "type": "object",
+      "properties": {
+        "form": {"enum": ["card", "token", "tile", "board", "reference_sheet", "tracker", "die", "standee", "custom"]},
+        "size_class": {"$ref": "#/$defs/id"},
+        "shape": {"enum": ["rectangle", "circle", "hex", "custom", "none"]},
+        "dimensions": {"$ref": "#/$defs/dimensions"},
+        "two_sided": {"type": "boolean"},
+        "shared_back_ref": {"type": "string"},
+        "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "archetype": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {"enum": ["token", "collection", "randomizer"]},
+        "face_slots": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/faceSlot"}},
+        "component": {"$ref": "#/$defs/component"},
+        "description": {"type": "string"},
+        "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "member": {
+      "type": "object",
+      "properties": {
+        "entity_ref": {"$ref": "#/$defs/ref"},
+        "object_ref": {"$ref": "#/$defs/ref"},
+        "archetype_ref": {"$ref": "#/$defs/ref"},
+        "quantity": {"type": "integer", "minimum": 1, "default": 1},
+        "state": {"type": "object"},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "oneOf": [
+        {"required": ["entity_ref", "archetype_ref"], "not": {"required": ["object_ref"]}},
+        {"required": ["object_ref"], "not": {"required": ["entity_ref"]}}
+      ],
+      "additionalProperties": false
+    },
+    "behavior": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["shuffle", "draw", "return", "select_uniform"]},
+        "replacement": {"type": "boolean"},
+        "destination": {"type": "string"},
+        "parameters": {"type": "object"},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "region": {
+      "type": "object",
+      "required": ["id", "role"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "role": {"enum": ["title", "art", "rules", "stats", "connections", "icon", "label", "reference", "custom"]},
+        "content_ref": {"type": "string"},
+        "text": {"type": "string"},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "oneOf": [
+        {"required": ["content_ref"], "not": {"required": ["text"]}},
+        {"required": ["text"], "not": {"required": ["content_ref"]}}
+      ],
+      "additionalProperties": false
+    },
+    "face": {
+      "type": "object",
+      "required": ["slot"],
+      "properties": {
+        "slot": {"$ref": "#/$defs/id"},
+        "content_ref": {"type": "string"},
+        "text": {"type": "string"},
+        "regions": {"type": "array", "items": {"$ref": "#/$defs/region"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "oneOf": [
+        {"required": ["content_ref"]},
+        {"required": ["text"]},
+        {"required": ["regions"]}
+      ],
+      "additionalProperties": false
+    },
+    "relationship": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"$ref": "#/$defs/id"},
+        "target_object_ref": {"$ref": "#/$defs/ref"},
+        "target_instance_ref": {"$ref": "#/$defs/ref"},
+        "role": {"$ref": "#/$defs/id"},
+        "properties": {"type": "object"},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "oneOf": [
+        {"required": ["target_object_ref"], "not": {"required": ["target_instance_ref"]}},
+        {"required": ["target_instance_ref"], "not": {"required": ["target_object_ref"]}}
+      ],
+      "additionalProperties": false
+    },
+    "object": {
+      "type": "object",
+      "required": ["kind", "archetype_ref"],
+      "properties": {
+        "kind": {"enum": ["token", "collection", "randomizer"]},
+        "archetype_ref": {"$ref": "#/$defs/ref"},
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "source_ref": {"$ref": "#/$defs/ref"},
+        "component": {"$ref": "#/$defs/component"},
+        "faces": {"type": "array", "items": {"$ref": "#/$defs/face"}},
+        "members": {"type": "array", "items": {"$ref": "#/$defs/member"}},
+        "ordering": {"enum": ["declared", "unordered"], "default": "declared"},
+        "behaviors": {"type": "array", "items": {"$ref": "#/$defs/behavior"}},
+        "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "instance": {
+      "type": "object",
+      "required": ["id", "object_ref"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "object_ref": {"$ref": "#/$defs/ref"},
+        "quantity": {"type": "integer", "minimum": 1, "default": 1},
+        "state": {"type": "object"},
+        "location_ref": {"$ref": "#/$defs/ref"},
+        "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "scene": {
+      "type": "object",
+      "required": ["name", "instances"],
+      "properties": {
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "source_ref": {"$ref": "#/$defs/ref"},
+        "instances": {"type": "array", "items": {"$ref": "#/$defs/instance"}},
+        "metadata": {"type": "object"},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

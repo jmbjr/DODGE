@@ -1,0 +1,78 @@
+{
+  "dodge_version": "0.2.0",
+  "document_id": "digitropolis.starter-example",
+  "game_id": "digitropolis",
+  "title": "Digitropolis ordered starter example",
+  "sources": {
+    "cards": {
+      "kind": "entity_catalog",
+      "uri": "data/cards/base-set.json",
+      "version": "0.2.0",
+      "authority": "authoritative"
+    },
+    "selection": {
+      "kind": "selection_manifest",
+      "uri": "data/decks/starter.json",
+      "version": "0.1.0",
+      "authority": "derived"
+    },
+    "rules": {
+      "kind": "rules",
+      "uri": "docs/rules.md",
+      "version": "research-v0.1",
+      "authority": "authoritative"
+    }
+  },
+  "archetypes": {
+    "standard-card": {
+      "kind": "token",
+      "face_slots": [
+        {"id": "front", "role": "front"},
+        {"id": "back", "role": "back"}
+      ],
+      "component": {
+        "form": "card",
+        "size_class": "standard-card",
+        "shape": "rectangle",
+        "dimensions": {"unit": "in", "width": 2.5, "height": 3.5},
+        "two_sided": true,
+        "shared_back_ref": "rules:card-back"
+      }
+    },
+    "deck": {"kind": "collection"},
+    "reference-sheet": {
+      "kind": "token",
+      "face_slots": [{"id": "reference", "role": "reference"}],
+      "component": {"form": "reference_sheet", "size_class": "rules-sheet", "shape": "rectangle"}
+    }
+  },
+  "objects": {
+    "starter-deck": {
+      "kind": "collection",
+      "archetype_ref": "deck",
+      "source_ref": "selection",
+      "members": [
+        {"entity_ref": "cards:base-001", "archetype_ref": "standard-card"},
+        {"entity_ref": "cards:base-002", "archetype_ref": "standard-card", "quantity": 2}
+      ],
+      "behaviors": [
+        {"type": "shuffle"},
+        {"type": "draw", "replacement": false, "destination": "player-hand"}
+      ]
+    },
+    "rules-reference": {
+      "kind": "token",
+      "archetype_ref": "reference-sheet",
+      "faces": [{"slot": "reference", "content_ref": "rules"}]
+    }
+  },
+  "scenes": {
+    "starter-table": {
+      "name": "Starter table",
+      "instances": [
+        {"id": "deck-1", "object_ref": "starter-deck"},
+        {"id": "rules-1", "object_ref": "rules-reference"}
+      ]
+    }
+  }
+}
