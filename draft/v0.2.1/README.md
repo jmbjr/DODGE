@@ -15,12 +15,19 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - concrete map topology and connection rules
 - scenarios, objectives, setup, and end conditions
 - campaign phases, locations, persistence, and progression loops
+- timing anchors, deterministic effect lifetimes, scheduled effects, and usage limits
+- explicit actor/player/party/expedition/location/scenario/campaign ownership
+- deterministic transformation transactions with consumption, placement, identity, and state-transfer policy
+- unresolved topology generation and materialized runtime topology snapshots
+- neutral resumable runtime snapshots for clocks, bindings, active effects, and scheduled effects
 
 ## Deliberate limits
 
 The schema does not promote inspirations, design pillars, candidate mechanics, prototype recommendations, or unresolved questions into executable rules. Those remain metadata or adjacent sidecar information.
 
 This vocabulary is intentionally declarative and conservative. It can preserve the WD sidecar's structured intent, but it is not yet a complete rules engine or expression language.
+
+Issue #21 drove the timing, ownership, transformation, and topology-materialization semantics in this revision.
 
 ## Structure
 

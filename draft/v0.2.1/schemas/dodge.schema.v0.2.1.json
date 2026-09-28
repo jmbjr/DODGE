@@ -20,6 +20,7 @@
     "topologies": {"type": "object", "additionalProperties": {"$ref": "#/$defs/topology"}},
     "scenarios": {"type": "object", "additionalProperties": {"$ref": "#/$defs/scenario"}},
     "campaigns": {"type": "object", "additionalProperties": {"$ref": "#/$defs/campaign"}},
+    "runtime_states": {"type": "object", "additionalProperties": {"$ref": "#/$defs/runtimeState"}},
     "metadata": {"type": "object"},
     "extensions": {"$ref": "#/$defs/extensions"}
   },
@@ -214,9 +215,72 @@
       "type": "object",
       "properties": {
         "instance_ref": {"$ref": "#/$defs/ref"}, "tag": {"$ref": "#/$defs/id"},
-        "relative": {"enum": ["current-player", "current-actor", "source", "target", "location", "scenario", "campaign", "all-players", "all-actors"]}
+        "relative": {"enum": ["current-player", "current-actor", "source", "target", "party", "expedition", "location", "scenario", "campaign", "all-players", "all-actors"]}
       },
       "oneOf": [{"required": ["instance_ref"]}, {"required": ["tag"]}, {"required": ["relative"]}],
+      "additionalProperties": false
+    },
+    "timingAnchor": {
+      "type": "object",
+      "required": ["scope", "boundary", "occurrence"],
+      "properties": {
+        "scope": {"enum": ["phase", "turn", "round", "scenario", "expedition", "campaign"]},
+        "boundary": {"enum": ["start", "end"]},
+        "ref": {"$ref": "#/$defs/ref"},
+        "subject": {"$ref": "#/$defs/subject"},
+        "occurrence": {"oneOf": [{"enum": ["current", "next"]}, {"type": "integer", "minimum": 1}]},
+        "offset": {"type": "integer", "minimum": 0, "default": 0}
+      },
+      "additionalProperties": false
+    },
+    "usagePeriod": {
+      "type": "object",
+      "required": ["scope"],
+      "properties": {
+        "scope": {"enum": ["phase", "turn", "round", "scenario", "expedition", "campaign"]},
+        "ref": {"$ref": "#/$defs/ref"},
+        "subject": {"$ref": "#/$defs/subject"}
+      },
+      "additionalProperties": false
+    },
+    "usageMatch": {
+      "type": "object",
+      "properties": {
+        "action_ref": {"$ref": "#/$defs/ref"},
+        "event": {"$ref": "#/$defs/id"},
+        "tag": {"$ref": "#/$defs/id"}
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "usageLimit": {
+      "type": "object",
+      "required": ["count", "mode", "period", "consume_on"],
+      "properties": {
+        "count": {"type": "integer", "minimum": 1},
+        "mode": {"enum": ["first", "next", "up-to"]},
+        "period": {"$ref": "#/$defs/usagePeriod"},
+        "consume_on": {"type": "string", "minLength": 1},
+        "match": {"$ref": "#/$defs/usageMatch"},
+        "expires_at": {"$ref": "#/$defs/timingAnchor"}
+      },
+      "additionalProperties": false
+    },
+    "effectTiming": {
+      "type": "object",
+      "required": ["apply"],
+      "properties": {
+        "apply": {"enum": ["immediate", "scheduled"]},
+        "at": {"$ref": "#/$defs/timingAnchor"},
+        "expires_at": {"$ref": "#/$defs/timingAnchor"},
+        "duration": {"type": "object", "required": ["count", "scope"], "properties": {"count": {"type": "integer", "minimum": 1}, "scope": {"enum": ["phase", "turn", "round", "scenario", "expedition", "campaign"]}}, "additionalProperties": false},
+        "usage": {"$ref": "#/$defs/usageLimit"},
+        "cancel_condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
+        "recheck_condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"apply": {"const": "scheduled"}}}, "then": {"required": ["at"]}}
+      ],
       "additionalProperties": false
     },
     "operand": {
@@ -239,6 +303,64 @@
       "anyOf": [{"required": ["prose"]}, {"required": ["op"]}],
       "additionalProperties": false
     },
+    "consumeSelector": {
+      "type": "object",
+      "required": ["subject", "quantity"],
+      "properties": {
+        "subject": {"$ref": "#/$defs/subject"},
+        "object_ref": {"$ref": "#/$defs/ref"},
+        "entity_ref": {"$ref": "#/$defs/ref"},
+        "quantity": {"type": "integer", "minimum": 1},
+        "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}}
+      },
+      "oneOf": [
+        {"required": ["object_ref"], "not": {"required": ["entity_ref"]}},
+        {"required": ["entity_ref"], "not": {"required": ["object_ref"]}}
+      ],
+      "additionalProperties": false
+    },
+    "stateTransfer": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": {"enum": ["none", "all", "only", "except", "map"]},
+        "fields": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "field_map": {"type": "object", "additionalProperties": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "placement": {
+      "type": "object",
+      "properties": {
+        "mode": {"enum": ["same-location", "explicit-location", "subject-location"]},
+        "location_ref": {"$ref": "#/$defs/ref"},
+        "subject": {"$ref": "#/$defs/subject"}
+      },
+      "required": ["mode"],
+      "additionalProperties": false
+    },
+    "transformation": {
+      "type": "object",
+      "required": ["subject", "placement", "identity_policy", "state_transfer"],
+      "properties": {
+        "subject": {"$ref": "#/$defs/subject"},
+        "replacement_object_ref": {"$ref": "#/$defs/ref"},
+        "replacement_entity_ref": {"$ref": "#/$defs/ref"},
+        "consume": {"type": "array", "items": {"$ref": "#/$defs/consumeSelector"}},
+        "placement": {"$ref": "#/$defs/placement"},
+        "identity_policy": {"enum": ["preserve-instance-id", "new-instance-id"]},
+        "state_transfer": {"$ref": "#/$defs/stateTransfer"},
+        "relationship_transfer": {"enum": ["none", "all", "compatible-only"]},
+        "cause_ref": {"$ref": "#/$defs/ref"},
+        "event": {"$ref": "#/$defs/id"},
+        "payload": {"type": "object"}
+      },
+      "oneOf": [
+        {"required": ["replacement_object_ref"], "not": {"required": ["replacement_entity_ref"]}},
+        {"required": ["replacement_entity_ref"], "not": {"required": ["replacement_object_ref"]}}
+      ],
+      "additionalProperties": false
+    },
     "effect": {
       "type": "object",
       "properties": {
@@ -247,24 +369,29 @@
         "target_ref": {"$ref": "#/$defs/ref"}, "subject": {"$ref": "#/$defs/subject"}, "value": {"$ref": "#/$defs/operand"},
         "to_ref": {"$ref": "#/$defs/ref"}, "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
         "options": {"type": "array", "items": {"type": "object"}}, "event": {"$ref": "#/$defs/id"}, "payload": {"type": "object"},
+        "timing": {"$ref": "#/$defs/effectTiming"}, "transformation": {"$ref": "#/$defs/transformation"}, "cause_ref": {"$ref": "#/$defs/ref"},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
       "anyOf": [{"required": ["prose"]}, {"required": ["op"]}],
+      "allOf": [{"if": {"properties": {"op": {"const": "transform"}}, "required": ["op"]}, "then": {"required": ["transformation"]}}],
       "additionalProperties": false
     },
     "valueDefinition": {
-      "type": "object", "required": ["type", "scope"],
+      "type": "object", "required": ["type", "owner_scope", "persistence_scope"],
       "properties": {
         "name": {"type": "string"}, "description": {"type": "string"}, "type": {"enum": ["number", "integer", "boolean", "string", "enum"]},
-        "scope": {"$ref": "#/$defs/scope"}, "default": {}, "minimum": {"type": "number"}, "maximum": {"type": "number"},
+        "scope": {"$ref": "#/$defs/scope"}, "owner_scope": {"$ref": "#/$defs/ownerScope"}, "persistence_scope": {"$ref": "#/$defs/persistenceScope"},
+        "reset_at": {"$ref": "#/$defs/timingAnchor"}, "default": {}, "minimum": {"type": "number"}, "maximum": {"type": "number"},
         "enum_values": {"type": "array", "items": {"type": ["string", "number", "integer", "boolean"]}, "uniqueItems": true},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
       "additionalProperties": false
     },
-    "scope": {"enum": ["game", "campaign", "scenario", "round", "turn", "player", "actor", "object", "location"]},
+    "scope": {"enum": ["game", "campaign", "expedition", "scenario", "round", "turn", "party", "player", "actor", "object", "location"]},
+    "ownerScope": {"enum": ["game", "campaign", "expedition", "scenario", "party", "player", "actor", "object", "location"]},
+    "persistenceScope": {"enum": ["turn", "round", "scenario", "expedition", "campaign", "game"]},
     "threshold": {
       "type": "object", "required": ["condition"],
       "properties": {
@@ -274,10 +401,11 @@
       "additionalProperties": false
     },
     "resource": {
-      "type": "object", "required": ["kind", "scope"],
+      "type": "object", "required": ["kind", "owner_scope", "persistence_scope"],
       "properties": {
         "name": {"type": "string"}, "description": {"type": "string"}, "kind": {"enum": ["currency", "track", "status", "capacity", "inventory"]},
-        "scope": {"$ref": "#/$defs/scope"}, "value_type": {"enum": ["number", "integer", "boolean", "enum"]},
+        "scope": {"$ref": "#/$defs/scope"}, "owner_scope": {"$ref": "#/$defs/ownerScope"}, "persistence_scope": {"$ref": "#/$defs/persistenceScope"},
+        "reset_at": {"$ref": "#/$defs/timingAnchor"}, "value_type": {"enum": ["number", "integer", "boolean", "enum"]},
         "default": {}, "minimum": {"type": "number"}, "maximum": {"type": "number"}, "enum_values": {"type": "array", "items": {"type": ["string", "number"]}},
         "thresholds": {"type": "array", "items": {"$ref": "#/$defs/threshold"}},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
@@ -386,13 +514,59 @@
       },
       "additionalProperties": false
     },
-    "topology": {
-      "type": "object", "required": ["name", "nodes", "edges"],
+    "topologyPool": {
+      "type": "object",
+      "required": ["object_ref", "quantity"],
       "properties": {
-        "name": {"type": "string"}, "description": {"type": "string"}, "nodes": {"type": "array", "items": {"$ref": "#/$defs/topologyNode"}},
-        "edges": {"type": "array", "items": {"$ref": "#/$defs/topologyEdge"}}, "source_ref": {"$ref": "#/$defs/ref"},
+        "object_ref": {"$ref": "#/$defs/ref"},
+        "quantity": {"type": "integer", "minimum": 1},
+        "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "constraints": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "generationDecision": {
+      "type": "object",
+      "required": ["sequence", "event"],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 0},
+        "event": {"$ref": "#/$defs/id"},
+        "payload": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "materialization": {
+      "type": "object",
+      "required": ["source_topology_ref", "generation_id", "id_policy"],
+      "properties": {
+        "source_topology_ref": {"$ref": "#/$defs/ref"},
+        "generation_id": {"$ref": "#/$defs/id"},
+        "generation_procedure_ref": {"$ref": "#/$defs/ref"},
+        "seed": {"type": ["string", "integer"]},
+        "generator_version": {"type": "string"},
+        "id_policy": {"enum": ["stable-derived", "stable-recorded"]},
+        "decisions": {"type": "array", "items": {"$ref": "#/$defs/generationDecision"}},
+        "state_revision": {"type": "string"},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "topology": {
+      "type": "object", "required": ["name", "resolution"],
+      "properties": {
+        "name": {"type": "string"}, "description": {"type": "string"}, "resolution": {"enum": ["unresolved", "partially-materialized", "materialized"]},
+        "generation_procedure_ref": {"$ref": "#/$defs/ref"}, "component_pool": {"type": "array", "items": {"$ref": "#/$defs/topologyPool"}},
+        "constraints": {"type": "array", "items": {"type": "string"}}, "hidden_state_policy": {"type": "string"},
+        "id_policy": {"enum": ["stable-derived", "stable-recorded"]},
+        "nodes": {"type": "array", "items": {"$ref": "#/$defs/topologyNode"}},
+        "edges": {"type": "array", "items": {"$ref": "#/$defs/topologyEdge"}}, "materialization": {"$ref": "#/$defs/materialization"},
+        "source_ref": {"$ref": "#/$defs/ref"},
         "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}}, "extensions": {"$ref": "#/$defs/extensions"}
       },
+      "allOf": [
+        {"if": {"properties": {"resolution": {"const": "unresolved"}}}, "then": {"required": ["generation_procedure_ref"]}},
+        {"if": {"properties": {"resolution": {"const": "materialized"}}}, "then": {"required": ["nodes", "edges", "materialization"]}}
+      ],
       "additionalProperties": false
     },
     "objective": {
@@ -418,10 +592,63 @@
       "properties": {"ref": {"$ref": "#/$defs/ref"}, "subject": {"$ref": "#/$defs/subject"}, "value": {}, "authority": {"$ref": "#/$defs/authority"}},
       "additionalProperties": false
     },
+    "clockState": {
+      "type": "object",
+      "properties": {
+        "round": {"type": "integer", "minimum": 0},
+        "turn": {"type": "integer", "minimum": 0},
+        "phase_ref": {"$ref": "#/$defs/ref"},
+        "active_subject": {"$ref": "#/$defs/subject"}
+      },
+      "additionalProperties": false
+    },
+    "activeEffectState": {
+      "type": "object",
+      "required": ["id", "effect_ref", "subject"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "effect_ref": {"$ref": "#/$defs/ref"}, "subject": {"$ref": "#/$defs/subject"},
+        "source_subject": {"$ref": "#/$defs/subject"}, "applied_at": {"$ref": "#/$defs/timingAnchor"},
+        "expires_at": {"$ref": "#/$defs/timingAnchor"}, "remaining_uses": {"type": "integer", "minimum": 0},
+        "cause_ref": {"$ref": "#/$defs/ref"}, "state": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "scheduledEffectState": {
+      "type": "object",
+      "required": ["id", "effect_ref", "subject", "at"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "effect_ref": {"$ref": "#/$defs/ref"}, "subject": {"$ref": "#/$defs/subject"},
+        "source_subject": {"$ref": "#/$defs/subject"}, "at": {"$ref": "#/$defs/timingAnchor"},
+        "cause_ref": {"$ref": "#/$defs/ref"}, "captured_bindings": {"type": "object"}, "state": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "runtimeEvent": {
+      "type": "object", "required": ["sequence", "event"],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 0}, "event": {"$ref": "#/$defs/id"},
+        "subject": {"$ref": "#/$defs/subject"}, "cause_ref": {"$ref": "#/$defs/ref"}, "payload": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "runtimeState": {
+      "type": "object",
+      "properties": {
+        "scene_ref": {"$ref": "#/$defs/ref"}, "scenario_ref": {"$ref": "#/$defs/ref"}, "campaign_ref": {"$ref": "#/$defs/ref"},
+        "clock": {"$ref": "#/$defs/clockState"}, "bindings": {"type": "array", "items": {"$ref": "#/$defs/binding"}},
+        "active_effects": {"type": "array", "items": {"$ref": "#/$defs/activeEffectState"}},
+        "scheduled_effects": {"type": "array", "items": {"$ref": "#/$defs/scheduledEffectState"}},
+        "materialized_topology_ref": {"$ref": "#/$defs/ref"}, "events": {"type": "array", "items": {"$ref": "#/$defs/runtimeEvent"}},
+        "revision": {"type": "string"}, "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "anyOf": [{"required": ["scene_ref"]}, {"required": ["scenario_ref"]}, {"required": ["campaign_ref"]}],
+      "additionalProperties": false
+    },
     "scenario": {
       "type": "object", "required": ["name", "scene_ref"],
       "properties": {
         "name": {"type": "string"}, "description": {"type": "string"}, "scene_ref": {"$ref": "#/$defs/ref"}, "topology_ref": {"$ref": "#/$defs/ref"},
+        "materialized_topology_ref": {"$ref": "#/$defs/ref"},
         "players": {"type": "object", "properties": {"min": {"type": "integer", "minimum": 1}, "max": {"type": "integer", "minimum": 1}}, "additionalProperties": false},
         "initial_state": {"type": "array", "items": {"$ref": "#/$defs/binding"}}, "action_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
         "turn_procedure_ref": {"$ref": "#/$defs/ref"}, "objectives": {"type": "array", "items": {"$ref": "#/$defs/objective"}},
