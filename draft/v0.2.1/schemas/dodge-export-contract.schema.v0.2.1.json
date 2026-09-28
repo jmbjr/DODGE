@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dodge-format.example.invalid/schemas/dodge-export-contract.schema.v0.2.1.json",
+  "title": "DODGE exporter contract 0.2.1 working draft",
+  "type": "object",
+  "required": ["contract_version", "contract_id", "target", "accepts", "maps", "adds", "outputs", "forbidden_in_dodge"],
+  "properties": {
+    "contract_version": {"const": "0.2.1"},
+    "contract_id": {"type": "string", "minLength": 1},
+    "target": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+    "accepts": {
+      "type": "object",
+      "required": ["dodge_versions", "object_kinds"],
+      "properties": {
+        "dodge_versions": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+        "object_kinds": {"type": "array", "items": {"enum": ["token", "collection", "randomizer"]}, "uniqueItems": true},
+        "component_forms": {"type": "array", "items": {"enum": ["card", "token", "tile", "board", "reference_sheet", "tracker", "die", "standee", "custom"]}, "uniqueItems": true},
+        "rule_features": {"type": "array", "items": {"enum": ["values", "resources", "conditions", "effects", "actions", "procedures", "phases", "ai_profiles", "topologies", "scenarios", "campaigns"]}, "uniqueItems": true},
+        "allows_prose_rules": {"type": "boolean", "default": false},
+        "required_extensions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "maps": {"type": "array", "items": {"type": "object", "required": ["from", "to"], "properties": {"from": {"type": "string"}, "to": {"type": "string"}, "notes": {"type": "string"}}, "additionalProperties": false}},
+    "adds": {"type": "array", "items": {"type": "string"}},
+    "outputs": {"type": "array", "items": {"type": "string"}},
+    "forbidden_in_dodge": {"type": "array", "items": {"type": "string"}},
+    "manifest_identity_fields": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "extensions": {"type": "object"}
+  },
+  "additionalProperties": false
+}
