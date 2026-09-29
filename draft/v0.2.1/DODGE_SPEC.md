@@ -71,6 +71,20 @@ The following 0.2.0 semantics remain normative:
 
 The detailed JSON shapes for this core are normative in the 0.2.1 schema.
 
+### 4.1 Normative physical dimensions
+
+When `component.dimensions` is present, it defines the normative finished physical dimensions of the component. These values are game-domain facts, not layout hints. For a cut component, width and height describe the finished cut or trim boundary; bleed MAY extend beyond that boundary but MUST NOT change it.
+
+Physical unit conversion MUST be exact: 1 inch is 25.4 millimetres, and 1 point is 1/72 inch. Dimensions MUST be positive and geometrically compatible with the declared shape.
+
+A print-and-play exporter MUST render a component at its declared physical dimensions when the artifact is printed at 100% scale. It MAY apply a different scale only when the selected target contract explicitly declares and documents the transformation. Such a transformation MUST state the scale factor, MUST be recorded in the build manifest or equivalent provenance record, and MUST cause the output to be identified as not dimensionally accurate at 100% print scale.
+
+`size_class` is a semantic, project-defined classification. It does not have a universal DODGE measurement. When both `size_class` and explicit `dimensions` are present, `dimensions` is authoritative. A project MAY define a registry that maps size classes to expected dimensions; validators MAY report a mismatch between that registry and explicit dimensions, but exporters MUST NOT replace the explicit dimensions with the registry value.
+
+When explicit dimensions are absent, a project or target contract MAY resolve a `size_class` to dimensions. That mapping MUST be deterministic and documented, and its identity SHOULD be preserved in export provenance. Exporters MUST NOT silently invent conflicting physical sizes for the same unresolved size class.
+
+Digital targets MAY scale components freely for display or interaction. They SHOULD preserve the declared aspect ratio and neutral size semantics. A Tabletop Simulator exporter, for example, MAY map physical units to target units but MUST NOT redefine the component's neutral dimensions or `size_class`; the mapping belongs in its target contract or target-owned configuration.
+
 ## 5. Identity and references
 
 Local identifiers match `^[a-z0-9][a-z0-9._:-]*$`.
@@ -389,9 +403,11 @@ A scenario's inventory is the inventory of its `scene_ref`, plus components crea
 
 DODGE owns neutral facts, logical topology, declarative rules, and scene/campaign composition. Targets own presentation and deployment details.
 
-Forbidden examples include PDF coordinates, cut marks, font sizes, TTS GUIDs, atlas indices, hosted URLs, engine node paths, and target save identifiers.
+Normative physical component dimensions are neutral facts. Page imposition, margins, bleed, cut marks, typography, printer settings, digital transforms, TTS GUIDs, atlas indices, hosted URLs, engine node paths, and target save identifiers are target-owned.
 
-A target contract MUST declare supported DODGE versions, object kinds, component forms, rule features, and required extensions. Unsupported required semantics MUST fail clearly rather than degrade silently.
+Forbidden examples in a DODGE document include PDF coordinates, cut-mark geometry, font sizes, printer settings, TTS GUIDs, atlas indices, hosted URLs, engine node paths, and target save identifiers. Neutral dimensions do not become target-owned merely because an exporter consumes them.
+
+A target contract MUST declare supported DODGE versions, object kinds, component forms, rule features, and required extensions. Any transformation that changes declared physical output size MUST also be explicit and documented in the contract. Unsupported required semantics MUST fail clearly rather than degrade silently.
 
 ## 15. Semantic validation
 
@@ -400,7 +416,7 @@ In addition to schema validation, a 0.2.1 validator MUST check:
 1. all required local and external references resolve;
 2. object/archetype kinds and face slots agree;
 3. collection nesting and procedure references are acyclic unless repetition is explicit;
-4. quantities and component dimensions are coherent;
+4. quantities are coherent, and component dimensions are positive, geometrically valid, and expressed in supported units;
 5. source hashes match;
 6. scene instance and topology node IDs are unique in scope;
 7. topology edges reference existing nodes;
@@ -409,6 +425,8 @@ In addition to schema validation, a 0.2.1 validator MUST check:
 10. phase transitions and scenario end-condition evaluation are deterministic;
 11. AI priorities have an executable action/effect/procedure or are marked prose-only;
 12. a target contract supports all required normalized features.
+
+A validator MAY additionally compare explicit dimensions with a project-defined `size_class` registry and report mismatches. Such a diagnostic MUST treat the explicit dimensions as authoritative.
 
 ## 16. WD sidecar mapping used for this draft
 
