@@ -20,6 +20,7 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - deterministic transformation transactions with consumption, placement, identity, and state-transfer policy
 - unresolved topology generation and materialized runtime topology snapshots
 - neutral resumable runtime snapshots for clocks, bindings, active effects, and scheduled effects
+- normative physical component dimensions and explicit exporter-scaling rules
 
 ## Deliberate limits
 
@@ -28,6 +29,8 @@ The schema does not promote inspirations, design pillars, candidate mechanics, p
 This vocabulary is intentionally declarative and conservative. It can preserve the WD sidecar's structured intent, but it is not yet a complete rules engine or expression language.
 
 Issue #21 drove the timing, ownership, transformation, and topology-materialization semantics in this revision.
+
+Issue #23 clarified that explicit component dimensions are authoritative physical facts, established exact-size print-and-play behavior, and kept target-specific layout and digital scaling outside the neutral document.
 
 ## Structure
 

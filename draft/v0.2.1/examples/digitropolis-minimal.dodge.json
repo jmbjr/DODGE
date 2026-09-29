@@ -13,7 +13,7 @@
     "standard-card": {
       "kind": "token",
       "face_slots": [{"id": "front", "role": "front"}, {"id": "back", "role": "back"}],
-      "component": {"form": "card", "size_class": "standard-card", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true, "shared_back_ref": "rules:card-back"}
+      "component": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true, "shared_back_ref": "rules:card-back"}
     },
     "deck": {"kind": "collection"},
     "reference-sheet": {"kind": "token", "face_slots": [{"id": "reference", "role": "reference"}], "component": {"form": "reference_sheet", "size_class": "rules-sheet", "shape": "rectangle"}}
