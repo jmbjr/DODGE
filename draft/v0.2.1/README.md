@@ -22,6 +22,7 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - neutral resumable runtime snapshots for clocks, bindings, active effects, and scheduled effects
 - normative physical component dimensions and explicit exporter-scaling rules
 - selectable representations of semantic state with export-profile selection
+- export-profile inclusion modes for selected, synchronized, and bundled-alternative representations
 
 ## Deliberate limits
 
@@ -33,7 +34,9 @@ Issue #21 drove the timing, ownership, transformation, and topology-materializat
 
 Issue #23 clarified that explicit component dimensions are authoritative physical facts, established exact-size print-and-play behavior, and kept target-specific layout and digital scaling outside the neutral document.
 
-Issue #25 introduced the minimum neutral vocabulary for alternate state representations while keeping the underlying value/resource definition authoritative. Export contracts select one candidate without moving game rules into target configuration.
+Issue #25 introduced the minimum neutral vocabulary for alternate state representations while keeping the underlying value/resource definition authoritative. Export contracts include candidates without moving game rules into target configuration.
+
+Issue #27 generalized export profiles so Beta artifacts can bundle several alternative implementations without duplicating the game, while stable profiles can select one and capable targets can synchronize redundant views.
 
 ## Structure
 

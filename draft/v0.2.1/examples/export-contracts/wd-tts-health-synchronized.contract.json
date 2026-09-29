@@ -1,0 +1,26 @@
+{
+  "contract_version": "0.2.1",
+  "contract_id": "wd-tts-health-synchronized",
+  "target": "tts",
+  "accepts": {
+    "dodge_versions": ["0.2.1"],
+    "object_kinds": ["token", "collection", "randomizer"],
+    "component_forms": ["card", "token", "tile", "reference_sheet", "tracker"],
+    "representation_kinds": ["target_native", "marker_track"],
+    "representation_modes": ["selected", "synchronized"],
+    "rule_features": ["values", "resources", "ownership_bindings"]
+  },
+  "maps": [{"from": "representation_inclusions", "to": "scripted counter synchronized with a physical marker"}],
+  "adds": ["state synchronization script", "TTS GUIDs", "transforms", "interaction controls"],
+  "outputs": ["TTS save JSON"],
+  "forbidden_in_dodge": ["Lua", "TTS GUIDs", "TTS transforms"],
+  "representation_inclusions": [
+    {
+      "state_ref": "health",
+      "mode": "synchronized",
+      "representation_refs": ["health-tts-scripted-counter", "health-tts-physical-marker"],
+      "notes": "Both controls are active and must read and write the same Health binding."
+    }
+  ],
+  "manifest_identity_fields": ["DODGE SHA-256", "contract ID", "state ref", "inclusion mode", "ordered representation refs"]
+}

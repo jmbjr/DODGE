@@ -16,6 +16,7 @@
         "object_kinds": {"type": "array", "items": {"enum": ["token", "collection", "randomizer"]}, "uniqueItems": true},
         "component_forms": {"type": "array", "items": {"enum": ["card", "token", "tile", "board", "reference_sheet", "tracker", "die", "standee", "custom"]}, "uniqueItems": true},
         "representation_kinds": {"type": "array", "items": {"enum": ["unit_tokens", "numbered_track", "marker_track", "dial", "numeric_display", "status_marker", "target_native"]}, "uniqueItems": true},
+        "representation_modes": {"type": "array", "items": {"enum": ["selected", "synchronized", "alternatives"]}, "uniqueItems": true},
         "rule_features": {"type": "array", "items": {"enum": ["values", "resources", "ownership_bindings", "conditions", "effects", "timing", "usage_limits", "transformations", "actions", "procedures", "phases", "ai_profiles", "topologies", "topology_materialization", "scenarios", "campaigns"]}, "uniqueItems": true},
         "allows_prose_rules": {"type": "boolean", "default": false},
         "required_extensions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
@@ -27,15 +28,21 @@
     "adds": {"type": "array", "items": {"type": "string"}},
     "outputs": {"type": "array", "items": {"type": "string"}},
     "forbidden_in_dodge": {"type": "array", "items": {"type": "string"}},
-    "representation_selections": {
+    "representation_inclusions": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["state_ref", "representation_ref"],
+        "required": ["state_ref", "mode", "representation_refs"],
         "properties": {
           "state_ref": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
-          "representation_ref": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"}
+          "mode": {"enum": ["selected", "synchronized", "alternatives"]},
+          "representation_refs": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"}, "uniqueItems": true},
+          "notes": {"type": "string"}
         },
+        "allOf": [
+          {"if": {"properties": {"mode": {"const": "selected"}}, "required": ["mode"]}, "then": {"properties": {"representation_refs": {"maxItems": 1}}}},
+          {"if": {"properties": {"mode": {"enum": ["synchronized", "alternatives"]}}, "required": ["mode"]}, "then": {"properties": {"representation_refs": {"minItems": 2}}}}
+        ],
         "additionalProperties": false
       }
     },
