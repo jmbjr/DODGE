@@ -1,0 +1,18 @@
+{
+  "contract_version": "0.2.1",
+  "contract_id": "wd-pnp-health-card-marker",
+  "target": "pnp",
+  "accepts": {
+    "dodge_versions": ["0.2.1"],
+    "object_kinds": ["token", "collection", "randomizer"],
+    "component_forms": ["card", "token", "tile", "reference_sheet", "tracker"],
+    "representation_kinds": ["marker_track"],
+    "rule_features": ["values", "resources", "ownership_bindings"]
+  },
+  "maps": [{"from": "representations.health-crew-card-marker", "to": "printable crew reference card and cube marker"}],
+  "adds": ["card artwork", "track graphics", "page imposition", "cut marks", "bleed", "printer instructions"],
+  "outputs": ["PDF"],
+  "forbidden_in_dodge": ["PDF coordinates", "cut-mark geometry", "font sizes", "printer settings"],
+  "representation_selections": [{"state_ref": "health", "representation_ref": "health-crew-card-marker"}],
+  "manifest_identity_fields": ["DODGE SHA-256", "contract ID", "state ref", "representation ref"]
+}

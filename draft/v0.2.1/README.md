@@ -21,6 +21,7 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - unresolved topology generation and materialized runtime topology snapshots
 - neutral resumable runtime snapshots for clocks, bindings, active effects, and scheduled effects
 - normative physical component dimensions and explicit exporter-scaling rules
+- selectable representations of semantic state with export-profile selection
 
 ## Deliberate limits
 
@@ -32,6 +33,8 @@ Issue #21 drove the timing, ownership, transformation, and topology-materializat
 
 Issue #23 clarified that explicit component dimensions are authoritative physical facts, established exact-size print-and-play behavior, and kept target-specific layout and digital scaling outside the neutral document.
 
+Issue #25 introduced the minimum neutral vocabulary for alternate state representations while keeping the underlying value/resource definition authoritative. Export contracts select one candidate without moving game rules into target configuration.
+
 ## Structure
 
 - `DODGE_SPEC.md` — complete candidate specification
@@ -39,3 +42,4 @@ Issue #23 clarified that explicit component dimensions are authoritative physica
 - `schemas/dodge-export-contract.schema.v0.2.1.json` — target contract schema
 - `examples/digitropolis-minimal.dodge.json` — compatibility example
 - `examples/wretched-demesne-sidecar-promoted.dodge.json` — inferred WD rule-model example
+- `examples/export-contracts/` — WD Health representation-laboratory selections

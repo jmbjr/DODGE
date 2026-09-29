@@ -32,6 +32,7 @@ DODGE is authoritative for neutral composition and for any normalized semantics 
 
 - `game_profile`
 - `rules`
+- `representations`
 - `topologies`
 - `scenarios`
 - `campaigns`
@@ -285,6 +286,34 @@ Priorities are evaluated in order; the first satisfied executable priority is se
 
 This supports WD's Detect → Move → Act procedure and differentiated Small/Large/Alpha Spider priorities while remaining generic.
 
+### 7.9 Selectable representations of semantic state
+
+Semantic state and its representation are separate. A value or resource definition owns its type, bounds, ownership, persistence, timing, thresholds, and rule behavior. A representation candidate only describes how that same state may be perceived or manipulated.
+
+`representations` is an optional map of reusable candidates. Each candidate MUST declare:
+
+- `state_ref`, resolving to exactly one `rules.values` or `rules.resources` definition;
+- a neutral `kind`, such as `unit_tokens`, `numbered_track`, `marker_track`, `dial`, `numeric_display`, `status_marker`, or `target_native`;
+- an `encoding`: `quantity`, `position`, `numeric`, or `presence`;
+- whether interaction is `display-only` or `read-write`;
+- zero or more neutral component requirements.
+
+A component requirement references an ordinary DODGE object, assigns its representational role, and derives its required quantity using one of these bases:
+
+- `fixed`, with an explicit non-negative quantity;
+- `current`, from the selected state's current binding;
+- `maximum`, from the selected state's maximum.
+
+`per_binding` states whether the requirement is repeated for every resolved owner binding. A quantity derived from `current` or `maximum` is not a copied game value: it MUST resolve from the semantic definition or runtime binding. If the required value is unavailable in the selected export scope, the exporter MUST fail clearly or use a different explicitly selected candidate.
+
+An export contract selects a candidate with `representation_selections`, pairing one `state_ref` with one `representation_ref`. For each selected pair, both references MUST resolve, the candidate's `state_ref` MUST equal the selection's `state_ref`, and the candidate kind MUST be listed in `accepts.representation_kinds`. A profile MUST NOT select more than one representation for the same state unless the target explicitly supports synchronized redundant views; this draft's standard contract pattern selects exactly one.
+
+Selection adds only the selected candidate's component requirements to the resolved export inventory. Unselected candidates contribute no components. Target-native candidates may have no neutral component requirements.
+
+Representation selection MUST NOT change or override current values, maximum values, defaults, ownership, persistence, reset timing, conditions, effects, or any other semantic rule. PDF coordinates, track graphics, TTS scripts/GUIDs/transforms, Web DOM/CSS, and equivalent implementation details remain target-owned.
+
+An object's use as a representation component is established by the selected candidate, not by its physical form. World objects such as a corpse or chrysalis remain game objects even when physically token-shaped; they are not representations of a value unless a candidate explicitly uses them in that role.
+
 ## 8. Topologies
 
 A topology defines logical space independently of rendering. It has a `resolution` of `unresolved`, `partially-materialized`, or `materialized`.
@@ -399,6 +428,8 @@ The 0.2.0 deterministic inventory algorithm remains unchanged:
 
 A scenario's inventory is the inventory of its `scene_ref`, plus components created by explicit setup effects whose quantities can be resolved before export. Dynamic runtime creation that cannot be bounded is reported as a runtime requirement rather than silently omitted.
 
+When an export contract selects state representations, the resolver then appends the selected candidates' resolved component requirements in selection order. Those additions MUST retain provenance to the representation candidate, state definition, and contract selection that caused them.
+
 ## 14. Target boundary
 
 DODGE owns neutral facts, logical topology, declarative rules, and scene/campaign composition. Targets own presentation and deployment details.
@@ -407,7 +438,7 @@ Normative physical component dimensions are neutral facts. Page imposition, marg
 
 Forbidden examples in a DODGE document include PDF coordinates, cut-mark geometry, font sizes, printer settings, TTS GUIDs, atlas indices, hosted URLs, engine node paths, and target save identifiers. Neutral dimensions do not become target-owned merely because an exporter consumes them.
 
-A target contract MUST declare supported DODGE versions, object kinds, component forms, rule features, and required extensions. Any transformation that changes declared physical output size MUST also be explicit and documented in the contract. Unsupported required semantics MUST fail clearly rather than degrade silently.
+A target contract MUST declare supported DODGE versions, object kinds, component forms, rule features, representation kinds when used, and required extensions. Any transformation that changes declared physical output size MUST also be explicit and documented in the contract. Unsupported required semantics MUST fail clearly rather than degrade silently.
 
 ## 15. Semantic validation
 
@@ -426,6 +457,8 @@ In addition to schema validation, a 0.2.1 validator MUST check:
 11. AI priorities have an executable action/effect/procedure or are marked prose-only;
 12. a target contract supports all required normalized features.
 
+When representations are present or selected, a validator MUST additionally check that state and object references resolve, selection state matches candidate state, selected kinds are supported by the contract, component quantities can be resolved for the export scope, and a standard profile selects at most one candidate per state.
+
 A validator MAY additionally compare explicit dimensions with a project-defined `size_class` registry and report mismatches. Such a diagnostic MUST treat the explicit dimensions as authoritative.
 
 ## 16. WD sidecar mapping used for this draft
@@ -440,6 +473,7 @@ A validator MAY additionally compare explicit dimensions with a project-defined 
 | attack resolution | procedure |
 | noise/threat | track resources + thresholds/effects |
 | health/ammunition/scrap/medical supplies | values/resources |
+| alternate Health tokens/tracks/HUDs | representation candidates + export-contract selection |
 | fed/suppressed/incapacitated | status resources |
 | Detect → Move → Act | AI activation procedure |
 | spider behavior differences | ordered AI profiles |
@@ -484,3 +518,17 @@ This revision intends to satisfy issue #21 as follows:
 | deterministic save/resume | neutral `runtime_states` bindings, active effects, schedules, clock, and topology reference |
 
 These mechanisms are generic. WD-specific values and procedures belong in WD data, not this specification.
+
+## 19. Issue #25 adoption requirements
+
+This revision separates selectable state representation into three normative layers:
+
+| Concern | Normative location |
+|---|---|
+| Health current/max, owner, persistence, and rules | `rules.values.health` and runtime bindings |
+| token, track, marker-card, HUD, or target-native alternative | `representations` candidate |
+| selected alternative for one export | target contract `representation_selections` |
+
+The Wretched Demesne example defines one Health value and multiple candidates. The accompanying contracts select individual tokens, a numbered track, a crew-card marker track, or a Web numeric display without cloning or overriding Health. Spider Corpse and Chrysalis remain contrasting world objects in scene/rule inventory rather than state representations.
+
+The same pattern applies without new rule definitions to Ammo, Threat, Actions, and Scrap through quantity, position, or numeric encodings; and to Fed or Incapacitated through presence or status-marker encodings. The candidate chosen for any of them may differ by target and experiment. A physical Spider Corpse or Chrysalis, by contrast, has identity, location, relationships, and lifecycle in the game world, so it remains an object even if a target renders it with the same physical material as a representational token.

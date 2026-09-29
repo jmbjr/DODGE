@@ -1,0 +1,18 @@
+{
+  "contract_version": "0.2.1",
+  "contract_id": "wd-tts-health-counter",
+  "target": "tts",
+  "accepts": {
+    "dodge_versions": ["0.2.1"],
+    "object_kinds": ["token", "collection", "randomizer"],
+    "component_forms": ["card", "token", "tile", "reference_sheet", "tracker"],
+    "representation_kinds": ["target_native", "marker_track"],
+    "rule_features": ["values", "resources", "ownership_bindings"]
+  },
+  "maps": [{"from": "representations.health-tts-scripted-counter", "to": "scripted numeric counter"}],
+  "adds": ["Lua script", "TTS GUID", "transforms", "interaction controls"],
+  "outputs": ["TTS save JSON"],
+  "forbidden_in_dodge": ["Lua", "TTS GUIDs", "TTS transforms"],
+  "representation_selections": [{"state_ref": "health", "representation_ref": "health-tts-scripted-counter"}],
+  "manifest_identity_fields": ["DODGE SHA-256", "contract ID", "state ref", "representation ref"]
+}
