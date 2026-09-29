@@ -35,6 +35,21 @@
       "kind": "token",
       "face_slots": [{"id": "front", "role": "front"}],
       "component": {"form": "tile", "size_class": "room-tile", "shape": "rectangle"}
+    },
+    "health-track": {
+      "kind": "token",
+      "face_slots": [{"id": "front", "role": "front"}],
+      "component": {"form": "tracker", "size_class": "health-track", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 50, "height": 100}}
+    },
+    "crew-reference-card": {
+      "kind": "token",
+      "face_slots": [{"id": "front", "role": "reference"}],
+      "component": {"form": "reference_sheet", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}}
+    },
+    "cube-marker": {
+      "kind": "token",
+      "face_slots": [{"id": "front", "role": "front"}],
+      "component": {"form": "token", "size_class": "marker-cube", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 8, "height": 8, "thickness": 8}}
     }
   },
   "objects": {
@@ -53,7 +68,11 @@
     "spider-corpse": {"kind": "token", "archetype_ref": "board-token", "name": "Spider Corpse", "faces": [{"slot": "front", "text": "SPIDER CORPSE"}], "tags": ["corpse", "spider-food"]},
     "chrysalis": {"kind": "token", "archetype_ref": "board-token", "name": "Chrysalis", "faces": [{"slot": "front", "text": "CHRYSALIS"}], "relationships": [{"type": "transforms-from", "target_object_ref": "spider-corpse"}], "tags": ["chrysalis"]},
     "security-crew": {"kind": "token", "archetype_ref": "board-token", "name": "Security Crew", "faces": [{"slot": "front", "text": "SECURITY"}], "tags": ["crew", "security"]},
-    "cave-room": {"kind": "token", "archetype_ref": "room-tile", "name": "Cave Room", "faces": [{"slot": "front", "text": "CAVE"}], "tags": ["room", "cave"]}
+    "cave-room": {"kind": "token", "archetype_ref": "room-tile", "name": "Cave Room", "faces": [{"slot": "front", "text": "CAVE"}], "tags": ["room", "cave"]},
+    "health-token": {"kind": "token", "archetype_ref": "board-token", "name": "Health Token", "component": {"form": "token", "size_class": "health-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 18}}, "faces": [{"slot": "front", "text": "HEALTH"}], "tags": ["representation", "health"]},
+    "health-numbered-track": {"kind": "token", "archetype_ref": "health-track", "name": "Numbered Health Track", "faces": [{"slot": "front", "text": "HEALTH 0–10"}], "tags": ["representation", "health"]},
+    "health-marker": {"kind": "token", "archetype_ref": "cube-marker", "name": "Health Marker", "faces": [{"slot": "front", "text": "HP"}], "tags": ["representation", "health"]},
+    "crew-health-card": {"kind": "token", "archetype_ref": "crew-reference-card", "name": "Crew Health Reference", "faces": [{"slot": "front", "text": "CREW HEALTH 0–10"}], "tags": ["representation", "health"]}
   },
   "scenes": {
     "scenario-01-the-cave": {
@@ -71,7 +90,7 @@
   },
   "rules": {
     "values": {
-      "health": {"name": "Health", "type": "integer", "owner_scope": "actor", "persistence_scope": "campaign", "minimum": 0, "authority": "authoritative", "source_ref": "gdd"}
+      "health": {"name": "Health", "type": "integer", "owner_scope": "actor", "persistence_scope": "campaign", "minimum": 0, "maximum": 10, "authority": "provisional", "source_ref": "gdd", "assumptions": ["Maximum 10 is an illustrative representation-laboratory value and requires WD confirmation."]}
     },
     "resources": {
       "actions": {"name": "Actions remaining", "kind": "capacity", "owner_scope": "actor", "persistence_scope": "turn", "reset_at": {"scope": "turn", "boundary": "start", "occurrence": "current", "subject": {"relative": "current-actor"}}, "value_type": "integer", "default": 3, "minimum": 0, "maximum": 3, "authority": "authoritative", "source_ref": "gdd"},
@@ -226,6 +245,35 @@
       }
     }
   },
+  "representations": {
+    "health-unit-tokens": {
+      "name": "Individual Health tokens", "state_ref": "health", "kind": "unit_tokens", "encoding": "quantity", "interaction": "read-write",
+      "components": [{"object_ref": "health-token", "role": "unit", "quantity": {"basis": "maximum", "per_binding": true}}]
+    },
+    "health-numbered-track": {
+      "name": "Numbered Health track and marker", "state_ref": "health", "kind": "numbered_track", "encoding": "position", "interaction": "read-write",
+      "components": [
+        {"object_ref": "health-numbered-track", "role": "track", "quantity": {"basis": "fixed", "value": 1, "per_binding": true}},
+        {"object_ref": "health-marker", "role": "marker", "quantity": {"basis": "fixed", "value": 1, "per_binding": true}}
+      ]
+    },
+    "health-crew-card-marker": {
+      "name": "Crew reference card with cube marker", "state_ref": "health", "kind": "marker_track", "encoding": "position", "interaction": "read-write",
+      "components": [
+        {"object_ref": "crew-health-card", "role": "reference-track", "quantity": {"basis": "fixed", "value": 1, "per_binding": true}},
+        {"object_ref": "health-marker", "role": "marker", "quantity": {"basis": "fixed", "value": 1, "per_binding": true}}
+      ]
+    },
+    "health-web-hud": {"name": "Web numeric HUD", "state_ref": "health", "kind": "numeric_display", "encoding": "numeric", "interaction": "read-write"},
+    "health-tts-scripted-counter": {"name": "TTS scripted counter", "state_ref": "health", "kind": "target_native", "encoding": "numeric", "interaction": "read-write"},
+    "health-tts-physical-marker": {
+      "name": "TTS physical marker", "state_ref": "health", "kind": "marker_track", "encoding": "position", "interaction": "read-write",
+      "components": [
+        {"object_ref": "health-numbered-track", "role": "track", "quantity": {"basis": "fixed", "value": 1, "per_binding": true}},
+        {"object_ref": "health-marker", "role": "marker", "quantity": {"basis": "fixed", "value": 1, "per_binding": true}}
+      ]
+    }
+  },
   "topologies": {
     "the-cave-unresolved": {
       "name": "The Cave unresolved topology", "resolution": "unresolved", "generation_procedure_ref": "generate-cave-topology",
@@ -287,6 +335,7 @@
       "scene_ref": "scenario-01-the-cave", "scenario_ref": "scenario-01", "campaign_ref": "plateau-of-leng",
       "clock": {"round": 2, "turn": 1, "phase_ref": "crew-action", "active_subject": {"instance_ref": "crew-security-1"}},
       "bindings": [
+        {"ref": "health", "subject": {"instance_ref": "crew-security-1"}, "value": 7, "authority": "provisional"},
         {"ref": "ammunition", "subject": {"relative": "expedition"}, "value": 4, "authority": "provisional"},
         {"ref": "threat", "subject": {"relative": "scenario"}, "value": 6, "authority": "provisional"}
       ],

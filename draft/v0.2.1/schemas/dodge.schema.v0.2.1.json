@@ -17,6 +17,7 @@
     "objects": {"type": "object", "additionalProperties": {"$ref": "#/$defs/object"}},
     "scenes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/scene"}},
     "rules": {"$ref": "#/$defs/rules"},
+    "representations": {"type": "object", "additionalProperties": {"$ref": "#/$defs/representation"}},
     "topologies": {"type": "object", "additionalProperties": {"$ref": "#/$defs/topology"}},
     "scenarios": {"type": "object", "additionalProperties": {"$ref": "#/$defs/scenario"}},
     "campaigns": {"type": "object", "additionalProperties": {"$ref": "#/$defs/campaign"}},
@@ -409,6 +410,48 @@
         "default": {}, "minimum": {"type": "number"}, "maximum": {"type": "number"}, "enum_values": {"type": "array", "items": {"type": ["string", "number"]}},
         "thresholds": {"type": "array", "items": {"$ref": "#/$defs/threshold"}},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "representationQuantity": {
+      "type": "object",
+      "required": ["basis", "per_binding"],
+      "properties": {
+        "basis": {"enum": ["fixed", "current", "maximum"]},
+        "value": {"type": "integer", "minimum": 0},
+        "per_binding": {"type": "boolean"}
+      },
+      "allOf": [
+        {"if": {"properties": {"basis": {"const": "fixed"}}, "required": ["basis"]}, "then": {"required": ["value"]}},
+        {"if": {"properties": {"basis": {"enum": ["current", "maximum"]}}, "required": ["basis"]}, "then": {"not": {"required": ["value"]}}}
+      ],
+      "additionalProperties": false
+    },
+    "representationComponent": {
+      "type": "object",
+      "required": ["object_ref", "role", "quantity"],
+      "properties": {
+        "object_ref": {"$ref": "#/$defs/ref"},
+        "role": {"$ref": "#/$defs/id"},
+        "quantity": {"$ref": "#/$defs/representationQuantity"}
+      },
+      "additionalProperties": false
+    },
+    "representation": {
+      "type": "object",
+      "required": ["state_ref", "kind", "encoding", "interaction"],
+      "properties": {
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "state_ref": {"$ref": "#/$defs/ref"},
+        "kind": {"enum": ["unit_tokens", "numbered_track", "marker_track", "dial", "numeric_display", "status_marker", "target_native"]},
+        "encoding": {"enum": ["quantity", "position", "numeric", "presence"]},
+        "interaction": {"enum": ["display-only", "read-write"]},
+        "components": {"type": "array", "items": {"$ref": "#/$defs/representationComponent"}},
+        "source_ref": {"$ref": "#/$defs/ref"},
+        "authority": {"$ref": "#/$defs/authority"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
       "additionalProperties": false

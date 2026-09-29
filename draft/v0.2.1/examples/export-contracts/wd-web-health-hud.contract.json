@@ -1,0 +1,18 @@
+{
+  "contract_version": "0.2.1",
+  "contract_id": "wd-web-health-hud",
+  "target": "web",
+  "accepts": {
+    "dodge_versions": ["0.2.1"],
+    "object_kinds": ["token", "collection", "randomizer"],
+    "component_forms": ["card", "token", "tile", "reference_sheet", "tracker"],
+    "representation_kinds": ["numeric_display"],
+    "rule_features": ["values", "resources", "ownership_bindings"]
+  },
+  "maps": [{"from": "representations.health-web-hud", "to": "numeric HUD control"}],
+  "adds": ["DOM structure", "CSS", "input controls", "accessibility labels"],
+  "outputs": ["Web application bundle"],
+  "forbidden_in_dodge": ["DOM IDs", "CSS selectors", "framework components"],
+  "representation_selections": [{"state_ref": "health", "representation_ref": "health-web-hud"}],
+  "manifest_identity_fields": ["DODGE SHA-256", "contract ID", "state ref", "representation ref"]
+}
