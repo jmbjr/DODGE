@@ -306,9 +306,17 @@ A component requirement references an ordinary DODGE object, assigns its represe
 
 `per_binding` states whether the requirement is repeated for every resolved owner binding. A quantity derived from `current` or `maximum` is not a copied game value: it MUST resolve from the semantic definition or runtime binding. If the required value is unavailable in the selected export scope, the exporter MUST fail clearly or use a different explicitly selected candidate.
 
-An export contract selects a candidate with `representation_selections`, pairing one `state_ref` with one `representation_ref`. For each selected pair, both references MUST resolve, the candidate's `state_ref` MUST equal the selection's `state_ref`, and the candidate kind MUST be listed in `accepts.representation_kinds`. A profile MUST NOT select more than one representation for the same state unless the target explicitly supports synchronized redundant views; this draft's standard contract pattern selects exactly one.
+An export contract includes candidates with `representation_inclusions`. Each inclusion group declares one `state_ref`, one `mode`, and an ordered, unique `representation_refs` list:
 
-Selection adds only the selected candidate's component requirements to the resolved export inventory. Unselected candidates contribute no components. Target-native candidates may have no neutral component requirements.
+- `selected` contains exactly one gameplay representation;
+- `synchronized` contains two or more simultaneously active views or controls of the same state binding;
+- `alternatives` contains two or more mutually alternative implementations bundled into one artifact for evaluation, prototyping, or review.
+
+Omitting an inclusion group for a state means that profile includes no representation for that state. A target MAY therefore include one, several, or none of the available candidates according to its capability and purpose.
+
+For every inclusion, the state and representation references MUST resolve, every candidate's `state_ref` MUST equal the inclusion's `state_ref`, every candidate kind MUST be listed in `accepts.representation_kinds`, and the mode MUST be listed in `accepts.representation_modes`. A standard contract MUST contain at most one inclusion group per state.
+
+Every included candidate adds its component requirements to the resolved export inventory. Unincluded candidates contribute no components. Target-native candidates may have no neutral component requirements. An `alternatives` group adds all configured alternatives to one artifact but does not duplicate the base game inventory and does not imply that the alternatives are used simultaneously. A `synchronized` group requires the target to keep all included representations bound to the same semantic state during play.
 
 Representation selection MUST NOT change or override current values, maximum values, defaults, ownership, persistence, reset timing, conditions, effects, or any other semantic rule. PDF coordinates, track graphics, TTS scripts/GUIDs/transforms, Web DOM/CSS, and equivalent implementation details remain target-owned.
 
@@ -428,7 +436,7 @@ The 0.2.0 deterministic inventory algorithm remains unchanged:
 
 A scenario's inventory is the inventory of its `scene_ref`, plus components created by explicit setup effects whose quantities can be resolved before export. Dynamic runtime creation that cannot be bounded is reported as a runtime requirement rather than silently omitted.
 
-When an export contract selects state representations, the resolver then appends the selected candidates' resolved component requirements in selection order. Those additions MUST retain provenance to the representation candidate, state definition, and contract selection that caused them.
+When an export contract includes state representations, the resolver appends every included candidate's resolved component requirements in inclusion-group and candidate order. Those additions MUST retain provenance to the representation candidate, state definition, contract inclusion, and inclusion mode that caused them. Base scene inventory is resolved once; an alternatives bundle MUST NOT clone the rest of the game for each candidate.
 
 ## 14. Target boundary
 
@@ -457,7 +465,7 @@ In addition to schema validation, a 0.2.1 validator MUST check:
 11. AI priorities have an executable action/effect/procedure or are marked prose-only;
 12. a target contract supports all required normalized features.
 
-When representations are present or selected, a validator MUST additionally check that state and object references resolve, selection state matches candidate state, selected kinds are supported by the contract, component quantities can be resolved for the export scope, and a standard profile selects at most one candidate per state.
+When representations are present or included, a validator MUST additionally check that state and object references resolve; inclusion state matches every candidate state; candidate kinds and inclusion modes are supported by the contract; mode cardinality is valid; component quantities can be resolved for the export scope; candidate references are unique within a group; and a standard profile contains at most one inclusion group per state.
 
 A validator MAY additionally compare explicit dimensions with a project-defined `size_class` registry and report mismatches. Such a diagnostic MUST treat the explicit dimensions as authoritative.
 
@@ -527,8 +535,20 @@ This revision separates selectable state representation into three normative lay
 |---|---|
 | Health current/max, owner, persistence, and rules | `rules.values.health` and runtime bindings |
 | token, track, marker-card, HUD, or target-native alternative | `representations` candidate |
-| selected alternative for one export | target contract `representation_selections` |
+| included alternative(s) for one export | target contract `representation_inclusions` |
 
 The Wretched Demesne example defines one Health value and multiple candidates. The accompanying contracts select individual tokens, a numbered track, a crew-card marker track, or a Web numeric display without cloning or overriding Health. Spider Corpse and Chrysalis remain contrasting world objects in scene/rule inventory rather than state representations.
 
 The same pattern applies without new rule definitions to Ammo, Threat, Actions, and Scrap through quantity, position, or numeric encodings; and to Fed or Incapacitated through presence or status-marker encodings. The candidate chosen for any of them may differ by target and experiment. A physical Spider Corpse or Chrysalis, by contrast, has identity, location, relationships, and lifecycle in the game world, so it remains an object even if a target renders it with the same physical material as a representational token.
+
+## 20. Issue #27 adoption requirements
+
+Export profiles distinguish capability from inclusion policy:
+
+| Concern | Contract field |
+|---|---|
+| supported candidate forms | `accepts.representation_kinds` |
+| supported inclusion behavior | `accepts.representation_modes` |
+| included candidates and their purpose | `representation_inclusions` |
+
+The WD PnP Beta contract uses `alternatives` to place all three Health experiments in one PDF while resolving the game inventory once. Stable PnP, Web, and TTS profiles use `selected`. A TTS Beta profile demonstrates an alternatives bundle, and a separate TTS contract schema-tests `synchronized` views bound to the same Health state. These are export decisions only; none may clone or override Health semantics.

@@ -1,0 +1,26 @@
+{
+  "contract_version": "0.2.1",
+  "contract_id": "wd-pnp-beta-health-alternatives",
+  "target": "pnp",
+  "accepts": {
+    "dodge_versions": ["0.2.1"],
+    "object_kinds": ["token", "collection", "randomizer"],
+    "component_forms": ["card", "token", "tile", "reference_sheet", "tracker"],
+    "representation_kinds": ["unit_tokens", "numbered_track", "marker_track"],
+    "representation_modes": ["selected", "alternatives"],
+    "rule_features": ["values", "resources", "ownership_bindings"]
+  },
+  "maps": [{"from": "representation_inclusions", "to": "one base PDF plus an alternatives evaluation section"}],
+  "adds": ["alternative labels", "evaluation instructions", "page imposition", "cut marks", "bleed", "printer instructions"],
+  "outputs": ["Beta PnP PDF"],
+  "forbidden_in_dodge": ["PDF coordinates", "cut-mark geometry", "font sizes", "printer settings"],
+  "representation_inclusions": [
+    {
+      "state_ref": "health",
+      "mode": "alternatives",
+      "representation_refs": ["health-unit-tokens", "health-numbered-track", "health-crew-card-marker"],
+      "notes": "Include all three alternatives for review; players choose one implementation for a play session."
+    }
+  ],
+  "manifest_identity_fields": ["DODGE SHA-256", "contract ID", "state ref", "inclusion mode", "ordered representation refs"]
+}
