@@ -12,7 +12,7 @@
   },
   "maps": [{"from": "representation_inclusions", "to": "one base PDF plus an alternatives evaluation section"}],
   "adds": ["alternative labels", "evaluation instructions", "page imposition", "cut marks", "bleed", "printer instructions"],
-  "outputs": ["Beta PnP PDF"],
+  "outputs": ["Beta PnP PDF", "resolved target manifest JSON"],
   "forbidden_in_dodge": ["PDF coordinates", "cut-mark geometry", "font sizes", "printer settings"],
   "representation_inclusions": [
     {
@@ -22,5 +22,34 @@
       "notes": "Include all three alternatives for review; players choose one implementation for a play session."
     }
   ],
-  "manifest_identity_fields": ["DODGE SHA-256", "contract ID", "state ref", "inclusion mode", "ordered representation refs"]
+  "content_configuration": {
+    "default_inclusion": "inherit-resolved",
+    "entries": [
+      {
+        "content_ref": "representation/health-unit-tokens/component/0",
+        "group": "health-alternatives",
+        "component_overrides": {"dimensions": {"unit": "mm", "diameter": 16}},
+        "notes": ["Print 16 mm test tokens while preserving the canonical 18 mm DODGE dimension in diagnostics."]
+      },
+      {
+        "content_ref": "representation/health-numbered-track/component/0",
+        "group": "health-alternatives",
+        "notes": ["Keep the inherited tracker dimensions."]
+      },
+      {
+        "content_ref": "representation/health-crew-card-marker/component/0",
+        "group": "health-alternatives",
+        "variant_policy": "alongside-base",
+        "presentation_variants": [
+          {"id": "high-contrast", "label": "High-contrast playtest treatment", "notes": ["Same Health encoding and card identity; presentation only."]}
+        ]
+      },
+      {
+        "content_ref": "scene/scenario-01-the-cave/instance/corpse-supply",
+        "quantity_override": {"value": 10, "classification": "noncanonical-playtest", "reason": "Beta packet includes two spare corpse tokens for attrition testing."},
+        "group": "scenario-supplies"
+      }
+    ]
+  },
+  "manifest_identity_fields": ["DODGE SHA-256", "contract SHA-256", "contract ID", "resolution scope", "ordered content IDs", "canonical and resolved quantities", "override diagnostics"]
 }

@@ -23,6 +23,8 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - normative physical component dimensions and explicit exporter-scaling rules
 - selectable representations of semantic state with export-profile selection
 - export-profile inclusion modes for selected, synchronized, and bundled-alternative representations
+- deterministic resolved target manifests with inherited-versus-overridden diagnostics
+- target-owned PnP grouping, presentation variants, size overrides, and explicit playtest quantities
 
 ## Deliberate limits
 
@@ -38,11 +40,15 @@ Issue #25 introduced the minimum neutral vocabulary for alternate state represen
 
 Issue #27 generalized export profiles so Beta artifacts can bundle several alternative implementations without duplicating the game, while stable profiles can select one and capable targets can synchronize redundant views.
 
+Issue #29 defined designer-authored target content configuration and deterministic resolved target manifests. Target overrides remain traceable artifact decisions and never mutate DODGE semantics.
+
 ## Structure
 
 - `DODGE_SPEC.md` — complete candidate specification
 - `schemas/dodge.schema.v0.2.1.json` — document schema
 - `schemas/dodge-export-contract.schema.v0.2.1.json` — target contract schema
+- `schemas/dodge-target-manifest.schema.v0.2.1.json` — resolved target-manifest schema
 - `examples/digitropolis-minimal.dodge.json` — compatibility example
 - `examples/wretched-demesne-sidecar-promoted.dodge.json` — inferred WD rule-model example
 - `examples/export-contracts/` — WD Health representation-laboratory selections
+- `examples/target-manifests/` — resolved content and provenance examples
