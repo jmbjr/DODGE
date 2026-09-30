@@ -438,6 +438,55 @@ A scenario's inventory is the inventory of its `scene_ref`, plus components crea
 
 When an export contract includes state representations, the resolver appends every included candidate's resolved component requirements in inclusion-group and candidate order. Those additions MUST retain provenance to the representation candidate, state definition, contract inclusion, and inclusion mode that caused them. Base scene inventory is resolved once; an alternatives bundle MUST NOT clone the rest of the game for each candidate.
 
+### 13.1 Resolved target manifests
+
+An exporter MUST be able to emit an explicit resolved target manifest conforming to `schemas/dodge-target-manifest.schema.v0.2.1.json`. The manifest is deterministic diagnostic output, not a new source of game truth. It identifies the exact DODGE document, export contract, resolution scope, and ordered target contents used for a build.
+
+Each content entry exposes:
+
+- a deterministic `content_id`;
+- its source kind, reference, and JSON path;
+- canonical and resolved quantity;
+- inclusion status;
+- inherited and effective component metadata when applicable;
+- optional target grouping and presentation-variant identity;
+- ordered provenance back to DODGE and contract inputs;
+- field-level diagnostics showing inherited, derived, or overridden values and classifying them as canonical, presentation-only, or explicitly non-canonical playtest data.
+
+Content IDs use these deterministic forms within a resolution scope:
+
+- scene instance: `scene/<scene-ref>/instance/<instance-id>`;
+- collection member: append `/member/<zero-based-declared-index>` to its owning content ID;
+- representation component: `representation/<representation-ref>/component/<zero-based-declared-index>`;
+- presentation variant: append `/variant/<variant-id>` to the source content ID.
+
+Nested collection paths repeat the member segment. Decimal indexes MUST be emitted without leading zeroes. Exporters MUST preserve scene, member, representation-inclusion, component, and variant declaration order. The same inputs and selected scope MUST produce byte-equivalent ordered semantic manifest content after canonical JSON serialization; timestamps, random IDs, and machine paths MUST NOT participate.
+
+### 13.2 Target content configuration and inheritance
+
+An export contract MAY contain `content_configuration`. Its default is `inherit-resolved`: every resolved scene, collection-member, and included representation-component entry is included with canonical quantity and component metadata unless an exact `content_ref` entry changes it.
+
+A designer-authored content entry MAY:
+
+- inherit, include, or exclude the resolved item;
+- assign a target grouping label;
+- override dimensions or `size_class` for that target artifact;
+- declare an explicit non-canonical playtest quantity with a reason;
+- attach target notes;
+- add presentation variants that replace or accompany the base rendering.
+
+Overrides are applied only after neutral inventory and representation resolution. They MUST NOT mutate the DODGE document, its objects, semantic state, collection membership, or rules. Every override MUST appear in target-manifest diagnostics with its canonical and effective values. An overridden physical dimension is the documented scaling transformation allowed by section 4.1; the canonical DODGE dimension remains authoritative and the effective target size is presentation metadata.
+
+An `include` override may restore an entry excluded earlier by the same target configuration, but it cannot create an unresolved game object. An `exclude` override retains a diagnostic manifest entry with `resolved_quantity: 0`. A quantity override MUST use classification `noncanonical-playtest` and state a reason. It changes only the artifact contents, never the canonical inventory or gameplay requirement.
+
+### 13.3 Presentation variants versus semantic representations
+
+A presentation variant is another rendering or packaging treatment of the same content identity: for example, standard and high-contrast art, alternate label treatments, or a target-sized playtest print. It MUST NOT change what state is represented, object behavior, rules, or semantic identity.
+
+A semantic representation implements a value/resource through a different interaction model, such as Health tokens versus a numbered track. Those alternatives belong in DODGE `representations` and are included through `representation_inclusions`. If a proposed variant changes state encoding, gameplay interaction, component meaning, or rule behavior, it is not a presentation variant.
+
+With `variant_policy: replace-base`, the base content remains in the manifest for provenance but is excluded from emitted artifact quantity while the variant entries are emitted. With `alongside-base`, both base and variant entries are emitted. Each variant inherits the base entry's effective quantity and component metadata unless it carries its own explicit override. Variant copies are presentation artifacts and MUST NOT be added to canonical game quantity.
+
 ## 14. Target boundary
 
 DODGE owns neutral facts, logical topology, declarative rules, and scene/campaign composition. Targets own presentation and deployment details.
@@ -447,6 +496,8 @@ Normative physical component dimensions are neutral facts. Page imposition, marg
 Forbidden examples in a DODGE document include PDF coordinates, cut-mark geometry, font sizes, printer settings, TTS GUIDs, atlas indices, hosted URLs, engine node paths, and target save identifiers. Neutral dimensions do not become target-owned merely because an exporter consumes them.
 
 A target contract MUST declare supported DODGE versions, object kinds, component forms, rule features, representation kinds when used, and required extensions. Any transformation that changes declared physical output size MUST also be explicit and documented in the contract. Unsupported required semantics MUST fail clearly rather than degrade silently.
+
+Target grouping, notes, variant artwork, effective print size, and non-canonical playtest quantities belong in the export contract and resolved target manifest. Page coordinates, typography, page imposition, and renderer layout remain outside both DODGE and the neutral target manifest.
 
 ## 15. Semantic validation
 
@@ -466,6 +517,8 @@ In addition to schema validation, a 0.2.1 validator MUST check:
 12. a target contract supports all required normalized features.
 
 When representations are present or included, a validator MUST additionally check that state and object references resolve; inclusion state matches every candidate state; candidate kinds and inclusion modes are supported by the contract; mode cardinality is valid; component quantities can be resolved for the export scope; candidate references are unique within a group; and a standard profile contains at most one inclusion group per state.
+
+When target content configuration is present, a validator MUST check that every `content_ref` resolves exactly once in the pre-override manifest, configuration entries do not repeat a `content_ref`, presentation-variant IDs are unique within an entry, quantity overrides are explicitly non-canonical and justified, component overrides are valid, and no override changes semantic identity or rules. A resolved manifest MUST preserve excluded entries and every inherited/derived/overridden diagnostic required to explain the effective artifact contents.
 
 A validator MAY additionally compare explicit dimensions with a project-defined `size_class` registry and report mismatches. Such a diagnostic MUST treat the explicit dimensions as authoritative.
 
@@ -552,3 +605,17 @@ Export profiles distinguish capability from inclusion policy:
 | included candidates and their purpose | `representation_inclusions` |
 
 The WD PnP Beta contract uses `alternatives` to place all three Health experiments in one PDF while resolving the game inventory once. Stable PnP, Web, and TTS profiles use `selected`. A TTS Beta profile demonstrates an alternatives bundle, and a separate TTS contract schema-tests `synchronized` views bound to the same Health state. These are export decisions only; none may clone or override Health semantics.
+
+## 21. Issue #29 adoption requirements
+
+The target-manifest pipeline is:
+
+1. resolve the selected DODGE scope and canonical inventory;
+2. append components from representation inclusions;
+3. assign deterministic content IDs and provenance;
+4. apply exact target content-configuration entries;
+5. expand presentation variants;
+6. emit the ordered resolved target manifest;
+7. render the artifact from that manifest.
+
+The WD PnP Beta example demonstrates inherited entries, a target-only dimension override, grouping and notes, presentation variants, and an explicitly non-canonical playtest quantity. The accompanying resolved manifest preserves both canonical and effective values so a reviewer can distinguish DODGE facts from target decisions without a Wretched-specific extension.

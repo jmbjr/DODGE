@@ -1,0 +1,192 @@
+{
+  "manifest_version": "0.2.1",
+  "manifest_id": "wd-pnp-beta-scenario-01",
+  "target": "pnp",
+  "dodge_identity": {
+    "dodge_version": "0.2.1",
+    "document_id": "wretched-demesne.scenario-01-rule-draft",
+    "sha256": "91069c5343340c2dbae22e7b1431089c6b6655f17d5542450cf6aff51fdb2036"
+  },
+  "contract_identity": {
+    "contract_version": "0.2.1",
+    "contract_id": "wd-pnp-beta-health-alternatives",
+    "sha256": "164d85a2b031ee982dbfd909187bd02d1d63d3ed3d467c7550f92219ced5ab76"
+  },
+  "resolution_scope": {
+    "scene_ref": "scenario-01-the-cave",
+    "scenario_ref": "scenario-01",
+    "campaign_ref": "plateau-of-leng",
+    "runtime_state_ref": "scenario-01-example-save"
+  },
+  "contents": [
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/security-deck-1",
+      "source": {"kind": "scene-instance", "ref": "security-starter-deck", "path": "#/scenes/scenario-01-the-cave/instances/0"},
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "provenance": [{"kind": "instance", "ref": "security-deck-1", "path": "#/scenes/scenario-01-the-cave/instances/0"}, {"kind": "object", "ref": "security-starter-deck", "path": "#/objects/security-starter-deck"}],
+      "diagnostics": [{"field": "quantity", "status": "inherited", "classification": "canonical", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/security-deck-1/member/0", "parent_content_id": "scene/scenario-01-the-cave/instance/security-deck-1",
+      "source": {"kind": "collection-member", "ref": "cards:sidearm", "path": "#/objects/security-starter-deck/members/0"},
+      "canonical_quantity": 2, "resolved_quantity": 2, "inclusion": "included-inherited",
+      "component_inherited": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "component_effective": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "provenance": [{"kind": "collection-member", "ref": "cards:sidearm", "path": "#/objects/security-starter-deck/members/0"}, {"kind": "archetype", "ref": "standard-card", "path": "#/archetypes/standard-card"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 2, "effective": 2}, {"field": "component.dimensions", "status": "inherited", "classification": "canonical", "canonical": {"unit": "in", "width": 2.5, "height": 3.5}, "effective": {"unit": "in", "width": 2.5, "height": 3.5}}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/security-deck-1/member/1", "parent_content_id": "scene/scenario-01-the-cave/instance/security-deck-1",
+      "source": {"kind": "collection-member", "ref": "cards:move", "path": "#/objects/security-starter-deck/members/1"},
+      "canonical_quantity": 2, "resolved_quantity": 2, "inclusion": "included-inherited",
+      "component_inherited": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "component_effective": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "provenance": [{"kind": "collection-member", "ref": "cards:move", "path": "#/objects/security-starter-deck/members/1"}, {"kind": "archetype", "ref": "standard-card", "path": "#/archetypes/standard-card"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 2, "effective": 2}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/security-deck-1/member/2", "parent_content_id": "scene/scenario-01-the-cave/instance/security-deck-1",
+      "source": {"kind": "collection-member", "ref": "cards:take-cover", "path": "#/objects/security-starter-deck/members/2"},
+      "canonical_quantity": 2, "resolved_quantity": 2, "inclusion": "included-inherited",
+      "component_inherited": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "component_effective": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "provenance": [{"kind": "collection-member", "ref": "cards:take-cover", "path": "#/objects/security-starter-deck/members/2"}, {"kind": "archetype", "ref": "standard-card", "path": "#/archetypes/standard-card"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 2, "effective": 2}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/security-deck-1/member/3", "parent_content_id": "scene/scenario-01-the-cave/instance/security-deck-1",
+      "source": {"kind": "collection-member", "ref": "cards:reload", "path": "#/objects/security-starter-deck/members/3"},
+      "canonical_quantity": 2, "resolved_quantity": 2, "inclusion": "included-inherited",
+      "component_inherited": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "component_effective": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "provenance": [{"kind": "collection-member", "ref": "cards:reload", "path": "#/objects/security-starter-deck/members/3"}, {"kind": "archetype", "ref": "standard-card", "path": "#/archetypes/standard-card"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 2, "effective": 2}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/security-deck-1/member/4", "parent_content_id": "scene/scenario-01-the-cave/instance/security-deck-1",
+      "source": {"kind": "collection-member", "ref": "cards:suppressive-fire", "path": "#/objects/security-starter-deck/members/4"},
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "component_inherited": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "component_effective": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "provenance": [{"kind": "collection-member", "ref": "cards:suppressive-fire", "path": "#/objects/security-starter-deck/members/4"}, {"kind": "archetype", "ref": "standard-card", "path": "#/archetypes/standard-card"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/security-deck-1/member/5", "parent_content_id": "scene/scenario-01-the-cave/instance/security-deck-1",
+      "source": {"kind": "collection-member", "ref": "cards:security-training", "path": "#/objects/security-starter-deck/members/5"},
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "component_inherited": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "component_effective": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true},
+      "provenance": [{"kind": "collection-member", "ref": "cards:security-training", "path": "#/objects/security-starter-deck/members/5"}, {"kind": "archetype", "ref": "standard-card", "path": "#/archetypes/standard-card"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/corpse-supply",
+      "source": {"kind": "scene-instance", "ref": "spider-corpse", "path": "#/scenes/scenario-01-the-cave/instances/1"},
+      "canonical_quantity": 8, "resolved_quantity": 10, "inclusion": "included-inherited", "group": "scenario-supplies",
+      "component_inherited": {"form": "token", "size_class": "small-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 25}},
+      "component_effective": {"form": "token", "size_class": "small-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 25}},
+      "provenance": [{"kind": "instance", "ref": "corpse-supply", "path": "#/scenes/scenario-01-the-cave/instances/1"}, {"kind": "object", "ref": "spider-corpse", "path": "#/objects/spider-corpse"}, {"kind": "content-configuration", "ref": "scene/scenario-01-the-cave/instance/corpse-supply", "path": "#/content_configuration/entries/3"}],
+      "diagnostics": [{"field": "quantity", "status": "overridden", "classification": "noncanonical-playtest", "canonical": 8, "effective": 10, "reason": "Beta packet includes two spare corpse tokens for attrition testing."}, {"field": "group", "status": "overridden", "classification": "presentation", "effective": "scenario-supplies", "reason": "Target grouping configuration."}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/chrysalis-supply",
+      "source": {"kind": "scene-instance", "ref": "chrysalis", "path": "#/scenes/scenario-01-the-cave/instances/2"},
+      "canonical_quantity": 4, "resolved_quantity": 4, "inclusion": "included-inherited",
+      "component_inherited": {"form": "token", "size_class": "small-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 25}},
+      "component_effective": {"form": "token", "size_class": "small-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 25}},
+      "provenance": [{"kind": "instance", "ref": "chrysalis-supply", "path": "#/scenes/scenario-01-the-cave/instances/2"}, {"kind": "object", "ref": "chrysalis", "path": "#/objects/chrysalis"}],
+      "diagnostics": [{"field": "quantity", "status": "inherited", "classification": "canonical", "canonical": 4, "effective": 4}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/crew-security-1",
+      "source": {"kind": "scene-instance", "ref": "security-crew", "path": "#/scenes/scenario-01-the-cave/instances/3"},
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "component_inherited": {"form": "token", "size_class": "small-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 25}},
+      "component_effective": {"form": "token", "size_class": "small-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 25}},
+      "provenance": [{"kind": "instance", "ref": "crew-security-1", "path": "#/scenes/scenario-01-the-cave/instances/3"}, {"kind": "object", "ref": "security-crew", "path": "#/objects/security-crew"}],
+      "diagnostics": [{"field": "quantity", "status": "inherited", "classification": "canonical", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/entrance-room",
+      "source": {"kind": "scene-instance", "ref": "cave-room", "path": "#/scenes/scenario-01-the-cave/instances/4"},
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "component_inherited": {"form": "tile", "size_class": "room-tile", "shape": "rectangle"},
+      "component_effective": {"form": "tile", "size_class": "room-tile", "shape": "rectangle"},
+      "provenance": [{"kind": "instance", "ref": "entrance-room", "path": "#/scenes/scenario-01-the-cave/instances/4"}, {"kind": "object", "ref": "cave-room", "path": "#/objects/cave-room"}],
+      "diagnostics": [{"field": "quantity", "status": "inherited", "classification": "canonical", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "scene/scenario-01-the-cave/instance/nest-room",
+      "source": {"kind": "scene-instance", "ref": "cave-room", "path": "#/scenes/scenario-01-the-cave/instances/5"},
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "component_inherited": {"form": "tile", "size_class": "room-tile", "shape": "rectangle"},
+      "component_effective": {"form": "tile", "size_class": "room-tile", "shape": "rectangle"},
+      "provenance": [{"kind": "instance", "ref": "nest-room", "path": "#/scenes/scenario-01-the-cave/instances/5"}, {"kind": "object", "ref": "cave-room", "path": "#/objects/cave-room"}],
+      "diagnostics": [{"field": "quantity", "status": "inherited", "classification": "canonical", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "representation/health-unit-tokens/component/0",
+      "source": {"kind": "representation-component", "ref": "health-token", "path": "#/representations/health-unit-tokens/components/0"},
+      "representation_ref": "health-unit-tokens", "representation_mode": "alternatives",
+      "canonical_quantity": 10, "resolved_quantity": 10, "inclusion": "included-inherited", "group": "health-alternatives",
+      "component_inherited": {"form": "token", "size_class": "health-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 18}},
+      "component_effective": {"form": "token", "size_class": "health-token", "shape": "circle", "dimensions": {"unit": "mm", "diameter": 16}},
+      "notes": ["Print 16 mm test tokens while preserving the canonical 18 mm DODGE dimension in diagnostics."],
+      "provenance": [{"kind": "representation", "ref": "health-unit-tokens", "path": "#/representations/health-unit-tokens"}, {"kind": "object", "ref": "health-token", "path": "#/objects/health-token"}, {"kind": "content-configuration", "ref": "representation/health-unit-tokens/component/0", "path": "#/content_configuration/entries/0"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 10, "effective": 10}, {"field": "component.dimensions", "status": "overridden", "classification": "presentation", "canonical": {"unit": "mm", "diameter": 18}, "effective": {"unit": "mm", "diameter": 16}, "reason": "Target component override."}, {"field": "group", "status": "overridden", "classification": "presentation", "effective": "health-alternatives", "reason": "Target grouping configuration."}]
+    },
+    {
+      "content_id": "representation/health-numbered-track/component/0",
+      "source": {"kind": "representation-component", "ref": "health-numbered-track", "path": "#/representations/health-numbered-track/components/0"},
+      "representation_ref": "health-numbered-track", "representation_mode": "alternatives",
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited", "group": "health-alternatives",
+      "component_inherited": {"form": "tracker", "size_class": "health-track", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 50, "height": 100}},
+      "component_effective": {"form": "tracker", "size_class": "health-track", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 50, "height": 100}},
+      "notes": ["Keep the inherited tracker dimensions."],
+      "provenance": [{"kind": "representation", "ref": "health-numbered-track", "path": "#/representations/health-numbered-track"}, {"kind": "object", "ref": "health-numbered-track", "path": "#/objects/health-numbered-track"}, {"kind": "content-configuration", "ref": "representation/health-numbered-track/component/0", "path": "#/content_configuration/entries/1"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 1, "effective": 1}, {"field": "component.dimensions", "status": "inherited", "classification": "canonical", "canonical": {"unit": "mm", "width": 50, "height": 100}, "effective": {"unit": "mm", "width": 50, "height": 100}}, {"field": "group", "status": "overridden", "classification": "presentation", "effective": "health-alternatives", "reason": "Target grouping configuration."}]
+    },
+    {
+      "content_id": "representation/health-numbered-track/component/1",
+      "source": {"kind": "representation-component", "ref": "health-marker", "path": "#/representations/health-numbered-track/components/1"},
+      "representation_ref": "health-numbered-track", "representation_mode": "alternatives",
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "component_inherited": {"form": "token", "size_class": "marker-cube", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 8, "height": 8, "thickness": 8}},
+      "component_effective": {"form": "token", "size_class": "marker-cube", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 8, "height": 8, "thickness": 8}},
+      "provenance": [{"kind": "representation", "ref": "health-numbered-track", "path": "#/representations/health-numbered-track"}, {"kind": "object", "ref": "health-marker", "path": "#/objects/health-marker"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "representation/health-crew-card-marker/component/0",
+      "source": {"kind": "representation-component", "ref": "crew-health-card", "path": "#/representations/health-crew-card-marker/components/0"},
+      "representation_ref": "health-crew-card-marker", "representation_mode": "alternatives",
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited", "group": "health-alternatives",
+      "component_inherited": {"form": "reference_sheet", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}},
+      "component_effective": {"form": "reference_sheet", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}},
+      "provenance": [{"kind": "representation", "ref": "health-crew-card-marker", "path": "#/representations/health-crew-card-marker"}, {"kind": "object", "ref": "crew-health-card", "path": "#/objects/crew-health-card"}, {"kind": "content-configuration", "ref": "representation/health-crew-card-marker/component/0", "path": "#/content_configuration/entries/2"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 1, "effective": 1}, {"field": "group", "status": "overridden", "classification": "presentation", "effective": "health-alternatives", "reason": "Target grouping configuration."}]
+    },
+    {
+      "content_id": "representation/health-crew-card-marker/component/0/variant/high-contrast", "parent_content_id": "representation/health-crew-card-marker/component/0",
+      "source": {"kind": "presentation-variant", "ref": "high-contrast", "path": "#/content_configuration/entries/2/presentation_variants/0"},
+      "representation_ref": "health-crew-card-marker", "representation_mode": "alternatives", "variant_of": "representation/health-crew-card-marker/component/0",
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-override", "group": "health-alternatives",
+      "component_inherited": {"form": "reference_sheet", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}},
+      "component_effective": {"form": "reference_sheet", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}},
+      "notes": ["Same Health encoding and card identity; presentation only."],
+      "provenance": [{"kind": "representation", "ref": "health-crew-card-marker", "path": "#/representations/health-crew-card-marker"}, {"kind": "presentation-variant", "ref": "high-contrast", "path": "#/content_configuration/entries/2/presentation_variants/0"}],
+      "diagnostics": [{"field": "presentation_variant", "status": "overridden", "classification": "presentation", "effective": "high-contrast", "reason": "Target presentation variant."}, {"field": "quantity", "status": "derived", "classification": "presentation", "canonical": 1, "effective": 1}]
+    },
+    {
+      "content_id": "representation/health-crew-card-marker/component/1",
+      "source": {"kind": "representation-component", "ref": "health-marker", "path": "#/representations/health-crew-card-marker/components/1"},
+      "representation_ref": "health-crew-card-marker", "representation_mode": "alternatives",
+      "canonical_quantity": 1, "resolved_quantity": 1, "inclusion": "included-inherited",
+      "component_inherited": {"form": "token", "size_class": "marker-cube", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 8, "height": 8, "thickness": 8}},
+      "component_effective": {"form": "token", "size_class": "marker-cube", "shape": "rectangle", "dimensions": {"unit": "mm", "width": 8, "height": 8, "thickness": 8}},
+      "provenance": [{"kind": "representation", "ref": "health-crew-card-marker", "path": "#/representations/health-crew-card-marker"}, {"kind": "object", "ref": "health-marker", "path": "#/objects/health-marker"}],
+      "diagnostics": [{"field": "quantity", "status": "derived", "classification": "canonical", "canonical": 1, "effective": 1}]
+    }
+  ]
+}
