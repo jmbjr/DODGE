@@ -25,6 +25,7 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - export-profile inclusion modes for selected, synchronized, and bundled-alternative representations
 - deterministic resolved target manifests with inherited-versus-overridden diagnostics
 - target-owned PnP grouping, presentation variants, size overrides, and explicit playtest quantities
+- neutral playable-object invocation bindings to actions, procedures, and effects
 
 ## Deliberate limits
 
@@ -42,6 +43,8 @@ Issue #27 generalized export profiles so Beta artifacts can bundle several alter
 
 Issue #29 defined designer-authored target content configuration and deterministic resolved target manifests. Target overrides remain traceable artifact decisions and never mutate DODGE semantics.
 
+Issue #32 added explicit invocation bindings between usable objects and normalized actions/procedures/effects, including runtime subject inputs. Action costs remain authoritative and object-ID dispatch is non-conforming.
+
 ## Structure
 
 - `DODGE_SPEC.md` — complete candidate specification
@@ -50,5 +53,6 @@ Issue #29 defined designer-authored target content configuration and determinist
 - `schemas/dodge-target-manifest.schema.v0.2.1.json` — resolved target-manifest schema
 - `examples/digitropolis-minimal.dodge.json` — compatibility example
 - `examples/wretched-demesne-sidecar-promoted.dodge.json` — inferred WD rule-model example
+- `examples/playable-object-bindings.dodge.json` — neutral invocation and target-binding example
 - `examples/export-contracts/` — WD Health representation-laboratory selections
 - `examples/target-manifests/` — resolved content and provenance examples

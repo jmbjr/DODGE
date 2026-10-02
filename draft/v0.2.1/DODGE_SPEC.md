@@ -31,6 +31,7 @@ DODGE is authoritative for neutral composition and for any normalized semantics 
 0.2.1 includes all 0.2.0 concepts unchanged except the required `dodge_version`. The following new top-level sections are optional:
 
 - `game_profile`
+- `entity_invocations`
 - `rules`
 - `representations`
 - `topologies`
@@ -253,6 +254,42 @@ An action declares:
 
 An action definition does not automatically place the action in every turn. Phases and scenarios determine availability.
 
+### 7.5.1 Playable-object invocation bindings
+
+An `invocation` is the neutral bridge from using a game object to executable rule semantics. It declares:
+
+- a stable local `id`;
+- a semantic trigger such as `play`, `use`, or `activate`;
+- one or more ordered procedure steps referencing existing actions, procedures, or effects, or containing inline effects;
+- optional subject-slot bindings that construct the execution context.
+
+Invocations MAY be declared on a local object, on a collection member, or in top-level `entity_invocations` keyed by an externally referenced entity ID. This permits canonical entity catalogs to remain external while the DODGE document binds their entities to its normalized rule graph.
+
+For a resolved playable occurrence, invocation resolution is deterministic:
+
+1. a member-level `invocations` array overrides inherited invocation declarations for that member occurrence;
+2. otherwise, an `object_ref` member inherits the referenced object's invocations;
+3. otherwise, an `entity_ref` member inherits `entity_invocations[entity_ref]` when present;
+4. a directly instantiated object uses its own invocations.
+
+If no explicit invocation resolves, the object has no executable use binding. A runtime MUST NOT infer one from equality or similarity between object/entity IDs and action IDs.
+
+Each invocation step uses the existing procedure-step vocabulary. An action step references its action with `kind: action` and `ref`. The referenced action remains authoritative for costs, requirements, target semantics, procedure, and effects. An invocation MUST NOT copy or override an action's cost. Therefore changing an action cost changes every object that invokes it without changing those objects.
+
+An invocation MAY instead reference a procedure, reference effects, or contain inline effects. Direct effects retain their own conditions and timing. Ordered mixed sequences use multiple steps rather than target-specific runtime branches.
+
+Subject bindings populate neutral execution-context slots. A binding declares a slot such as `source`, `target`, `current-actor`, or `location` and obtains its value from:
+
+- `runtime-input`, identified by a stable input name;
+- `using-object`, the concrete object/member occurrence that triggered the invocation;
+- `context-subject`, an existing neutral subject selector.
+
+Required runtime inputs MUST be supplied before execution. All steps then resolve ordinary subject selectors such as `{ "relative": "target" }` against that context. For example, a Sidearm-like object binds the `target` slot from runtime input `enemy-target`, then invokes Attack; the runtime does not test whether the object's ID is `sidearm`.
+
+Invocation IDs MUST be unique within their declaring array, subject-binding slots MUST be unique within an invocation, referenced steps MUST resolve to definitions of the correct kind, and required subject slots used by those definitions MUST be bound by the invocation or already available in the surrounding execution context.
+
+Multiple differently identified objects MAY invoke the same action. Renaming an object or entity does not change execution as long as its explicit invocation binding is preserved.
+
 ### 7.6 Procedures
 
 A procedure is an ordered list of steps. A step may:
@@ -453,6 +490,8 @@ Each content entry exposes:
 - ordered provenance back to DODGE and contract inputs;
 - field-level diagnostics showing inherited, derived, or overridden values and classifying them as canonical, presentation-only, or explicitly non-canonical playtest data.
 
+When a resolved object/member has invocations, its target-manifest entry SHOULD include their ordered IDs in `invocation_ids`. A renderer may preserve or display this relationship without executing it; gameplay runtimes consume the full DODGE invocation definitions.
+
 Content IDs use these deterministic forms within a resolution scope:
 
 - scene instance: `scene/<scene-ref>/instance/<instance-id>`;
@@ -519,6 +558,8 @@ In addition to schema validation, a 0.2.1 validator MUST check:
 When representations are present or included, a validator MUST additionally check that state and object references resolve; inclusion state matches every candidate state; candidate kinds and inclusion modes are supported by the contract; mode cardinality is valid; component quantities can be resolved for the export scope; candidate references are unique within a group; and a standard profile contains at most one inclusion group per state.
 
 When target content configuration is present, a validator MUST check that every `content_ref` resolves exactly once in the pre-override manifest, configuration entries do not repeat a `content_ref`, presentation-variant IDs are unique within an entry, quantity overrides are explicitly non-canonical and justified, component overrides are valid, and no override changes semantic identity or rules. A resolved manifest MUST preserve excluded entries and every inherited/derived/overridden diagnostic required to explain the effective artifact contents.
+
+When invocations are present, a validator MUST also check invocation-ID and subject-slot uniqueness, resolution precedence, referenced step kinds, required execution-context inputs, and action availability/cost semantics. An object/entity ID matching an action ID is not a binding and MUST NOT satisfy validation.
 
 A validator MAY additionally compare explicit dimensions with a project-defined `size_class` registry and report mismatches. Such a diagnostic MUST treat the explicit dimensions as authoritative.
 
@@ -619,3 +660,18 @@ The target-manifest pipeline is:
 7. render the artifact from that manifest.
 
 The WD PnP Beta example demonstrates inherited entries, a target-only dimension override, grouping and notes, presentation variants, and an explicitly non-canonical playtest quantity. The accompanying resolved manifest preserves both canonical and effective values so a reviewer can distinguish DODGE facts from target decisions without a Wretched-specific extension.
+
+## 22. Issue #32 adoption requirements
+
+The playable-object execution chain is:
+
+1. resolve the concrete object or collection member;
+2. resolve its explicit invocation declaration using the precedence in section 7.5.1;
+3. collect required runtime subject inputs;
+4. execute invocation steps in order;
+5. for an action step, evaluate the referenced action's requirements and consume its declared costs;
+6. resolve action/procedure/effect subjects through the constructed neutral execution context.
+
+The neutral example demonstrates two differently identified movement cards invoking the same Move action, an attack card binding a runtime-selected target before invoking Attack, a reload card invoking Reload, and a direct-effect object. Object-ID switches, action-ID equality assumptions, embedded `sidearm` defaults, and engine-coded uniform action costs are explicit anti-patterns when invocation bindings and action costs are available.
+
+All invocation fields are optional additions. Existing valid 0.2.1 documents remain valid and gain no inferred executable behavior.
