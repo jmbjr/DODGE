@@ -15,6 +15,7 @@
     "game_profile": {"$ref": "#/$defs/gameProfile"},
     "archetypes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/archetype"}},
     "objects": {"type": "object", "additionalProperties": {"$ref": "#/$defs/object"}},
+    "entity_invocations": {"type": "object", "propertyNames": {"$ref": "#/$defs/ref"}, "additionalProperties": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/invocation"}}},
     "scenes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/scene"}},
     "rules": {"$ref": "#/$defs/rules"},
     "representations": {"type": "object", "additionalProperties": {"$ref": "#/$defs/representation"}},
@@ -134,7 +135,8 @@
       "type": "object",
       "properties": {
         "entity_ref": {"$ref": "#/$defs/ref"}, "object_ref": {"$ref": "#/$defs/ref"}, "archetype_ref": {"$ref": "#/$defs/ref"},
-        "quantity": {"type": "integer", "minimum": 1, "default": 1}, "state": {"type": "object"}, "extensions": {"$ref": "#/$defs/extensions"}
+        "quantity": {"type": "integer", "minimum": 1, "default": 1}, "state": {"type": "object"},
+        "invocations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/invocation"}}, "extensions": {"$ref": "#/$defs/extensions"}
       },
       "oneOf": [
         {"required": ["entity_ref", "archetype_ref"], "not": {"required": ["object_ref"]}},
@@ -190,7 +192,8 @@
         "name": {"type": "string"}, "description": {"type": "string"}, "source_ref": {"$ref": "#/$defs/ref"},
         "component": {"$ref": "#/$defs/component"}, "faces": {"type": "array", "items": {"$ref": "#/$defs/face"}},
         "members": {"type": "array", "items": {"$ref": "#/$defs/member"}}, "ordering": {"enum": ["declared", "unordered"], "default": "declared"},
-        "behaviors": {"type": "array", "items": {"$ref": "#/$defs/behavior"}}, "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}},
+        "behaviors": {"type": "array", "items": {"$ref": "#/$defs/behavior"}}, "invocations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/invocation"}},
+        "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}},
         "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true}, "extensions": {"$ref": "#/$defs/extensions"}
       },
       "additionalProperties": false
@@ -469,6 +472,39 @@
         "target": {"$ref": "#/$defs/subject"}, "procedure_ref": {"$ref": "#/$defs/ref"}, "effect_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
         "effects": {"type": "array", "items": {"$ref": "#/$defs/effect"}}, "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "invocationSubjectBinding": {
+      "type": "object",
+      "required": ["slot", "source"],
+      "properties": {
+        "slot": {"enum": ["source", "target", "current-actor", "current-player", "party", "expedition", "location", "scenario", "campaign"]},
+        "source": {"enum": ["runtime-input", "using-object", "context-subject"]},
+        "input": {"$ref": "#/$defs/id"},
+        "subject": {"$ref": "#/$defs/subject"},
+        "required": {"type": "boolean", "default": true}
+      },
+      "allOf": [
+        {"if": {"properties": {"source": {"const": "runtime-input"}}, "required": ["source"]}, "then": {"required": ["input"], "not": {"anyOf": [{"required": ["subject"]}]} }},
+        {"if": {"properties": {"source": {"const": "context-subject"}}, "required": ["source"]}, "then": {"required": ["subject"], "not": {"anyOf": [{"required": ["input"]}]} }},
+        {"if": {"properties": {"source": {"const": "using-object"}}, "required": ["source"]}, "then": {"not": {"anyOf": [{"required": ["input"]}, {"required": ["subject"]}]}}}
+      ],
+      "additionalProperties": false
+    },
+    "invocation": {
+      "type": "object",
+      "required": ["id", "trigger", "steps"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "trigger": {"$ref": "#/$defs/id"},
+        "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "subject_bindings": {"type": "array", "items": {"$ref": "#/$defs/invocationSubjectBinding"}},
+        "description": {"type": "string"},
+        "source_ref": {"$ref": "#/$defs/ref"},
+        "authority": {"$ref": "#/$defs/authority"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
       "additionalProperties": false

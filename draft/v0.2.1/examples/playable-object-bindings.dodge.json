@@ -1,0 +1,85 @@
+{
+  "dodge_version": "0.2.1",
+  "document_id": "neutral.playable-object-bindings",
+  "game_id": "neutral-invocation-example",
+  "title": "Neutral playable-object invocation example",
+  "sources": {
+    "rules-source": {"kind": "rules", "uri": "rules/example-rules.json", "version": "1.0.0", "authority": "authoritative"},
+    "card-catalog": {"kind": "entity_catalog", "uri": "cards/example-cards.json", "version": "1.0.0", "authority": "authoritative"}
+  },
+  "archetypes": {
+    "play-card": {
+      "kind": "token",
+      "face_slots": [{"id": "front", "role": "front"}, {"id": "back", "role": "back"}],
+      "component": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}, "two_sided": true}
+    },
+    "deck": {"kind": "collection"}
+  },
+  "objects": {
+    "walk-card": {
+      "kind": "token", "archetype_ref": "play-card", "name": "Walk", "faces": [{"slot": "front", "text": "Walk"}],
+      "invocations": [{"id": "play-walk", "trigger": "play", "steps": [{"kind": "action", "ref": "move"}], "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]}]
+    },
+    "sprint-card": {
+      "kind": "token", "archetype_ref": "play-card", "name": "Sprint", "faces": [{"slot": "front", "text": "Sprint"}],
+      "invocations": [{"id": "play-sprint", "trigger": "play", "steps": [{"kind": "action", "ref": "move"}], "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]}]
+    },
+    "sidearm-card": {
+      "kind": "token", "archetype_ref": "play-card", "name": "Sidearm", "faces": [{"slot": "front", "text": "Sidearm"}],
+      "invocations": [{
+        "id": "fire-sidearm", "trigger": "play", "steps": [{"kind": "action", "ref": "attack"}],
+        "subject_bindings": [
+          {"slot": "source", "source": "using-object"},
+          {"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}},
+          {"slot": "target", "source": "runtime-input", "input": "enemy-target", "required": true}
+        ]
+      }]
+    },
+    "stim-card": {
+      "kind": "token", "archetype_ref": "play-card", "name": "Stim", "faces": [{"slot": "front", "text": "Stim"}],
+      "invocations": [{
+        "id": "use-stim", "trigger": "play",
+        "steps": [{"kind": "effect", "effect": {"op": "add", "target_ref": "health", "subject": {"relative": "current-actor"}, "value": 1}}],
+        "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]
+      }]
+    },
+    "action-deck": {
+      "kind": "collection", "archetype_ref": "deck", "members": [
+        {"object_ref": "walk-card"},
+        {"object_ref": "sprint-card"},
+        {"object_ref": "sidearm-card"},
+        {"entity_ref": "catalog:reload-card", "archetype_ref": "play-card"},
+        {"object_ref": "stim-card"}
+      ]
+    }
+  },
+  "entity_invocations": {
+    "catalog:reload-card": [{
+      "id": "play-reload", "trigger": "play", "steps": [{"kind": "action", "ref": "reload"}],
+      "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]
+    }]
+  },
+  "scenes": {
+    "example-table": {"name": "Invocation example table", "instances": [{"id": "action-deck-1", "object_ref": "action-deck"}]}
+  },
+  "rules": {
+    "values": {
+      "health": {"name": "Health", "type": "integer", "owner_scope": "actor", "persistence_scope": "scenario", "default": 5, "minimum": 0, "maximum": 5}
+    },
+    "resources": {
+      "actions": {"name": "Actions", "kind": "capacity", "owner_scope": "actor", "persistence_scope": "turn", "value_type": "integer", "default": 2, "minimum": 0, "maximum": 2},
+      "ammo": {"name": "Ammo", "kind": "currency", "owner_scope": "actor", "persistence_scope": "scenario", "value_type": "integer", "default": 1, "minimum": 0, "maximum": 6}
+    },
+    "effects": {
+      "gain-ammo": {"op": "add", "target_ref": "ammo", "subject": {"relative": "current-actor"}, "value": 1}
+    },
+    "actions": {
+      "move": {"name": "Move", "costs": [{"resource_ref": "actions", "amount": 1, "subject": {"relative": "current-actor"}}], "effects": [{"prose": "Move according to the current topology and movement rules."}]},
+      "attack": {"name": "Attack", "costs": [{"resource_ref": "actions", "amount": 1, "subject": {"relative": "current-actor"}}, {"resource_ref": "ammo", "amount": 1, "subject": {"relative": "current-actor"}}], "target": {"relative": "target"}, "procedure_ref": "attack-resolution"},
+      "reload": {"name": "Reload", "costs": [{"resource_ref": "actions", "amount": 1, "subject": {"relative": "current-actor"}}], "effect_refs": ["gain-ammo"]}
+    },
+    "procedures": {
+      "attack-resolution": {"name": "Attack resolution", "steps": [{"kind": "prose", "prose": "Resolve the attack against the bound target."}]}
+    }
+  }
+}
