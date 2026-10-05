@@ -1,7 +1,7 @@
 name: Build DODGE Example Hub
 on:
   pull_request:
-    paths: ["draft/v0.2.1/**", "tools/build_example_hub.py", "index.html", "hub.js", "hub.css", ".github/workflows/example-hub.yml"]
+    paths: ["draft/v0.2.1/**", "tools/build_example_hub.py", "hub-src/**", "index.html", "hub.js", "hub.css", "hub-pips.css", ".github/workflows/example-hub.yml"]
   push:
     branches: [master]
     paths-ignore: ["examples/**"]
