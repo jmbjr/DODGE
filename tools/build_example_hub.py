@@ -10,13 +10,32 @@ from reportlab.pdfgen.canvas import Canvas
 ROOT=Path(__file__).resolve().parents[1]
 EXAMPLE=ROOT/"draft"/"v0.2.1"/"examples"/"standard-52-card-deck"
 PUBLIC=ROOT/"examples"; GAME_ID="standard-52-card-deck"
+PIP_LAYOUTS={
+    2:[(.5,.72,0),(.5,.28,180)],3:[(.5,.74,0),(.5,.5,0),(.5,.26,180)],
+    4:[(.3,.72,0),(.7,.72,0),(.3,.28,180),(.7,.28,180)],
+    5:[(.3,.72,0),(.7,.72,0),(.5,.5,0),(.3,.28,180),(.7,.28,180)],
+    6:[(.3,.74,0),(.7,.74,0),(.3,.5,0),(.7,.5,0),(.3,.26,180),(.7,.26,180)],
+    7:[(.3,.76,0),(.7,.76,0),(.5,.63,0),(.3,.5,0),(.7,.5,0),(.3,.24,180),(.7,.24,180)],
+    8:[(.3,.76,0),(.7,.76,0),(.5,.63,0),(.3,.5,0),(.7,.5,0),(.5,.37,180),(.3,.24,180),(.7,.24,180)],
+    9:[(.3,.78,0),(.7,.78,0),(.3,.60,0),(.7,.60,0),(.5,.5,0),(.3,.40,180),(.7,.40,180),(.3,.22,180),(.7,.22,180)],
+    10:[(.3,.79,0),(.7,.79,0),(.5,.69,0),(.3,.59,0),(.7,.59,0),(.3,.41,180),(.7,.41,180),(.5,.31,180),(.3,.21,180),(.7,.21,180)],
+}
 def load_resolver():
     spec=importlib.util.spec_from_file_location("standard_52_resolver",EXAMPLE/"resolve.py"); module=importlib.util.module_from_spec(spec); assert spec.loader; spec.loader.exec_module(module); return module
 def write_json(path,value): path.parent.mkdir(parents=True,exist_ok=True); path.write_text(json.dumps(value,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
 def draw_card(c,card,x,y):
     width,height=2.5*inch,3.5*inch; color=red if card["color"]=="red" else black
     c.setStrokeColor(HexColor("#252936"));c.setLineWidth(.8);c.roundRect(x,y,width,height,8,stroke=1,fill=0);c.setFillColor(color)
-    c.setFont("Helvetica-Bold",22);c.drawString(x+12,y+height-28,card["rank_label"]);c.setFont("Helvetica",22);c.drawString(x+13,y+height-52,card["suit_symbol"]);c.setFont("Helvetica-Bold",52);c.drawCentredString(x+width/2,y+height/2-18,card["suit_symbol"])
+    c.setFont("Helvetica-Bold",22);c.drawString(x+12,y+height-28,card["rank_label"]);c.setFont("Helvetica",22);c.drawString(x+13,y+height-52,card["suit_symbol"])
+    rank=card["rank_order"]
+    if rank==1:
+        c.setFont("Helvetica-Bold",58);c.drawCentredString(x+width/2,y+height/2-20,card["suit_symbol"])
+    elif rank<=10:
+        c.setFont("Helvetica-Bold",32)
+        for px,py,rotation in PIP_LAYOUTS[rank]:
+            c.saveState();c.translate(x+px*width,y+py*height);c.rotate(rotation);c.drawCentredString(0,-11,card["suit_symbol"]);c.restoreState()
+    else:
+        c.setFont("Helvetica-Bold",54);c.drawCentredString(x+width/2,y+height/2+2,card["rank_label"]);c.setFont("Helvetica-Bold",25);c.drawCentredString(x+width/2,y+height/2-30,card["suit_symbol"])
     c.saveState();c.translate(x+width-12,y+30);c.rotate(180);c.setFont("Helvetica-Bold",22);c.drawString(0,0,card["rank_label"]);c.setFont("Helvetica",22);c.drawString(1,-24,card["suit_symbol"]);c.restoreState()
 def draw_back(c,x,y):
     width,height=2.5*inch,3.5*inch;c.setFillColor(HexColor("#171923"));c.setStrokeColor(HexColor("#252936"));c.roundRect(x,y,width,height,8,stroke=1,fill=1);c.setFillColor(white);c.setFont("Helvetica-Bold",18);c.drawCentredString(x+width/2,y+height/2+8,"DODGE");c.setFont("Helvetica",8);c.drawCentredString(x+width/2,y+height/2-10,"STANDARD 52")
@@ -38,7 +57,7 @@ def app_js():
 def build(source_sha):
     if len(source_sha)<12:raise SystemExit("--source-sha must contain at least 12 hexadecimal characters")
     short=source_sha[:12];resolved=load_resolver().resolve();resolved["dodge_source_sha"]=source_sha;build_dir=PUBLIC/GAME_ID/"builds"/short;build_dir.mkdir(parents=True,exist_ok=True)
-    write_json(build_dir/"resolved.json",resolved);(build_dir/"index.html").write_text(app_html(short),encoding="utf-8");(build_dir/"app.js").write_text(app_js(),encoding="utf-8")
+    write_json(build_dir/"resolved.json",resolved);(build_dir/"index.html").write_text(app_html(short),encoding="utf-8");(build_dir/"app.js").write_text((ROOT/"hub-src"/"standard-52-app.js").read_text(encoding="utf-8"),encoding="utf-8")
     pdf_name=f"standard-52-card-deck-pnp-{short}.pdf";pdf_path=PUBLIC/GAME_ID/"downloads"/pdf_name;build_pdf(pdf_path,resolved,source_sha);pdf_sha=hashlib.sha256(pdf_path.read_bytes()).hexdigest()
     tts_name=f"standard-52-card-deck-tts-{short}.json";tts_path=PUBLIC/GAME_ID/"downloads"/tts_name;write_json(tts_path,{"status":"placeholder","message":"The shared TTS adapter is not yet converged. This file reserves the target without claiming a playable package.","source_sha":source_sha,"dodge_document_sha256":resolved["document_sha256"],"catalog_sha256":resolved["catalog"]["sha256"],"ordered_card_ids":[c["id"] for c in resolved["cards"]]});tts_sha=hashlib.sha256(tts_path.read_bytes()).hexdigest()
     build_meta={"format":"dodge-example-build.v1","game_id":GAME_ID,"classification":"component-example","source_sha":source_sha,"short_sha":short,"dodge_version":resolved["dodge_version"],"dodge_source_sha":source_sha,"dodge_document_sha256":resolved["document_sha256"],"catalog_sha256":resolved["catalog"]["sha256"],"resolved_model_sha256":hashlib.sha256((build_dir/"resolved.json").read_bytes()).hexdigest(),"targets":{"web":{"status":"implemented","url":f"./builds/{short}/index.html"},"pnp":{"status":"implemented","url":f"./downloads/{pdf_name}","sha256":pdf_sha},"tts":{"status":"placeholder","url":f"./downloads/{tts_name}","sha256":tts_sha}},"executable_semantics":["shuffle","draw-without-replacement","discard","reset-declared-order"],"unsupported_semantics":["game setup","turn structure","scoring","win conditions"]}
