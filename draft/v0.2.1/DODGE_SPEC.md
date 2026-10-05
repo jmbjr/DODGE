@@ -589,7 +589,33 @@ A target contract MUST declare supported DODGE versions, object kinds, component
 
 Target grouping, notes, variant artwork, effective print size, and non-canonical playtest quantities belong in the export contract and resolved target manifest. Page coordinates, typography, page imposition, and renderer layout remain outside both DODGE and the neutral target manifest.
 
-## 15. Semantic validation
+## 15. Validation and conformance lifecycle
+
+DODGE validation is a gated language/toolchain lifecycle:
+
+1. **Core validation** checks the DODGE schema, references, invocation/effect correctness, source identity, and generic structural invariants.
+2. **Game/application semantic validation** checks every profile declared in `validation.required_profiles`. The profile owner defines domain completeness and cross-field consistency that DODGE cannot know.
+3. **Resolution/compilation** produces the target-neutral resolved game only after stages 1 and 2 pass.
+4. **Resolved-game validation** reruns every required profile that declares the `resolved-game` stage and checks generic resolved invariants.
+5. **Target generation** may begin only after all applicable preceding stages pass.
+
+A conforming release pipeline MUST stop on any error. Schema validity alone does not make a source compilable, resolvable, releasable, or DODGE-compliant.
+
+### 15.1 Validation declarations and ownership
+
+The optional top-level `validation` declaration identifies the `dodge-core` profile matching `dodge_version` and lists required game/application profiles. Each requirement has a stable `profile_id`, version, owner kind, applicable stages, and a `validator_source_ref` whose source kind is `semantic_validator`.
+
+If `validation` is present, its declared profiles are normative requirements. A conforming implementation MUST load and successfully execute every required profile at every declared stage. Missing, unsupported, unavailable, version-mismatched, or failing validators are hard failures. Implementations MUST NOT silently ignore a required profile, substitute another version, or continue to target generation.
+
+DODGE owns the core validator and this lifecycle/contract. The game or application implementer owns its semantic profiles. Declaring a game-specific fact without declaring and running the profile needed to validate its domain implications is non-conforming whenever those implications are not derivable or enforceable by DODGE core.
+
+For Wretched Demesne, a rule such as “a room marked searchable must resolve executable Search semantics or an explicitly defined inherited Search default” belongs in the `wretched-demesne` profile. Neither `searchable` nor WD Search behavior belongs in DODGE core.
+
+### 15.2 Prefer derivation to duplicated facts
+
+Authors SHOULD derive convenience capabilities from authoritative executable semantics when practical. If independently authored facts must agree, the owning semantic profile MUST enforce their relationship. Validation is a safety net for unavoidable duplication, not permission to create multiple sources of truth.
+
+### 15.3 Core semantic validation
 
 In addition to schema validation, a 0.2.1 validator MUST check:
 
@@ -615,6 +641,12 @@ When invocations are present, a validator MUST also check invocation-ID and subj
 When requirements, modifiers, choices, or equipment are present, a validator MUST additionally check mode/option IDs and eligible branches; requirement and modifier references; modifier kind-specific fields; bounded lifetime for temporary modifiers; equipment slot validity and exclusivity; carried/equipped lifecycle transitions; parameter operands against the bound source; and topology requirements. Requirement-waiver or cost behavior implemented only by target-specific flags MUST NOT satisfy conformance.
 
 A validator MAY additionally compare explicit dimensions with a project-defined `size_class` registry and report mismatches. Such a diagnostic MUST treat the explicit dimensions as authoritative.
+
+### 15.4 Resolved-game validation and evidence
+
+Resolved-game validation MUST check that resolution did not drop, duplicate, weaken, or invent required executable semantics; all resolved references and bindings are unambiguous; selected scenario/scene content is complete; and every required profile declaring `resolved-game` passes on the exact resolved model supplied to exporters.
+
+A resolved target manifest MUST contain `validation_evidence` for the passing core validation, all required source-profile validations, and all required resolved-game validations. Evidence identifies profile/version/stage and MAY hash the validator and validated input. Only `pass` evidence is representable: failures stop the pipeline and therefore produce no release manifest.
 
 ## 16. WD sidecar mapping used for this draft
 
@@ -740,3 +772,9 @@ The neutral equipment example distinguishes carried Armor Plate from equipped Sh
 ## 25. Issue #36 adoption requirements
 
 The neutral location example composes existing invocations with the new requirement/modifier/branch primitives: an entry hazard with a discard alternative, OR-based sealed access, a bounded exit-cost modifier, conditional terminal reward/penalty, a fixed objective Search result, and a normal collection draw. None depends on a location ID or Wretched-specific schema field.
+
+## 26. Issue #43 adoption requirements
+
+This revision treats validation as a required staged toolchain rather than a single schema check. A source that passes DODGE core but fails any declared game/application profile is not compilable or DODGE-compliant. Resolution is permitted only after source-stage profiles pass; target generation is permitted only after resolved-game profiles pass on the exact resolved model.
+
+The WD reference fixture demonstrates the intended ownership boundary: `wretched-demesne:searchable` is valid extension data under DODGE core, but the WD profile rejects a searchable room without a `search` invocation. DODGE defines where that validator is declared, when it runs, how failure gates the pipeline, and how successful validation is recorded. WD defines what searchable means.

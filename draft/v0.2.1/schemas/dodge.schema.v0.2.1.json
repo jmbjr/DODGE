@@ -12,6 +12,7 @@
     "description": {"type": "string"},
     "sources": {"type": "object", "additionalProperties": {"$ref": "#/$defs/source"}},
     "sidecars": {"type": "array", "items": {"$ref": "#/$defs/sidecar"}},
+    "validation": {"$ref": "#/$defs/validationDeclaration"},
     "game_profile": {"$ref": "#/$defs/gameProfile"},
     "archetypes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/archetype"}},
     "objects": {"type": "object", "additionalProperties": {"$ref": "#/$defs/object"}},
@@ -46,7 +47,7 @@
       "type": "object",
       "required": ["kind", "uri", "version"],
       "properties": {
-        "kind": {"enum": ["entity_catalog", "selection_manifest", "rules", "text", "asset_catalog", "scenario", "sidecar"]},
+        "kind": {"enum": ["entity_catalog", "selection_manifest", "rules", "text", "asset_catalog", "scenario", "sidecar", "semantic_validator"]},
         "uri": {"type": "string", "minLength": 1},
         "version": {"type": "string", "minLength": 1},
         "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
@@ -65,6 +66,45 @@
         "purpose": {"type": "string", "minLength": 1},
         "lossless": {"type": "boolean", "default": false},
         "promotion_status": {"enum": ["adjacent", "experimental", "partially-promoted"]}
+      },
+      "additionalProperties": false
+    },
+    "validationProfileRequirement": {
+      "type": "object",
+      "required": ["profile_id", "version", "kind", "stages", "validator_source_ref"],
+      "properties": {
+        "profile_id": {"$ref": "#/$defs/id"},
+        "version": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["game", "application"]},
+        "stages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"enum": ["source", "resolved-game"]},
+          "uniqueItems": true
+        },
+        "validator_source_ref": {"$ref": "#/$defs/ref"},
+        "description": {"type": "string"},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "validationDeclaration": {
+      "type": "object",
+      "required": ["core_profile", "required_profiles"],
+      "properties": {
+        "core_profile": {
+          "type": "object",
+          "required": ["profile_id", "version"],
+          "properties": {
+            "profile_id": {"const": "dodge-core"},
+            "version": {"const": "0.2.1"}
+          },
+          "additionalProperties": false
+        },
+        "required_profiles": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/validationProfileRequirement"}
+        }
       },
       "additionalProperties": false
     },
