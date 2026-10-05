@@ -60,5 +60,6 @@ Issues #34–#36 completed a shared rule layer for choices, requirement waivers,
 - `examples/wretched-demesne-sidecar-promoted.dodge.json` — inferred WD rule-model example
 - `examples/playable-object-bindings.dodge.json` — neutral invocation and target-binding example
 - `examples/requirements-equipment-locations.dodge.json` — choices, waivers, equipment, and location semantics
+- `examples/standard-52-card-deck/` — complete canonical-catalog, resolver, validation, and PnP/TTS contract example
 - `examples/export-contracts/` — WD Health representation-laboratory selections
 - `examples/target-manifests/` — resolved content and provenance examples

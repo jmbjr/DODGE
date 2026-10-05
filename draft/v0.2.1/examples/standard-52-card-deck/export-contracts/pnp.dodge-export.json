@@ -1,0 +1,20 @@
+{
+  "contract_version": "0.2.1",
+  "contract_id": "standard-52-card-deck-pnp",
+  "target": "pnp",
+  "accepts": {
+    "dodge_versions": ["0.2.1"],
+    "object_kinds": ["token", "collection"],
+    "component_forms": ["card"],
+    "rule_features": []
+  },
+  "maps": [
+    {"from": "scenes.table", "to": "a 52-card print inventory"},
+    {"from": "archetypes.playing-card.component", "to": "exact-size poker cards"},
+    {"from": "objects.standard-deck.members", "to": "ordered card fronts sharing one back"}
+  ],
+  "adds": ["card typography", "suit artwork", "shared-back artwork", "page imposition", "bleed", "cut marks"],
+  "outputs": ["PDF"],
+  "forbidden_in_dodge": ["PDF coordinates", "font files", "bleed geometry", "cut-mark geometry", "printer settings"],
+  "manifest_identity_fields": ["DODGE SHA-256", "catalog SHA-256", "scene ref", "ordered card IDs"]
+}
