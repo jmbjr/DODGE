@@ -1,0 +1,40 @@
+{
+  "format": "dodge-example-build.v1",
+  "game_id": "standard-52-card-deck",
+  "classification": "component-example",
+  "source_sha": "23736585ff4f7cbd24c6796385438911ba854c93",
+  "short_sha": "23736585ff4f",
+  "dodge_version": "0.2.1",
+  "dodge_source_sha": "23736585ff4f7cbd24c6796385438911ba854c93",
+  "dodge_document_sha256": "443c97d241ed23c8fbbaf7c9270ac724629b3cfa16d74d2e9d3539fc944ef226",
+  "catalog_sha256": "eca0b58f3346627b5bab268841316162c053c3c44d71d33cbcf12537cfc1ee6b",
+  "resolved_model_sha256": "7a50842176965be859e90ee0db232672286247f3e6f5b007f93ca0cb8c6a9bc0",
+  "targets": {
+    "web": {
+      "status": "implemented",
+      "url": "./builds/23736585ff4f/index.html"
+    },
+    "pnp": {
+      "status": "implemented",
+      "url": "./downloads/standard-52-card-deck-pnp-23736585ff4f.pdf",
+      "sha256": "f43def8a38f19faf633ee0811e071022c8c30eed851abe6dbeea0d10a2f60445"
+    },
+    "tts": {
+      "status": "placeholder",
+      "url": "./downloads/standard-52-card-deck-tts-23736585ff4f.json",
+      "sha256": "e03efee8633d3e10f9a507248eb22899d456a606725f1b45e1279a0d495f9e06"
+    }
+  },
+  "executable_semantics": [
+    "shuffle",
+    "draw-without-replacement",
+    "discard",
+    "reset-declared-order"
+  ],
+  "unsupported_semantics": [
+    "game setup",
+    "turn structure",
+    "scoring",
+    "win conditions"
+  ]
+}
