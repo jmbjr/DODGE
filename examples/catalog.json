@@ -1,6 +1,6 @@
 {
   "format": "dodge-example-hub.v1",
-  "current_source_sha": "6beb53648835f84fb7536266ff6ac83e9671c368",
+  "current_source_sha": "014826cdf94c52f29ee5006260157229b7c3de95",
   "entries": [
     {
       "id": "standard-52-card-deck",
@@ -8,22 +8,22 @@
       "classification": "component-example",
       "summary": "Ordered and shuffleable canonical inventory with a shared back.",
       "dodge_version": "0.2.1",
-      "dodge_source_sha": "6beb53648835f84fb7536266ff6ac83e9671c368",
+      "dodge_source_sha": "014826cdf94c52f29ee5006260157229b7c3de95",
       "status": "available",
-      "latest": "./examples/standard-52-card-deck/builds/6beb53648835/index.html",
+      "latest": "./examples/standard-52-card-deck/builds/014826cdf94c/index.html",
       "versions": "./examples/standard-52-card-deck/versions.json",
       "targets": {
         "web": {
           "status": "implemented",
-          "url": "./examples/standard-52-card-deck/builds/6beb53648835/index.html"
+          "url": "./examples/standard-52-card-deck/builds/014826cdf94c/index.html"
         },
         "pnp": {
           "status": "implemented",
-          "url": "./examples/standard-52-card-deck/downloads/standard-52-card-deck-pnp-6beb53648835.pdf"
+          "url": "./examples/standard-52-card-deck/downloads/standard-52-card-deck-pnp-014826cdf94c.pdf"
         },
         "tts": {
           "status": "placeholder",
-          "url": "./examples/standard-52-card-deck/downloads/standard-52-card-deck-tts-6beb53648835.json"
+          "url": "./examples/standard-52-card-deck/downloads/standard-52-card-deck-tts-014826cdf94c.json"
         }
       }
     },
