@@ -3,7 +3,7 @@
   "$id": "https://dodge-format.example.invalid/schemas/dodge-target-manifest.schema.v0.2.1.json",
   "title": "DODGE resolved target manifest 0.2.1 working draft",
   "type": "object",
-  "required": ["manifest_version", "manifest_id", "target", "dodge_identity", "contract_identity", "resolution_scope", "contents"],
+  "required": ["manifest_version", "manifest_id", "target", "dodge_identity", "contract_identity", "resolution_scope", "validation_evidence", "contents"],
   "properties": {
     "manifest_version": {"const": "0.2.1"},
     "manifest_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
@@ -39,10 +39,33 @@
       },
       "additionalProperties": false
     },
+    "validation_evidence": {
+      "type": "object",
+      "required": ["core", "required_profiles", "resolved_game"],
+      "properties": {
+        "core": {"$ref": "#/$defs/validationResult"},
+        "required_profiles": {"type": "array", "items": {"$ref": "#/$defs/validationResult"}},
+        "resolved_game": {"type": "array", "items": {"$ref": "#/$defs/validationResult"}}
+      },
+      "additionalProperties": false
+    },
     "contents": {"type": "array", "items": {"$ref": "#/$defs/contentEntry"}}
   },
   "additionalProperties": false,
   "$defs": {
+    "validationResult": {
+      "type": "object",
+      "required": ["profile_id", "version", "stage", "status"],
+      "properties": {
+        "profile_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+        "version": {"type": "string", "minLength": 1},
+        "stage": {"enum": ["core", "source", "resolved-game"]},
+        "status": {"const": "pass"},
+        "validator_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "validated_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
     "dimensions": {
       "type": "object",
       "required": ["unit"],

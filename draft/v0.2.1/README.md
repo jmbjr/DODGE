@@ -29,6 +29,7 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - explicit executable modes, player choices, requirements, and scoped modifiers
 - neutral carried/equipped lifecycle, slots, capabilities, parameters, and equipped modifiers
 - data-driven location entry, exit, access, interaction, and search outcomes
+- staged core, game/application semantic, and resolved-game validation profiles that gate target generation
 
 ## Deliberate limits
 
@@ -50,6 +51,8 @@ Issue #32 added explicit invocation bindings between usable objects and normaliz
 
 Issues #34–#36 completed a shared rule layer for choices, requirement waivers, equipment lifecycle, and location-bound outcomes without game-specific flags or room-ID dispatch.
 
+Issue #43 formalized the validation toolchain. DODGE owns core validation and the profile-declaration contract; each game/application owns validators for domain meaning that the generic format cannot know. Successful core, required-profile, and resolved-game validation is a release prerequisite, not optional lint.
+
 ## Structure
 
 - `DODGE_SPEC.md` — complete candidate specification
@@ -63,3 +66,4 @@ Issues #34–#36 completed a shared rule layer for choices, requirement waivers,
 - `examples/standard-52-card-deck/` — complete canonical-catalog, resolver, validation, and PnP/TTS contract example
 - `examples/export-contracts/` — WD Health representation-laboratory selections
 - `examples/target-manifests/` — resolved content and provenance examples
+- `examples/validation-lifecycle/` — WD semantic-profile reference validator and a core-valid/domain-invalid fixture

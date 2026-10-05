@@ -1,0 +1,31 @@
+{
+  "dodge_version": "0.2.1",
+  "document_id": "wd.validation-fixture.searchable-without-search",
+  "game_id": "wretched-demesne",
+  "sources": {
+    "fixture": {"kind": "text", "uri": "README.md", "version": "1", "authority": "reference"},
+    "wd-semantic-validator": {"kind": "semantic_validator", "uri": "validate_wretched.py", "version": "0.1.0", "authority": "authoritative"}
+  },
+  "validation": {
+    "core_profile": {"profile_id": "dodge-core", "version": "0.2.1"},
+    "required_profiles": [
+      {"profile_id": "wretched-demesne", "version": "0.1.0", "kind": "game", "stages": ["source", "resolved-game"], "validator_source_ref": "wd-semantic-validator"}
+    ]
+  },
+  "archetypes": {
+    "room": {"kind": "token", "face_slots": [{"id": "front", "role": "front"}], "component": {"form": "tile", "shape": "rectangle"}}
+  },
+  "objects": {
+    "fungal-vault": {
+      "kind": "token",
+      "archetype_ref": "room",
+      "name": "Fungal Vault",
+      "faces": [{"slot": "front", "text": "FUNGAL VAULT"}],
+      "tags": ["room"],
+      "extensions": {"wretched-demesne:searchable": true}
+    }
+  },
+  "scenes": {
+    "validation-fixture": {"name": "Validation fixture", "instances": [{"id": "fungal-vault-1", "object_ref": "fungal-vault"}]}
+  }
+}

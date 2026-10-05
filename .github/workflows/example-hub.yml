@@ -17,6 +17,7 @@ jobs:
         with: {python-version: "3.12"}
       - run: pip install -r draft/v0.2.1/examples/standard-52-card-deck/requirements.txt reportlab
       - run: python draft/v0.2.1/examples/standard-52-card-deck/validate.py
+      - run: python draft/v0.2.1/examples/validation-lifecycle/validate_wretched.py
       - run: python tools/build_example_hub.py --source-sha "$GITHUB_SHA"
       - name: Verify identity and target parity
         run: |
