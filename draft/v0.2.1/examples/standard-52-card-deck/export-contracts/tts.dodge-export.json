@@ -1,0 +1,20 @@
+{
+  "contract_version": "0.2.1",
+  "contract_id": "standard-52-card-deck-tts",
+  "target": "tts",
+  "accepts": {
+    "dodge_versions": ["0.2.1"],
+    "object_kinds": ["token", "collection"],
+    "component_forms": ["card"],
+    "rule_features": []
+  },
+  "maps": [
+    {"from": "scenes.table", "to": "one Tabletop Simulator deck object"},
+    {"from": "objects.standard-deck.members", "to": "ordered atlas entries and card IDs"},
+    {"from": "archetypes.playing-card.component.shared_back_ref", "to": "one shared deck back"}
+  ],
+  "adds": ["TTS GUID", "deck transform", "atlas layout", "hosted face URL", "hosted back URL", "table and sky"],
+  "outputs": ["JSON", "PNG atlas"],
+  "forbidden_in_dodge": ["TTS GUIDs", "transforms", "atlas coordinates", "hosted URLs", "table selection", "sky selection"],
+  "manifest_identity_fields": ["DODGE SHA-256", "catalog SHA-256", "scene ref", "ordered card IDs"]
+}
