@@ -193,6 +193,7 @@
         "component": {"$ref": "#/$defs/component"}, "faces": {"type": "array", "items": {"$ref": "#/$defs/face"}},
         "members": {"type": "array", "items": {"$ref": "#/$defs/member"}}, "ordering": {"enum": ["declared", "unordered"], "default": "declared"},
         "behaviors": {"type": "array", "items": {"$ref": "#/$defs/behavior"}}, "invocations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/invocation"}},
+        "equipment": {"$ref": "#/$defs/equipmentProfile"},
         "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}},
         "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true}, "extensions": {"$ref": "#/$defs/extensions"}
       },
@@ -228,7 +229,7 @@
       "type": "object",
       "required": ["scope", "boundary", "occurrence"],
       "properties": {
-        "scope": {"enum": ["phase", "turn", "round", "scenario", "expedition", "campaign"]},
+        "scope": {"enum": ["action", "phase", "turn", "round", "scenario", "expedition", "campaign"]},
         "boundary": {"enum": ["start", "end"]},
         "ref": {"$ref": "#/$defs/ref"},
         "subject": {"$ref": "#/$defs/subject"},
@@ -241,7 +242,7 @@
       "type": "object",
       "required": ["scope"],
       "properties": {
-        "scope": {"enum": ["phase", "turn", "round", "scenario", "expedition", "campaign"]},
+        "scope": {"enum": ["action", "phase", "turn", "round", "scenario", "expedition", "campaign"]},
         "ref": {"$ref": "#/$defs/ref"},
         "subject": {"$ref": "#/$defs/subject"}
       },
@@ -277,7 +278,7 @@
         "apply": {"enum": ["immediate", "scheduled"]},
         "at": {"$ref": "#/$defs/timingAnchor"},
         "expires_at": {"$ref": "#/$defs/timingAnchor"},
-        "duration": {"type": "object", "required": ["count", "scope"], "properties": {"count": {"type": "integer", "minimum": 1}, "scope": {"enum": ["phase", "turn", "round", "scenario", "expedition", "campaign"]}}, "additionalProperties": false},
+        "duration": {"type": "object", "required": ["count", "scope"], "properties": {"count": {"type": "integer", "minimum": 1}, "scope": {"enum": ["action", "phase", "turn", "round", "scenario", "expedition", "campaign"]}}, "additionalProperties": false},
         "usage": {"$ref": "#/$defs/usageLimit"},
         "cancel_condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
         "recheck_condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}}
@@ -290,17 +291,20 @@
     "operand": {
       "oneOf": [
         {"type": ["number", "integer", "string", "boolean", "null"]},
-        {"type": "object", "required": ["ref"], "properties": {"ref": {"$ref": "#/$defs/ref"}, "subject": {"$ref": "#/$defs/subject"}}, "additionalProperties": false}
+        {"type": "object", "required": ["ref"], "properties": {"ref": {"$ref": "#/$defs/ref"}, "subject": {"$ref": "#/$defs/subject"}}, "additionalProperties": false},
+        {"type": "object", "required": ["parameter", "subject"], "properties": {"parameter": {"$ref": "#/$defs/id"}, "subject": {"$ref": "#/$defs/subject"}}, "additionalProperties": false}
       ]
     },
     "condition": {
       "type": "object",
       "properties": {
         "description": {"type": "string"}, "prose": {"type": "string"},
-        "op": {"enum": ["eq", "ne", "lt", "lte", "gt", "gte", "exists", "contains", "event", "all", "any", "not"]},
+        "op": {"enum": ["eq", "ne", "lt", "lte", "gt", "gte", "exists", "contains", "event", "all", "any", "not", "has-item", "has-tag", "has-capability", "is-equipped"]},
         "left": {"$ref": "#/$defs/operand"}, "right": {"$ref": "#/$defs/operand"},
         "conditions": {"type": "array", "items": {"oneOf": [{"$ref": "#/$defs/ref"}, {"$ref": "#/$defs/condition"}]}},
         "event": {"$ref": "#/$defs/id"}, "subject": {"$ref": "#/$defs/subject"},
+        "tag": {"$ref": "#/$defs/id"}, "capability": {"$ref": "#/$defs/id"}, "object_ref": {"$ref": "#/$defs/ref"}, "entity_ref": {"$ref": "#/$defs/ref"},
+        "item_state": {"enum": ["carried", "equipped", "either"]},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
@@ -369,7 +373,7 @@
       "type": "object",
       "properties": {
         "description": {"type": "string"}, "prose": {"type": "string"},
-        "op": {"enum": ["set", "add", "subtract", "add_status", "remove_status", "create", "remove", "move", "transform", "draw", "discard", "shuffle", "advance", "emit", "choose"]},
+        "op": {"enum": ["set", "add", "subtract", "add_status", "remove_status", "create", "remove", "move", "transform", "draw", "discard", "shuffle", "advance", "emit", "choose", "apply_modifier", "equip", "unequip"]},
         "target_ref": {"$ref": "#/$defs/ref"}, "subject": {"$ref": "#/$defs/subject"}, "value": {"$ref": "#/$defs/operand"},
         "to_ref": {"$ref": "#/$defs/ref"}, "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
         "options": {"type": "array", "items": {"type": "object"}}, "event": {"$ref": "#/$defs/id"}, "payload": {"type": "object"},
@@ -413,6 +417,70 @@
         "default": {}, "minimum": {"type": "number"}, "maximum": {"type": "number"}, "enum_values": {"type": "array", "items": {"type": ["string", "number"]}},
         "thresholds": {"type": "array", "items": {"$ref": "#/$defs/threshold"}},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "requirement": {
+      "type": "object",
+      "required": ["category", "condition"],
+      "properties": {
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "category": {"$ref": "#/$defs/id"},
+        "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true},
+        "condition": {"oneOf": [{"$ref": "#/$defs/ref"}, {"$ref": "#/$defs/condition"}]},
+        "source_ref": {"$ref": "#/$defs/ref"},
+        "authority": {"$ref": "#/$defs/authority"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "modifierMatch": {
+      "type": "object",
+      "properties": {
+        "action_ref": {"$ref": "#/$defs/ref"},
+        "action_tag": {"$ref": "#/$defs/id"},
+        "event": {"$ref": "#/$defs/id"},
+        "requirement_ref": {"$ref": "#/$defs/ref"},
+        "requirement_category": {"$ref": "#/$defs/id"},
+        "requirement_tag": {"$ref": "#/$defs/id"}
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "modifier": {
+      "type": "object",
+      "required": ["kind", "match"],
+      "properties": {
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "kind": {"enum": ["requirement-waiver", "cost-adjustment", "value-adjustment"]},
+        "match": {"$ref": "#/$defs/modifierMatch"},
+        "target_ref": {"$ref": "#/$defs/ref"},
+        "amount": {"type": "number"},
+        "maximum_matches": {"type": "integer", "minimum": 1},
+        "source_ref": {"$ref": "#/$defs/ref"},
+        "authority": {"$ref": "#/$defs/authority"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "allOf": [
+        {"if": {"properties": {"kind": {"const": "requirement-waiver"}}, "required": ["kind"]}, "then": {"required": ["maximum_matches"]}},
+        {"if": {"properties": {"kind": {"enum": ["cost-adjustment", "value-adjustment"]}}, "required": ["kind"]}, "then": {"required": ["amount"]}},
+        {"if": {"properties": {"kind": {"const": "value-adjustment"}}, "required": ["kind"]}, "then": {"required": ["target_ref"]}}
+      ],
+      "additionalProperties": false
+    },
+    "equipmentProfile": {
+      "type": "object",
+      "properties": {
+        "slots": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true},
+        "slot_policy": {"enum": ["exclusive", "shared", "unrestricted"]},
+        "parameters": {"type": "object", "propertyNames": {"$ref": "#/$defs/id"}, "additionalProperties": {"type": ["number", "integer", "string", "boolean"]}},
+        "capabilities": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true},
+        "equipped_modifier_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}, "uniqueItems": true},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
       "additionalProperties": false
@@ -469,6 +537,7 @@
       "properties": {
         "name": {"type": "string"}, "description": {"type": "string"}, "actor_tags": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "costs": {"type": "array", "items": {"$ref": "#/$defs/cost"}}, "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
+        "requirement_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}, "uniqueItems": true},
         "target": {"$ref": "#/$defs/subject"}, "procedure_ref": {"$ref": "#/$defs/ref"}, "effect_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
         "effects": {"type": "array", "items": {"$ref": "#/$defs/effect"}}, "tags": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "source_ref": {"$ref": "#/$defs/ref"}, "authority": {"$ref": "#/$defs/authority"}, "assumptions": {"type": "array", "items": {"type": "string"}},
@@ -495,11 +564,12 @@
     },
     "invocation": {
       "type": "object",
-      "required": ["id", "trigger", "steps"],
+      "required": ["id", "trigger"],
       "properties": {
         "id": {"$ref": "#/$defs/id"},
         "trigger": {"$ref": "#/$defs/id"},
         "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "modes": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/invocationMode"}},
         "subject_bindings": {"type": "array", "items": {"$ref": "#/$defs/invocationSubjectBinding"}},
         "description": {"type": "string"},
         "source_ref": {"$ref": "#/$defs/ref"},
@@ -507,14 +577,56 @@
         "assumptions": {"type": "array", "items": {"type": "string"}},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
+      "oneOf": [
+        {"required": ["steps"], "not": {"required": ["modes"]}},
+        {"required": ["modes"], "not": {"required": ["steps"]}}
+      ],
+      "additionalProperties": false
+    },
+    "invocationMode": {
+      "type": "object",
+      "required": ["id", "label", "steps"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "label": {"type": "string", "minLength": 1},
+        "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
+        "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "choiceOption": {
+      "type": "object",
+      "required": ["id", "label", "steps"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "label": {"type": "string", "minLength": 1},
+        "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}},
+        "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
+      "additionalProperties": false
+    },
+    "conditionalBranch": {
+      "type": "object",
+      "required": ["condition", "steps"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "condition": {"oneOf": [{"$ref": "#/$defs/ref"}, {"$ref": "#/$defs/condition"}]},
+        "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "extensions": {"$ref": "#/$defs/extensions"}
+      },
       "additionalProperties": false
     },
     "step": {
       "type": "object",
       "properties": {
-        "id": {"$ref": "#/$defs/id"}, "name": {"type": "string"}, "kind": {"enum": ["action", "condition", "effect", "procedure", "phase", "ai", "choice", "repeat", "prose"]},
+        "id": {"$ref": "#/$defs/id"}, "name": {"type": "string"}, "kind": {"enum": ["action", "condition", "effect", "procedure", "phase", "ai", "choice", "branch", "repeat", "prose"]},
         "ref": {"$ref": "#/$defs/ref"}, "condition": {"$ref": "#/$defs/condition"}, "effect": {"$ref": "#/$defs/effect"},
         "condition_ref": {"$ref": "#/$defs/ref"}, "steps": {"type": "array", "items": {"$ref": "#/$defs/step"}}, "options": {"type": "array", "items": {"$ref": "#/$defs/step"}},
+        "choice_options": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/choiceOption"}},
+        "branches": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/conditionalBranch"}},
+        "else_steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
         "repeat": {"enum": ["while", "until", "for-each"]}, "prose": {"type": "string"}, "optional": {"type": "boolean", "default": false},
         "extensions": {"$ref": "#/$defs/extensions"}
       },
@@ -565,6 +677,8 @@
       "properties": {
         "values": {"type": "object", "additionalProperties": {"$ref": "#/$defs/valueDefinition"}},
         "resources": {"type": "object", "additionalProperties": {"$ref": "#/$defs/resource"}},
+        "requirements": {"type": "object", "additionalProperties": {"$ref": "#/$defs/requirement"}},
+        "modifiers": {"type": "object", "additionalProperties": {"$ref": "#/$defs/modifier"}},
         "conditions": {"type": "object", "additionalProperties": {"$ref": "#/$defs/condition"}},
         "effects": {"type": "object", "additionalProperties": {"$ref": "#/$defs/effect"}},
         "actions": {"type": "object", "additionalProperties": {"$ref": "#/$defs/action"}},
@@ -589,7 +703,8 @@
       "properties": {
         "id": {"$ref": "#/$defs/id"}, "from": {"$ref": "#/$defs/ref"}, "to": {"$ref": "#/$defs/ref"}, "kind": {"$ref": "#/$defs/id"},
         "directed": {"type": "boolean", "default": false}, "costs": {"type": "array", "items": {"$ref": "#/$defs/cost"}},
-        "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}}, "state": {"type": "object"}, "extensions": {"$ref": "#/$defs/extensions"}
+        "condition_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}}, "requirement_refs": {"type": "array", "items": {"$ref": "#/$defs/ref"}, "uniqueItems": true},
+        "state": {"type": "object"}, "extensions": {"$ref": "#/$defs/extensions"}
       },
       "additionalProperties": false
     },
@@ -702,6 +817,34 @@
       },
       "additionalProperties": false
     },
+    "equipmentState": {
+      "type": "object",
+      "required": ["item_instance_ref", "owner", "state"],
+      "properties": {
+        "item_instance_ref": {"$ref": "#/$defs/ref"},
+        "owner": {"$ref": "#/$defs/subject"},
+        "state": {"enum": ["carried", "equipped"]},
+        "slot": {"$ref": "#/$defs/id"}
+      },
+      "allOf": [
+        {"if": {"properties": {"state": {"const": "equipped"}}, "required": ["state"]}, "then": {"required": ["slot"]}}
+      ],
+      "additionalProperties": false
+    },
+    "activeModifierState": {
+      "type": "object",
+      "required": ["id", "modifier_ref", "subject"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "modifier_ref": {"$ref": "#/$defs/ref"},
+        "subject": {"$ref": "#/$defs/subject"},
+        "source_subject": {"$ref": "#/$defs/subject"},
+        "expires_at": {"$ref": "#/$defs/timingAnchor"},
+        "remaining_matches": {"type": "integer", "minimum": 0},
+        "cause_ref": {"$ref": "#/$defs/ref"}
+      },
+      "additionalProperties": false
+    },
     "runtimeEvent": {
       "type": "object", "required": ["sequence", "event"],
       "properties": {
@@ -715,7 +858,9 @@
       "properties": {
         "scene_ref": {"$ref": "#/$defs/ref"}, "scenario_ref": {"$ref": "#/$defs/ref"}, "campaign_ref": {"$ref": "#/$defs/ref"},
         "clock": {"$ref": "#/$defs/clockState"}, "bindings": {"type": "array", "items": {"$ref": "#/$defs/binding"}},
+        "equipment_states": {"type": "array", "items": {"$ref": "#/$defs/equipmentState"}},
         "active_effects": {"type": "array", "items": {"$ref": "#/$defs/activeEffectState"}},
+        "active_modifiers": {"type": "array", "items": {"$ref": "#/$defs/activeModifierState"}},
         "scheduled_effects": {"type": "array", "items": {"$ref": "#/$defs/scheduledEffectState"}},
         "materialized_topology_ref": {"$ref": "#/$defs/ref"}, "events": {"type": "array", "items": {"$ref": "#/$defs/runtimeEvent"}},
         "revision": {"type": "string"}, "extensions": {"$ref": "#/$defs/extensions"}

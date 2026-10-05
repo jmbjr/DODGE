@@ -290,6 +290,45 @@ Invocation IDs MUST be unique within their declaring array, subject-binding slot
 
 Multiple differently identified objects MAY invoke the same action. Renaming an object or entity does not change execution as long as its explicit invocation binding is preserved.
 
+### 7.5.2 Explicit executable modes and choices
+
+An invocation MAY declare either one ordered `steps` sequence or two or more named `modes`. Each mode has a stable ID, player-facing label, optional availability conditions, and its own ordered steps. The runtime presents eligible modes and executes exactly the selected mode. It MUST NOT select behavior by inspecting the object's ID.
+
+Within a procedure, a `choice` step MAY use named `choice_options`. Each option likewise declares an ID, label, optional conditions, and steps. A `branch` step declares ordered conditional branches and optional `else_steps`; the first satisfied branch executes. Modes and choices represent player selection, while branches represent predicate-driven selection.
+
+### 7.5.3 Requirements and scoped modifiers
+
+A requirement is a named, categorized predicate. It declares a `category`, optional tags, and a structured condition. Actions and topology edges reference requirements through `requirement_refs`. Conditions can compose alternatives with `any`, so a sealed passage may accept an equipped key capability OR a qualifying actor tag.
+
+State predicates include `has-item`, `has-tag`, `has-capability`, and `is-equipped`. Item/capability predicates declare whether carried, equipped, or either equipment state qualifies. A renderer MUST NOT assume that possession and equipped state are equivalent.
+
+A modifier is reusable rule data with a match and one of these kinds:
+
+- `requirement-waiver`: ignores up to `maximum_matches` matching requirements;
+- `cost-adjustment`: adds its signed amount to matched action costs;
+- `value-adjustment`: adds its signed amount to a matched value/resource calculation.
+
+Modifier matches may name an action, action tag, event, requirement, requirement category, or requirement tag. An `apply_modifier` effect activates a modifier for its subject and uses ordinary effect timing. The `action` timing scope permits deterministic expiration at the end of the current action. Active modifiers, resolved expiration, and remaining matches are serialized in `runtime_states.active_modifiers`.
+
+Requirement evaluation order is: collect referenced requirements; collect active matching waivers; evaluate each requirement in declaration order; consume a matching waiver only when it actually waives a failed requirement; then evaluate action costs after matching cost modifiers. A modifier never rewrites the referenced requirement or action.
+
+Game-specific booleans such as `ignoreMachineryThisAction` or room-specific cost flags are non-conforming when a categorized requirement and scoped modifier express the same rule.
+
+### 7.5.4 Equipment lifecycle and parameters
+
+An object with an `equipment` profile declares neutral equipment metadata:
+
+- allowed slot IDs and an `exclusive`, `shared`, or `unrestricted` slot policy;
+- typed scalar parameters such as attack, range, ammo, or noise;
+- capability IDs that may satisfy requirements;
+- modifier references active only while equipped.
+
+Slot IDs and exclusivity are game data, not universal DODGE slots. `equip` and `unequip` effects perform lifecycle transitions. A runtime MUST validate ownership, allowed slot, and exclusivity before committing the transition.
+
+Neutral save state records every carried or equipped item in `equipment_states`, including owner and equipped slot. An equipped item's `equipped_modifier_refs` are active exactly while that item remains equipped; carrying the item alone does not activate them. Renderers and exporters preserve this state but MUST NOT invent equipment behavior.
+
+An invocation may bind the using equipment object to the `source` slot. Operands of the form `{ "parameter": "attack", "subject": { "relative": "source" } }` read declared parameters from that object. Thus different weapons can invoke one Attack action while supplying different stats without cloning Attack or dispatching on weapon IDs.
+
 ### 7.6 Procedures
 
 A procedure is an ordered list of steps. A step may:
@@ -384,6 +423,18 @@ Connection kinds are semantic project IDs such as `passage`, `door`, `rail`, or 
 Procedural-generation candidates or recommendations are not concrete topology. They remain metadata/sidecar information until expressed as a formal generator in a future version.
 
 Hidden is orthogonal to unresolved: a materialized node may exist with a stable ID while remaining unrevealed to players. Revealing it changes visibility/state, not identity.
+
+### 8.1 Location-bound executable semantics
+
+Locations use the same object invocation mechanism as cards and equipment. Standard project triggers may include `enter`, `exit`, `interact`, and `search`; their meaning is established by the game's procedures/events, not by room IDs.
+
+- Entry hazards use an `enter` invocation with ordered effects or a player choice.
+- Access restrictions use requirements on topology edges or actions.
+- Temporary exit costs use scoped cost-adjustment modifiers matched to an action/event.
+- Conditional interactions use a `branch` step with structured predicates and an else path.
+- A fixed Search result uses a `create` effect for the declared object/entity, while a collection result uses `draw` from the declared collection. Both are ordinary steps in a `search` invocation.
+
+Targets MUST consume these declarations rather than infer hazard, lock, reward, objective, or search behavior from location IDs.
 
 ## 9. Scenarios
 
@@ -561,6 +612,8 @@ When target content configuration is present, a validator MUST check that every 
 
 When invocations are present, a validator MUST also check invocation-ID and subject-slot uniqueness, resolution precedence, referenced step kinds, required execution-context inputs, and action availability/cost semantics. An object/entity ID matching an action ID is not a binding and MUST NOT satisfy validation.
 
+When requirements, modifiers, choices, or equipment are present, a validator MUST additionally check mode/option IDs and eligible branches; requirement and modifier references; modifier kind-specific fields; bounded lifetime for temporary modifiers; equipment slot validity and exclusivity; carried/equipped lifecycle transitions; parameter operands against the bound source; and topology requirements. Requirement-waiver or cost behavior implemented only by target-specific flags MUST NOT satisfy conformance.
+
 A validator MAY additionally compare explicit dimensions with a project-defined `size_class` registry and report mismatches. Such a diagnostic MUST treat the explicit dimensions as authoritative.
 
 ## 16. WD sidecar mapping used for this draft
@@ -675,3 +728,15 @@ The playable-object execution chain is:
 The neutral example demonstrates two differently identified movement cards invoking the same Move action, an attack card binding a runtime-selected target before invoking Attack, a reload card invoking Reload, and a direct-effect object. Object-ID switches, action-ID equality assumptions, embedded `sidearm` defaults, and engine-coded uniform action costs are explicit anti-patterns when invocation bindings and action costs are available.
 
 All invocation fields are optional additions. Existing valid 0.2.1 documents remain valid and gain no inferred executable behavior.
+
+## 23. Issue #34 adoption requirements
+
+The neutral Jury Rig pattern uses one invocation with two named modes. The resource mode performs an ordinary add effect. The waiver mode applies a `requirement-waiver` modifier matching category `machinery`, with one match and end-of-current-action expiration. The requirement and action remain unchanged.
+
+## 24. Issue #35 adoption requirements
+
+The neutral equipment example distinguishes carried Armor Plate from equipped Shotgun and Phase Cutter. Armor's Defense modifier activates only while equipped; Shotgun binds itself as Attack's source and supplies declared parameters; Phase Cutter exposes a capability used by an access requirement. Equip state, owners, slots, and active modifiers are serializable neutral runtime state.
+
+## 25. Issue #36 adoption requirements
+
+The neutral location example composes existing invocations with the new requirement/modifier/branch primitives: an entry hazard with a discard alternative, OR-based sealed access, a bounded exit-cost modifier, conditional terminal reward/penalty, a fixed objective Search result, and a normal collection draw. None depends on a location ID or Wretched-specific schema field.

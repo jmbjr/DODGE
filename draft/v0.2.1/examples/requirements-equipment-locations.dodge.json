@@ -1,0 +1,159 @@
+{
+  "dodge_version": "0.2.1",
+  "document_id": "neutral.requirements-equipment-locations",
+  "game_id": "neutral-system-example",
+  "title": "Neutral choices, equipment, requirements, modifiers, and location semantics",
+  "sources": {
+    "rules-source": {"kind": "rules", "uri": "rules/system-example.json", "version": "1.0.0", "authority": "authoritative"}
+  },
+  "archetypes": {
+    "card": {"kind": "token", "face_slots": [{"id": "front", "role": "front"}], "component": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}}, "tags": ["card"]},
+    "item": {"kind": "token", "face_slots": [{"id": "front", "role": "front"}], "component": {"form": "card", "size_class": "poker", "shape": "rectangle", "dimensions": {"unit": "in", "width": 2.5, "height": 3.5}}, "tags": ["equipment"]},
+    "actor": {"kind": "token", "face_slots": [{"id": "front", "role": "front"}], "component": {"form": "standee", "size_class": "actor", "shape": "custom"}, "tags": ["actor"]},
+    "location": {"kind": "token", "face_slots": [{"id": "front", "role": "front"}], "component": {"form": "tile", "size_class": "room-tile", "shape": "rectangle"}, "tags": ["location"]},
+    "collection": {"kind": "collection"}
+  },
+  "objects": {
+    "jury-rig-card": {
+      "kind": "token", "archetype_ref": "card", "name": "Jury Rig", "faces": [{"slot": "front", "text": "Gain 1 Scrap or waive one machinery requirement this action."}],
+      "invocations": [{
+        "id": "play-jury-rig", "trigger": "play",
+        "modes": [
+          {"id": "gain-scrap", "label": "Gain 1 Scrap", "steps": [{"kind": "effect", "ref": "gain-one-scrap"}]},
+          {"id": "waive-machinery", "label": "Waive one machinery requirement this action", "steps": [{"kind": "effect", "ref": "apply-jury-rig-waiver"}]}
+        ],
+        "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]
+      }]
+    },
+    "engineer-crew": {"kind": "token", "archetype_ref": "actor", "name": "Engineer Crew", "faces": [{"slot": "front", "text": "ENGINEER"}], "tags": ["actor", "engineer"]},
+    "armor-plate": {
+      "kind": "token", "archetype_ref": "item", "name": "Armor Plate", "faces": [{"slot": "front", "text": "+1 Defense while equipped"}],
+      "equipment": {"slots": ["body"], "slot_policy": "exclusive", "equipped_modifier_refs": ["armor-defense"]}, "tags": ["equipment", "armor"]
+    },
+    "shotgun": {
+      "kind": "token", "archetype_ref": "item", "name": "Shotgun", "faces": [{"slot": "front", "text": "Attack 5 / Range 1 / Ammo 2 / Noise 3"}],
+      "equipment": {"slots": ["hands"], "slot_policy": "exclusive", "parameters": {"attack": 5, "range": 1, "ammo": 2, "noise": 3}},
+      "invocations": [{
+        "id": "fire-shotgun", "trigger": "use", "steps": [{"kind": "action", "ref": "attack"}],
+        "subject_bindings": [{"slot": "source", "source": "using-object"}, {"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}, {"slot": "target", "source": "runtime-input", "input": "enemy-target"}]
+      }],
+      "tags": ["equipment", "weapon"]
+    },
+    "phase-cutter": {
+      "kind": "token", "archetype_ref": "item", "name": "Phase Cutter", "faces": [{"slot": "front", "text": "Opens sealed passages while equipped"}],
+      "equipment": {"slots": ["utility"], "slot_policy": "exclusive", "capabilities": ["opens-sealed-passages"]}, "tags": ["equipment", "tool"]
+    },
+    "ancient-relay-part": {"kind": "token", "archetype_ref": "item", "name": "Ancient Relay Part", "faces": [{"slot": "front", "text": "Objective Item"}], "tags": ["objective-item"]},
+    "spare-parts": {"kind": "token", "archetype_ref": "item", "name": "Spare Parts", "faces": [{"slot": "front", "text": "Spare Parts"}], "tags": ["salvage"]},
+    "salvage-deck": {"kind": "collection", "archetype_ref": "collection", "members": [{"object_ref": "spare-parts", "quantity": 3}], "behaviors": [{"type": "shuffle"}, {"type": "draw", "replacement": false, "destination": "current-actor-inventory"}]},
+    "corrosive-entry": {
+      "kind": "token", "archetype_ref": "location", "name": "Corrosive Entry", "faces": [{"slot": "front", "text": "On entry, lose 1 Health unless you discard Equipment."}],
+      "invocations": [{
+        "id": "resolve-entry-hazard", "trigger": "enter", "steps": [{
+          "kind": "choice", "choice_options": [
+            {"id": "take-damage", "label": "Lose 1 Health", "steps": [{"kind": "effect", "ref": "lose-one-health"}]},
+            {"id": "discard-equipment", "label": "Discard one Equipment", "condition_refs": ["actor-has-equipment"], "steps": [{"kind": "effect", "ref": "discard-selected-item"}]}
+          ]
+        }],
+        "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}, {"slot": "target", "source": "runtime-input", "input": "equipment-to-discard", "required": false}]
+      }]
+    },
+    "sticky-passage": {
+      "kind": "token", "archetype_ref": "location", "name": "Sticky Passage", "faces": [{"slot": "front", "text": "Leaving costs +1 action this turn."}],
+      "invocations": [{"id": "apply-exit-surcharge", "trigger": "enter", "steps": [{"kind": "effect", "ref": "apply-sticky-exit-cost"}], "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]}]
+    },
+    "ancient-terminal": {
+      "kind": "token", "archetype_ref": "location", "name": "Ancient Terminal", "faces": [{"slot": "front", "text": "Engineer gains Scrap; others trigger a shock."}],
+      "invocations": [{"id": "use-terminal", "trigger": "interact", "steps": [{"kind": "branch", "branches": [{"id": "engineer-success", "condition": "actor-is-engineer", "steps": [{"kind": "effect", "ref": "gain-one-scrap"}]}], "else_steps": [{"kind": "effect", "ref": "lose-one-health"}]}], "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]}]
+    },
+    "objective-cache": {
+      "kind": "token", "archetype_ref": "location", "name": "Objective Cache", "faces": [{"slot": "front", "text": "Search: gain Ancient Relay Part."}],
+      "invocations": [{"id": "search-fixed-objective", "trigger": "search", "steps": [{"kind": "effect", "ref": "gain-fixed-objective"}], "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]}]
+    },
+    "salvage-bay": {
+      "kind": "token", "archetype_ref": "location", "name": "Salvage Bay", "faces": [{"slot": "front", "text": "Search: draw from Salvage."}],
+      "invocations": [{"id": "search-salvage", "trigger": "search", "steps": [{"kind": "effect", "ref": "draw-salvage"}], "subject_bindings": [{"slot": "current-actor", "source": "context-subject", "subject": {"relative": "current-actor"}}]}]
+    }
+  },
+  "scenes": {
+    "example-map": {
+      "name": "System example map",
+      "instances": [
+        {"id": "crew-1", "object_ref": "engineer-crew", "location_ref": "entry"}, {"id": "jury-rig-1", "object_ref": "jury-rig-card"}, {"id": "armor-1", "object_ref": "armor-plate"}, {"id": "armor-2", "object_ref": "armor-plate"}, {"id": "shotgun-1", "object_ref": "shotgun"}, {"id": "phase-cutter-1", "object_ref": "phase-cutter"},
+        {"id": "corrosive-entry-1", "object_ref": "corrosive-entry", "location_ref": "entry"}, {"id": "sticky-passage-1", "object_ref": "sticky-passage", "location_ref": "sticky"},
+        {"id": "ancient-terminal-1", "object_ref": "ancient-terminal", "location_ref": "terminal"}, {"id": "objective-cache-1", "object_ref": "objective-cache", "location_ref": "cache"},
+        {"id": "salvage-bay-1", "object_ref": "salvage-bay", "location_ref": "salvage"}, {"id": "salvage-deck-1", "object_ref": "salvage-deck"}
+      ]
+    }
+  },
+  "rules": {
+    "values": {
+      "health": {"name": "Health", "type": "integer", "owner_scope": "actor", "persistence_scope": "scenario", "default": 5, "minimum": 0, "maximum": 5},
+      "defense": {"name": "Defense", "type": "integer", "owner_scope": "actor", "persistence_scope": "scenario", "default": 0, "minimum": 0}
+    },
+    "resources": {
+      "actions": {"name": "Actions", "kind": "capacity", "owner_scope": "actor", "persistence_scope": "turn", "value_type": "integer", "default": 3, "minimum": 0, "maximum": 3},
+      "scrap": {"name": "Scrap", "kind": "currency", "owner_scope": "campaign", "persistence_scope": "campaign", "value_type": "integer", "default": 0, "minimum": 0}
+    },
+    "conditions": {
+      "actor-has-equipment": {"op": "has-item", "subject": {"relative": "current-actor"}, "tag": "equipment", "item_state": "either"},
+      "actor-is-engineer": {"op": "has-tag", "subject": {"relative": "current-actor"}, "tag": "engineer"},
+      "has-equipped-phase-cutter": {"op": "has-capability", "subject": {"relative": "current-actor"}, "capability": "opens-sealed-passages", "item_state": "equipped"}
+    },
+    "requirements": {
+      "machinery-online": {"name": "Machinery online", "category": "machinery", "tags": ["machinery"], "condition": {"op": "event", "event": "machinery-requirement-satisfied"}},
+      "sealed-passage-access": {"name": "Sealed passage access", "category": "access", "tags": ["sealed", "machinery"], "condition": {"op": "any", "conditions": ["has-equipped-phase-cutter", "actor-is-engineer"]}}
+    },
+    "modifiers": {
+      "jury-rig-machinery-waiver": {"name": "Jury Rig machinery waiver", "kind": "requirement-waiver", "match": {"requirement_category": "machinery"}, "maximum_matches": 1},
+      "armor-defense": {"name": "Armor Plate defense", "kind": "value-adjustment", "match": {"event": "calculate-defense"}, "target_ref": "defense", "amount": 1},
+      "sticky-exit-cost": {"name": "Sticky passage exit surcharge", "kind": "cost-adjustment", "match": {"action_ref": "move", "event": "exit-location"}, "amount": 1}
+    },
+    "effects": {
+      "gain-one-scrap": {"op": "add", "target_ref": "scrap", "subject": {"relative": "campaign"}, "value": 1},
+      "apply-jury-rig-waiver": {"op": "apply_modifier", "target_ref": "jury-rig-machinery-waiver", "subject": {"relative": "current-actor"}, "timing": {"apply": "immediate", "expires_at": {"scope": "action", "boundary": "end", "occurrence": "current", "subject": {"relative": "current-actor"}}}},
+      "lose-one-health": {"op": "subtract", "target_ref": "health", "subject": {"relative": "current-actor"}, "value": 1},
+      "discard-selected-item": {"op": "discard", "subject": {"relative": "target"}},
+      "apply-sticky-exit-cost": {"op": "apply_modifier", "target_ref": "sticky-exit-cost", "subject": {"relative": "current-actor"}, "timing": {"apply": "immediate", "expires_at": {"scope": "turn", "boundary": "end", "occurrence": "current", "subject": {"relative": "current-actor"}}}},
+      "gain-fixed-objective": {"op": "create", "target_ref": "ancient-relay-part", "subject": {"relative": "current-actor"}},
+      "draw-salvage": {"op": "draw", "target_ref": "salvage-deck", "subject": {"relative": "current-actor"}}
+    },
+    "actions": {
+      "move": {"name": "Move", "costs": [{"resource_ref": "actions", "amount": 1, "subject": {"relative": "current-actor"}}], "tags": ["movement"]},
+      "attack": {"name": "Attack", "costs": [{"resource_ref": "actions", "amount": 1, "subject": {"relative": "current-actor"}}], "target": {"relative": "target"}, "effects": [{"op": "emit", "event": "attack-declared", "value": {"parameter": "attack", "subject": {"relative": "source"}}}]},
+      "equip-item": {"name": "Equip item", "target": {"relative": "target"}, "effects": [{"op": "equip", "subject": {"relative": "target"}}]},
+      "unequip-item": {"name": "Unequip item", "target": {"relative": "target"}, "effects": [{"op": "unequip", "subject": {"relative": "target"}}]},
+      "repair-machinery": {"name": "Repair machinery", "costs": [{"resource_ref": "actions", "amount": 1, "subject": {"relative": "current-actor"}}], "requirement_refs": ["machinery-online"]}
+    },
+    "procedures": {
+      "build-map": {"name": "Build example map", "steps": [{"kind": "prose", "prose": "Place the declared example locations and connections."}]}
+    }
+  },
+  "topologies": {
+    "example-topology-template": {"name": "Example topology template", "resolution": "unresolved", "generation_procedure_ref": "build-map", "id_policy": "stable-recorded"},
+    "example-topology": {
+      "name": "Example topology", "resolution": "materialized",
+      "nodes": [{"id": "entry", "object_ref": "corrosive-entry"}, {"id": "sticky", "object_ref": "sticky-passage"}, {"id": "terminal", "object_ref": "ancient-terminal"}, {"id": "cache", "object_ref": "objective-cache"}, {"id": "salvage", "object_ref": "salvage-bay"}],
+      "edges": [{"id": "sealed-door", "from": "entry", "to": "terminal", "kind": "sealed-passage", "requirement_refs": ["sealed-passage-access"]}],
+      "materialization": {"source_topology_ref": "example-topology-template", "generation_id": "example-map-1", "generation_procedure_ref": "build-map", "id_policy": "stable-recorded"}
+    }
+  },
+  "runtime_states": {
+    "example-save": {
+      "scene_ref": "example-map", "materialized_topology_ref": "example-topology",
+      "clock": {"round": 1, "turn": 1, "active_subject": {"instance_ref": "crew-1"}},
+      "bindings": [{"ref": "health", "subject": {"instance_ref": "crew-1"}, "value": 4}, {"ref": "defense", "subject": {"instance_ref": "crew-1"}, "value": 0}],
+      "equipment_states": [
+        {"item_instance_ref": "armor-1", "owner": {"instance_ref": "crew-1"}, "state": "equipped", "slot": "body"},
+        {"item_instance_ref": "armor-2", "owner": {"instance_ref": "crew-1"}, "state": "carried"},
+        {"item_instance_ref": "shotgun-1", "owner": {"instance_ref": "crew-1"}, "state": "equipped", "slot": "hands"},
+        {"item_instance_ref": "phase-cutter-1", "owner": {"instance_ref": "crew-1"}, "state": "equipped", "slot": "utility"}
+      ],
+      "active_modifiers": [
+        {"id": "armor-defense-1", "modifier_ref": "armor-defense", "subject": {"instance_ref": "crew-1"}, "source_subject": {"instance_ref": "armor-1"}},
+        {"id": "sticky-exit-1", "modifier_ref": "sticky-exit-cost", "subject": {"instance_ref": "crew-1"}, "source_subject": {"instance_ref": "sticky-passage-1"}, "expires_at": {"scope": "turn", "boundary": "end", "occurrence": "current", "subject": {"instance_ref": "crew-1"}}}
+      ],
+      "revision": "example-1"
+    }
+  }
+}
