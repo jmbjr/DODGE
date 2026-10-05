@@ -1,0 +1,74 @@
+{
+  "format": "dodge-example-hub.v1",
+  "current_source_sha": "23736585ff4f7cbd24c6796385438911ba854c93",
+  "entries": [
+    {
+      "id": "standard-52-card-deck",
+      "title": "Standard 52-card deck",
+      "classification": "component-example",
+      "summary": "Ordered and shuffleable canonical inventory with a shared back.",
+      "dodge_version": "0.2.1",
+      "dodge_source_sha": "23736585ff4f7cbd24c6796385438911ba854c93",
+      "status": "available",
+      "latest": "./examples/standard-52-card-deck/builds/23736585ff4f/index.html",
+      "versions": "./examples/standard-52-card-deck/versions.json",
+      "targets": {
+        "web": {
+          "status": "implemented",
+          "url": "./examples/standard-52-card-deck/builds/23736585ff4f/index.html"
+        },
+        "pnp": {
+          "status": "implemented",
+          "url": "./examples/standard-52-card-deck/downloads/standard-52-card-deck-pnp-23736585ff4f.pdf"
+        },
+        "tts": {
+          "status": "placeholder",
+          "url": "./examples/standard-52-card-deck/downloads/standard-52-card-deck-tts-23736585ff4f.json"
+        }
+      }
+    },
+    {
+      "id": "asymmetric-starter-decks",
+      "title": "Asymmetric starter decks",
+      "classification": "example-game",
+      "summary": "Multiple named decks assembled from one catalog.",
+      "status": "planned"
+    },
+    {
+      "id": "equipment-requirements",
+      "title": "Equipment & requirements",
+      "classification": "example-game",
+      "summary": "A tiny playable example for equipment, modifiers, choices, and waivers.",
+      "status": "planned"
+    },
+    {
+      "id": "locations-search",
+      "title": "Locations & search",
+      "classification": "example-game",
+      "summary": "A small room graph with entry, search, access, and temporary effects.",
+      "status": "planned"
+    },
+    {
+      "id": "digitropolis",
+      "title": "Digitropolis",
+      "classification": "example-game",
+      "summary": "Federated richer card, stat, and icon example.",
+      "status": "planned-federated"
+    },
+    {
+      "id": "wretched-demesne",
+      "title": "Wretched Demesne",
+      "classification": "example-game",
+      "summary": "Federated advanced DODGE implementation and convergence reference.",
+      "status": "planned-federated"
+    },
+    {
+      "id": "rule-vocabulary",
+      "title": "Rule vocabulary fixtures",
+      "classification": "specification-lab",
+      "summary": "Validated conformance fixtures; not presented as finished games.",
+      "status": "available",
+      "latest": "./draft/v0.2.1/examples/"
+    }
+  ]
+}

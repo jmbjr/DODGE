@@ -1,0 +1,51 @@
+name: Build DODGE Example Hub
+on:
+  pull_request:
+    paths: ["draft/v0.2.1/**", "tools/build_example_hub.py", "index.html", "hub.js", "hub.css", ".github/workflows/example-hub.yml"]
+  push:
+    branches: [master]
+    paths-ignore: ["examples/**"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r draft/v0.2.1/examples/standard-52-card-deck/requirements.txt reportlab
+      - run: python draft/v0.2.1/examples/standard-52-card-deck/validate.py
+      - run: python tools/build_example_hub.py --source-sha "$GITHUB_SHA"
+      - name: Verify identity and target parity
+        run: |
+          python - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          short=os.environ["GITHUB_SHA"][:12];root=Path("examples/standard-52-card-deck")
+          build=json.loads((root/"builds"/short/"build.json").read_text());resolved=json.loads((root/"builds"/short/"resolved.json").read_text());tts=json.loads((root/"downloads"/f"standard-52-card-deck-tts-{short}.json").read_text())
+          assert build["source_sha"]==os.environ["GITHUB_SHA"]==build["dodge_source_sha"];assert len(resolved["cards"])==52;assert tts["ordered_card_ids"]==[c["id"] for c in resolved["cards"]]
+          assert hashlib.sha256((root/"downloads"/f"standard-52-card-deck-pnp-{short}.pdf").read_bytes()).hexdigest()==build["targets"]["pnp"]["sha256"]
+          PY
+      - name: Perturb canonical data and prove resolved output follows it
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          p=Path("draft/v0.2.1/examples/standard-52-card-deck/data/standard-52-card-catalog.json");data=json.loads(p.read_text());data["cards"][0]["rank_label"]="ACE-PERTURBED";p.write_text(json.dumps(data))
+          d=Path("draft/v0.2.1/examples/standard-52-card-deck/standard-52-card-deck.dodge.json");doc=json.loads(d.read_text());doc["sources"]["cards"]["sha256"]=hashlib.sha256(p.read_bytes()).hexdigest();d.write_text(json.dumps(doc))
+          PY
+          python tools/build_example_hub.py --source-sha "$GITHUB_SHA"
+          grep -q 'ACE-PERTURBED' "examples/standard-52-card-deck/builds/${GITHUB_SHA::12}/resolved.json"
+      - name: Commit immutable release on master
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git restore draft/v0.2.1/examples/standard-52-card-deck/data/standard-52-card-catalog.json draft/v0.2.1/examples/standard-52-card-deck/standard-52-card-deck.dodge.json
+          python tools/build_example_hub.py --source-sha "$GITHUB_SHA"
+          git add examples/
+          git diff --cached --quiet && exit 0
+          git commit -m "Build DODGE Example Hub release"
+          git push
