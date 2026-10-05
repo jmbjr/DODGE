@@ -26,6 +26,9 @@ It remains under `draft/` until the Wretched Demesne implementation has exercise
 - deterministic resolved target manifests with inherited-versus-overridden diagnostics
 - target-owned PnP grouping, presentation variants, size overrides, and explicit playtest quantities
 - neutral playable-object invocation bindings to actions, procedures, and effects
+- explicit executable modes, player choices, requirements, and scoped modifiers
+- neutral carried/equipped lifecycle, slots, capabilities, parameters, and equipped modifiers
+- data-driven location entry, exit, access, interaction, and search outcomes
 
 ## Deliberate limits
 
@@ -45,6 +48,8 @@ Issue #29 defined designer-authored target content configuration and determinist
 
 Issue #32 added explicit invocation bindings between usable objects and normalized actions/procedures/effects, including runtime subject inputs. Action costs remain authoritative and object-ID dispatch is non-conforming.
 
+Issues #34–#36 completed a shared rule layer for choices, requirement waivers, equipment lifecycle, and location-bound outcomes without game-specific flags or room-ID dispatch.
+
 ## Structure
 
 - `DODGE_SPEC.md` — complete candidate specification
@@ -54,5 +59,6 @@ Issue #32 added explicit invocation bindings between usable objects and normaliz
 - `examples/digitropolis-minimal.dodge.json` — compatibility example
 - `examples/wretched-demesne-sidecar-promoted.dodge.json` — inferred WD rule-model example
 - `examples/playable-object-bindings.dodge.json` — neutral invocation and target-binding example
+- `examples/requirements-equipment-locations.dodge.json` — choices, waivers, equipment, and location semantics
 - `examples/export-contracts/` — WD Health representation-laboratory selections
 - `examples/target-manifests/` — resolved content and provenance examples

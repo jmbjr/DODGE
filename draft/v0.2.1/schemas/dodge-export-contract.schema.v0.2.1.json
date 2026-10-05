@@ -17,7 +17,7 @@
         "component_forms": {"type": "array", "items": {"enum": ["card", "token", "tile", "board", "reference_sheet", "tracker", "die", "standee", "custom"]}, "uniqueItems": true},
         "representation_kinds": {"type": "array", "items": {"enum": ["unit_tokens", "numbered_track", "marker_track", "dial", "numeric_display", "status_marker", "target_native"]}, "uniqueItems": true},
         "representation_modes": {"type": "array", "items": {"enum": ["selected", "synchronized", "alternatives"]}, "uniqueItems": true},
-        "rule_features": {"type": "array", "items": {"enum": ["values", "resources", "ownership_bindings", "conditions", "effects", "timing", "usage_limits", "transformations", "actions", "invocations", "procedures", "phases", "ai_profiles", "topologies", "topology_materialization", "scenarios", "campaigns"]}, "uniqueItems": true},
+        "rule_features": {"type": "array", "items": {"enum": ["values", "resources", "ownership_bindings", "conditions", "effects", "timing", "usage_limits", "transformations", "actions", "invocations", "choices", "requirements", "modifiers", "equipment", "procedures", "phases", "ai_profiles", "topologies", "topology_materialization", "scenarios", "campaigns"]}, "uniqueItems": true},
         "allows_prose_rules": {"type": "boolean", "default": false},
         "required_extensions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
         "limitations": {"type": "array", "items": {"type": "string"}}
