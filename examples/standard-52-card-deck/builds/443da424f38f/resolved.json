@@ -1,0 +1,615 @@
+{
+  "format": "dodge-resolved-scene.v1",
+  "dodge_version": "0.2.1",
+  "document_id": "standard-52-card-deck.reference-example",
+  "document_sha256": "443c97d241ed23c8fbbaf7c9270ac724629b3cfa16d74d2e9d3539fc944ef226",
+  "scene_ref": "table",
+  "deck_ref": "standard-deck",
+  "catalog": {
+    "id": "standard-52-card-deck",
+    "version": "1.0.0",
+    "sha256": "eca0b58f3346627b5bab268841316162c053c3c44d71d33cbcf12537cfc1ee6b"
+  },
+  "component": {
+    "form": "card",
+    "size_class": "poker",
+    "shape": "rectangle",
+    "two_sided": true,
+    "dimensions": {
+      "unit": "in",
+      "width": 2.5,
+      "height": 3.5
+    },
+    "shared_back_ref": "cards:standard-back"
+  },
+  "card_back": {
+    "id": "standard-back",
+    "name": "Standard shared card back",
+    "description": "Semantic identity only; target exporters supply the artwork."
+  },
+  "behaviors": [
+    {
+      "type": "shuffle"
+    },
+    {
+      "type": "draw",
+      "replacement": false,
+      "destination": "player-hand"
+    }
+  ],
+  "cards": [
+    {
+      "position": 0,
+      "id": "ace-of-clubs",
+      "name": "Ace of Clubs",
+      "rank": "ace",
+      "rank_label": "A",
+      "rank_order": 1,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 1,
+      "id": "2-of-clubs",
+      "name": "2 of Clubs",
+      "rank": "2",
+      "rank_label": "2",
+      "rank_order": 2,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 2,
+      "id": "3-of-clubs",
+      "name": "3 of Clubs",
+      "rank": "3",
+      "rank_label": "3",
+      "rank_order": 3,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 3,
+      "id": "4-of-clubs",
+      "name": "4 of Clubs",
+      "rank": "4",
+      "rank_label": "4",
+      "rank_order": 4,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 4,
+      "id": "5-of-clubs",
+      "name": "5 of Clubs",
+      "rank": "5",
+      "rank_label": "5",
+      "rank_order": 5,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 5,
+      "id": "6-of-clubs",
+      "name": "6 of Clubs",
+      "rank": "6",
+      "rank_label": "6",
+      "rank_order": 6,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 6,
+      "id": "7-of-clubs",
+      "name": "7 of Clubs",
+      "rank": "7",
+      "rank_label": "7",
+      "rank_order": 7,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 7,
+      "id": "8-of-clubs",
+      "name": "8 of Clubs",
+      "rank": "8",
+      "rank_label": "8",
+      "rank_order": 8,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 8,
+      "id": "9-of-clubs",
+      "name": "9 of Clubs",
+      "rank": "9",
+      "rank_label": "9",
+      "rank_order": 9,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 9,
+      "id": "10-of-clubs",
+      "name": "10 of Clubs",
+      "rank": "10",
+      "rank_label": "10",
+      "rank_order": 10,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 10,
+      "id": "jack-of-clubs",
+      "name": "Jack of Clubs",
+      "rank": "jack",
+      "rank_label": "J",
+      "rank_order": 11,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 11,
+      "id": "queen-of-clubs",
+      "name": "Queen of Clubs",
+      "rank": "queen",
+      "rank_label": "Q",
+      "rank_order": 12,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 12,
+      "id": "king-of-clubs",
+      "name": "King of Clubs",
+      "rank": "king",
+      "rank_label": "K",
+      "rank_order": 13,
+      "suit": "clubs",
+      "suit_symbol": "♣",
+      "color": "black"
+    },
+    {
+      "position": 13,
+      "id": "ace-of-diamonds",
+      "name": "Ace of Diamonds",
+      "rank": "ace",
+      "rank_label": "A",
+      "rank_order": 1,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 14,
+      "id": "2-of-diamonds",
+      "name": "2 of Diamonds",
+      "rank": "2",
+      "rank_label": "2",
+      "rank_order": 2,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 15,
+      "id": "3-of-diamonds",
+      "name": "3 of Diamonds",
+      "rank": "3",
+      "rank_label": "3",
+      "rank_order": 3,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 16,
+      "id": "4-of-diamonds",
+      "name": "4 of Diamonds",
+      "rank": "4",
+      "rank_label": "4",
+      "rank_order": 4,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 17,
+      "id": "5-of-diamonds",
+      "name": "5 of Diamonds",
+      "rank": "5",
+      "rank_label": "5",
+      "rank_order": 5,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 18,
+      "id": "6-of-diamonds",
+      "name": "6 of Diamonds",
+      "rank": "6",
+      "rank_label": "6",
+      "rank_order": 6,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 19,
+      "id": "7-of-diamonds",
+      "name": "7 of Diamonds",
+      "rank": "7",
+      "rank_label": "7",
+      "rank_order": 7,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 20,
+      "id": "8-of-diamonds",
+      "name": "8 of Diamonds",
+      "rank": "8",
+      "rank_label": "8",
+      "rank_order": 8,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 21,
+      "id": "9-of-diamonds",
+      "name": "9 of Diamonds",
+      "rank": "9",
+      "rank_label": "9",
+      "rank_order": 9,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 22,
+      "id": "10-of-diamonds",
+      "name": "10 of Diamonds",
+      "rank": "10",
+      "rank_label": "10",
+      "rank_order": 10,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 23,
+      "id": "jack-of-diamonds",
+      "name": "Jack of Diamonds",
+      "rank": "jack",
+      "rank_label": "J",
+      "rank_order": 11,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 24,
+      "id": "queen-of-diamonds",
+      "name": "Queen of Diamonds",
+      "rank": "queen",
+      "rank_label": "Q",
+      "rank_order": 12,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 25,
+      "id": "king-of-diamonds",
+      "name": "King of Diamonds",
+      "rank": "king",
+      "rank_label": "K",
+      "rank_order": 13,
+      "suit": "diamonds",
+      "suit_symbol": "♦",
+      "color": "red"
+    },
+    {
+      "position": 26,
+      "id": "ace-of-hearts",
+      "name": "Ace of Hearts",
+      "rank": "ace",
+      "rank_label": "A",
+      "rank_order": 1,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 27,
+      "id": "2-of-hearts",
+      "name": "2 of Hearts",
+      "rank": "2",
+      "rank_label": "2",
+      "rank_order": 2,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 28,
+      "id": "3-of-hearts",
+      "name": "3 of Hearts",
+      "rank": "3",
+      "rank_label": "3",
+      "rank_order": 3,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 29,
+      "id": "4-of-hearts",
+      "name": "4 of Hearts",
+      "rank": "4",
+      "rank_label": "4",
+      "rank_order": 4,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 30,
+      "id": "5-of-hearts",
+      "name": "5 of Hearts",
+      "rank": "5",
+      "rank_label": "5",
+      "rank_order": 5,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 31,
+      "id": "6-of-hearts",
+      "name": "6 of Hearts",
+      "rank": "6",
+      "rank_label": "6",
+      "rank_order": 6,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 32,
+      "id": "7-of-hearts",
+      "name": "7 of Hearts",
+      "rank": "7",
+      "rank_label": "7",
+      "rank_order": 7,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 33,
+      "id": "8-of-hearts",
+      "name": "8 of Hearts",
+      "rank": "8",
+      "rank_label": "8",
+      "rank_order": 8,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 34,
+      "id": "9-of-hearts",
+      "name": "9 of Hearts",
+      "rank": "9",
+      "rank_label": "9",
+      "rank_order": 9,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 35,
+      "id": "10-of-hearts",
+      "name": "10 of Hearts",
+      "rank": "10",
+      "rank_label": "10",
+      "rank_order": 10,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 36,
+      "id": "jack-of-hearts",
+      "name": "Jack of Hearts",
+      "rank": "jack",
+      "rank_label": "J",
+      "rank_order": 11,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 37,
+      "id": "queen-of-hearts",
+      "name": "Queen of Hearts",
+      "rank": "queen",
+      "rank_label": "Q",
+      "rank_order": 12,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 38,
+      "id": "king-of-hearts",
+      "name": "King of Hearts",
+      "rank": "king",
+      "rank_label": "K",
+      "rank_order": 13,
+      "suit": "hearts",
+      "suit_symbol": "♥",
+      "color": "red"
+    },
+    {
+      "position": 39,
+      "id": "ace-of-spades",
+      "name": "Ace of Spades",
+      "rank": "ace",
+      "rank_label": "A",
+      "rank_order": 1,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 40,
+      "id": "2-of-spades",
+      "name": "2 of Spades",
+      "rank": "2",
+      "rank_label": "2",
+      "rank_order": 2,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 41,
+      "id": "3-of-spades",
+      "name": "3 of Spades",
+      "rank": "3",
+      "rank_label": "3",
+      "rank_order": 3,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 42,
+      "id": "4-of-spades",
+      "name": "4 of Spades",
+      "rank": "4",
+      "rank_label": "4",
+      "rank_order": 4,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 43,
+      "id": "5-of-spades",
+      "name": "5 of Spades",
+      "rank": "5",
+      "rank_label": "5",
+      "rank_order": 5,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 44,
+      "id": "6-of-spades",
+      "name": "6 of Spades",
+      "rank": "6",
+      "rank_label": "6",
+      "rank_order": 6,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 45,
+      "id": "7-of-spades",
+      "name": "7 of Spades",
+      "rank": "7",
+      "rank_label": "7",
+      "rank_order": 7,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 46,
+      "id": "8-of-spades",
+      "name": "8 of Spades",
+      "rank": "8",
+      "rank_label": "8",
+      "rank_order": 8,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 47,
+      "id": "9-of-spades",
+      "name": "9 of Spades",
+      "rank": "9",
+      "rank_label": "9",
+      "rank_order": 9,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 48,
+      "id": "10-of-spades",
+      "name": "10 of Spades",
+      "rank": "10",
+      "rank_label": "10",
+      "rank_order": 10,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 49,
+      "id": "jack-of-spades",
+      "name": "Jack of Spades",
+      "rank": "jack",
+      "rank_label": "J",
+      "rank_order": 11,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 50,
+      "id": "queen-of-spades",
+      "name": "Queen of Spades",
+      "rank": "queen",
+      "rank_label": "Q",
+      "rank_order": 12,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    },
+    {
+      "position": 51,
+      "id": "king-of-spades",
+      "name": "King of Spades",
+      "rank": "king",
+      "rank_label": "K",
+      "rank_order": 13,
+      "suit": "spades",
+      "suit_symbol": "♠",
+      "color": "black"
+    }
+  ],
+  "dodge_source_sha": "443da424f38f4e3a3219cdb3b21532d2af88e17d"
+}
