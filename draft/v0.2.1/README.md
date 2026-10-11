@@ -56,6 +56,7 @@ Issue #43 formalized the validation toolchain. DODGE owns core validation and th
 ## Structure
 
 - `DODGE_SPEC.md` — complete candidate specification
+- `IMPLEMENTATION_GUIDE.md` — practical golden path for adopting 0.2.1 in a new game, including validation/resolution gates, maturity labels, authority/perturbation guidance, and evidence required before proposing upstream gaps
 - `schemas/dodge.schema.v0.2.1.json` — document schema
 - `schemas/dodge-export-contract.schema.v0.2.1.json` — target contract schema
 - `schemas/dodge-target-manifest.schema.v0.2.1.json` — resolved target-manifest schema
