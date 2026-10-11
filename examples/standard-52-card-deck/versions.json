@@ -1,7 +1,13 @@
 {
   "format": "dodge-example-versions.v1",
-  "current": "443da424f38f4e3a3219cdb3b21532d2af88e17d",
+  "current": "978700d8c2887f65a60930f9e0f2ac8f8963d2f9",
   "versions": [
+    {
+      "source_sha": "978700d8c2887f65a60930f9e0f2ac8f8963d2f9",
+      "short_sha": "978700d8c288",
+      "label": "Build 978700d8c288",
+      "path": "./builds/978700d8c288/index.html"
+    },
     {
       "source_sha": "443da424f38f4e3a3219cdb3b21532d2af88e17d",
       "short_sha": "443da424f38f",
